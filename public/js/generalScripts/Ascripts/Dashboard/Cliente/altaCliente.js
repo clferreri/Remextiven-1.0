@@ -6,10 +6,6 @@ $(document).ready(function () {
         }
     });
 
-    function cargarPaises(){
-
-    }
-
     $('#btnAgregarCliente').click(crearCliente);
     $('#cmbPaisResidente').change(function(){
         var pais = $(this).val();
@@ -58,6 +54,7 @@ function crearCliente(){
     var tel = $("#txtTelefono").val();
 
     if (validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2, documento, paisEmisor, paisResidente, ciudadResidente,direccion, numeroPuerta, tel)){
+        $("#mantaLoading").fadeIn(400);
         $.ajax({
             url:'../api/createClient',
             data:{'email': email, 'nombre': nombre, 'apellido': apellido, 'segundoApellido': apellido2, 'documento': documento, 'tipoDocumento': tipoDocumento, 'fechaNacimiento': fechaNacimiento, 'paisDocumento': paisEmisor, 'pais': paisResidente, 'ciudad': ciudadResidente, 'dir': direccion, 'numeroPuerta': numeroPuerta, 'telefono': tel},
@@ -65,6 +62,7 @@ function crearCliente(){
             dataType: "json",
             success: function (response) {
                 $("#formularioNuevoCliente")[0].reset();
+                $("#mantaLoading").fadeOut(500);
                 Swal.fire({
                     icon: 'success',
                     title: response.respuesta,
@@ -82,25 +80,17 @@ function crearCliente(){
     
                     
             },
-            statusCode: {
+            statusCode: {              
                 404: function() {
+                $("#mantaLoading").fadeOut(500);
                 alert('El servicio Remextiven no se encuentra disponible');
                 }
             },
             error:function(x,xs,xt){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Problema la cargar el cliente',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3500,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                  })        
+                $("#mantaLoading").fadeOut(500);
+                alert(JSON.stringify(x));
+                alert(xs);
+                alert(xt);
             }
         });
     }
@@ -133,7 +123,7 @@ function validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2
     }
 
     //Valido el nombre
-    if (nombre == '' || nombre == ' ' || nombre.length < 5){
+    if (nombre == '' || nombre == ' ' || nombre.length < 4){
         $("#txtNombre").addClass('is-invalid');
         validacionCorrecta = false
     }
@@ -273,7 +263,7 @@ function casillaFechaNac(){
 
 function casillaNombre(){
     var nombre = $("#txtNombre").val();
-    if (nombre != '' && nombre != ' ' && nombre.length > 5){
+    if (nombre != '' && nombre != ' ' && nombre.length >= 4){
         $("#txtNombre").removeClass('is-invalid');
     }
 }

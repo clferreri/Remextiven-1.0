@@ -22,6 +22,7 @@
   <link rel="stylesheet" type="text/css" href="css/Inputs/iconoInterno.css">
   <link rel="stylesheet" type="text/css" href="css/Inputs/botones.css">
   <link rel="stylesheet" type="text/css" href="css/Align/alineacion.css">
+  <link rel="stylesheet" type="text/css" href="{{ asset("css/Utilidades/modals.css")}}">
   <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
   <link rel="stylesheet" href="css/Inputs/estiloLetras.css">
 
@@ -41,6 +42,9 @@
         <!--fin de aside-->
 
             <div class="content-wrapper">
+                <div id="mantaLoading" class="manta">
+                    <img class="imgCentradaManta" src="{{ asset('img/Spin-1s-200px.svg') }}"/>
+                </div>               
                 <section class="content-header">
                     @yield('contenidoHeader')
                 </section>

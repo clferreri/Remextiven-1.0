@@ -30,7 +30,7 @@ class ClienteController extends Controller
             $this->crearPersonaFisicaCliente($datos, $usuario->IdUsuarioR);
 
             $nombre = $datos['nombre'] . ' ' . $datos['apellido'] . ' ' . $datos['segundoApellido'];
-            Mail::to('clferreri94@hotmail.com')->send(new ConfirmacionCuentaCreadaAdmin($nombre, $usuario->Email, $contrasena));
+            Mail::to($usuario->Email)->send(new ConfirmacionCuentaCreadaAdmin($nombre, $usuario->Email, $contrasena));
             return response()->json(['respuesta' => 'Cliente cargado correctamente'], 200);
         }
         else{
@@ -75,7 +75,8 @@ class ClienteController extends Controller
             'TokenActivacion' => Str::random(40),
             'NewsLetters' => 1,
             'TokenReferido' => substr($datos['email'],0,4) . str::random(6),
-            'RutaImagen' => 'img/images/avatar.png'
+            'RutaImagen' => 'img/images/avatar.png',
+            'EsReferido ' => 0
         ]);
         }
 

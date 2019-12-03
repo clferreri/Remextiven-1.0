@@ -19,8 +19,7 @@
 
 
 
-@section('contenido')
-
+@section('contenido')  
  <!-- CUERPO DE LA PAGINA-->
     <!-- Content Header (Page header) -->
     <section class="content-header">
