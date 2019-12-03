@@ -21,14 +21,14 @@ class CrearTablaUsuarios extends Migration
             $table->date('FechaRegistro');
             $table->unsignedTinyInteger('IdRol');
             $table->boolean('Activo');
-            $table->boolean('Verificado');
+            $table->boolean('Verificado')->default(0);
             $table->string('PinTransacciones')->nullable();
             $table->string('TokenActivacion', 40)->nullable();
             $table->boolean('NewsLetters');
             $table->string('TokenReferido', 20);
             $table->string('RutaImagen', 40);
-            $table->boolean('EsReferido');
-            $table->date('UltimoLogin');
+            $table->boolean('EsReferido')->default(1);
+            $table->date('UltimoLogin')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
 
