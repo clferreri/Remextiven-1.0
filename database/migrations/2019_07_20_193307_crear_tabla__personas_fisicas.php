@@ -34,6 +34,9 @@ class CrearTablaPersonasFisicas extends Migration
             $table->timestamps(); 
 
             $table->foreign('IdUsuario', 'FK_PersonaFR_Usuario')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
+            $table->foreign('IdPaisDocumento', 'FK_PersonaFR_PaisDocumento')->references('IdPais')->on('Paises')->onDelete('restrict');
+            $table->foreign('IdPais', 'FK_PersonaFR_PaisResidencia')->references('IdPais')->on('Paises')->onDelete('restrict');
+            $table->foreign('IdCiudad', 'FK_PersonaFR_CiudadResidencia')->references('IdCiudad')->on('Ciudades')->onDelete('restrict');
 
         });
     }
