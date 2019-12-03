@@ -1,0 +1,13 @@
+.titleModal{
+    border-radius: 5px;  
+    -webkit-box-shadow: 6px 7px 17px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 7px 17px 0px rgba(0,0,0,0.75);
+    box-shadow: 6px 7px 17px 0px rgba(0,0,0,0.75);
+    padding-top:6px;
+    padding-bottom: 6px;
+  }
+
+.titleGreen{
+    background: linear-gradient(to top right, #3e9659 ,#51c174);
+    color: white;
+}

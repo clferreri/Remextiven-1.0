@@ -1,0 +1,46 @@
+.btnCircle {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition-property: background-color, color, border;
+    transition-duration: 0.4s;
+    margin-bottom: 15px;
+}
+
+.btnIconDelete {
+    background-color: brown;
+    display:inline-block;
+    padding: 3px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    border-radius: 3px;
+    
+}
+
+.btnIconDelete:hover{
+    background-color: crimson;
+    cursor: pointer;
+    transform: scale(1.03);
+}
+
+
+
+
+
+
+
+
+
+.cajaPunteada{
+    border-style: dashed; 
+    border-width: 1px;
+    padding: 5px;
+    font-size: 13px;
+}
+
+
