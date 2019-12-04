@@ -303,3 +303,26 @@ body, html {
 	}
   }
   
+  @media (min-width:0px ) and (max-width:400px) {
+	.wizard{
+		padding: 0;
+	}
+	.panel{
+		padding: 10px;
+	}
+	
+	.panels{
+		max-height: 1000px;
+	}
+
+	.panel__title{
+		font-size: 1.3rem;
+		text-align: center;
+	}
+
+	.panel__subheading{
+		font-size: 0.8rem;
+		text-align: center;
+	}
+	
+}

@@ -88,6 +88,15 @@ class User extends Authenticatable
         }
     }
 
+    public function datosPersonales(){
+        if($this->TipoUsuario == "P"){
+            return $this->hasOne('App\Models\PhysicalPerson', 'IdUsuario', 'IdUsuarioR');
+        }
+        else{
+            return $this->hasOne('App\Models\LegalPerson');
+        }
+    }
+
     //Retorna un string con el nombre completo del usuario (para Persona o empresa)
     public function getNombreCompleto()
     {
