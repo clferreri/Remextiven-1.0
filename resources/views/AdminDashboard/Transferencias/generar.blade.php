@@ -25,10 +25,10 @@
 
 @section('contenido')
 <div class="container-fluid">
-    <div class="row">
-  <div id="wizard" class="wizard col-10">
+  <div class="row">
+    <div id="wizard" class="wizard col-12 col-md-10">
     <div class="wizard__content">
-      <header class="wizard__header">
+      <header class="wizard__header d-none d-md-block">
         <div class="wizard__header-overlay"></div>
         
         <div class="wizard__header-content">
@@ -146,40 +146,37 @@
                         <label for="cmbUsuarios">Cliente:</label>
                     <div class="row">                        
                         <div class="form-group col-12 col-md-7">
-                                <select id="cmbUsuarios"class="form-control select2bs4" style="width: 100%;">
+                                <select id="cmbClientes"class="form-control select2bs4" style="width: 100%;">
                                     <option disabled selected="selected">Seleccione un usuario...</option>
                                     @foreach ($usuarios as $usuario)
-                                      <option value="{{$usuario->IdUsuario}}">{{$usuario->Email}}</option>
+                                      <option value="{{$usuario->IdUsuario}}">{{$usuario->DatosPersonales->Nombre . ' ' . $usuario->DatosPersonales->PrimerApellido . ' ' . $usuario->DatosPersonales->SegundoApellido}}</option>
                                     @endforeach
                                 </select>              
                         </div>
                       <button class="btn btn-success col-12 col-sm-8 col-md-4 h-75 w-100" onclick="location.href='{{route('nuevoCliente')}}';">+ Crear usuario</button>                  
-                    </div>
-                </div>                        
-            </div> 
-            <br/>
-            <div class="panel__content">
-                <div class="container-fluid">
-                    <label>Datos del Cliente:</label>
-                    <div class="row mt-3">                        
-                        <div class="col-12 col-sm-4 text-center"><img class="img-circle" width="120px" src="img/images/avatar/av-clferreri941P.jpg" alt=""><span style="position: absolute; bottom:8px; right:30px; height: 20px; width:20px;" class="badge badge-success img-circle"><i class="fas fa-check"></i></span> </div>
-                        <div class="col-12 col-sm-8">
-                            <div class="row">
-                                <label class="col-4">Nombre:</label>
-                                <p class="col-8">Cristian Ferreri Lorenzo</p>
-                            </div>
-                            <div class="row">
-                                <label class="col-4">DNI:</label>
-                                <p class="col-8">Cristian Ferreri Lorenzo</p>    
-                            </div> 
-                            <div class="row">
-                                <label class="col-4">Correo:</label>
-                                <p class="col-8">Cristian Ferreri Lorenzo</p>    
-                            </div>       
-                        </div>                   
-                    </div>
-                </div>                        
-            </div>    
+                  </div>
+                  <br/>
+                  <br/>
+                  <label>Datos del Cliente:</label>
+                  <div class="row mt-1">                        
+                      <div class="col-12 col-sm-4 text-center mb-2"><img id="imgAvatar" class="img-circle" width="120px" src="{{ asset("img/images/avatar.png")}}" alt=""></span></div>
+                      <div class="col-12 col-sm-8">
+                          <div class="row">
+                              <label class="col-3 col-sm-4">Nombre:</label>
+                              <p id="txtNombreCliente" class="col-9 col-sm-8">Cristian Ferreri Lorenzo</p>
+                          </div>
+                          <div class="row">
+                              <label class="col-3 col-sm-4">DNI:</label>
+                              <p id="txtDNICliente" class="col-9 col-sm-8">Cristian Ferreri Lorenzo</p>    
+                          </div> 
+                          <div class="row">
+                              <label class="col-3 col-sm-4">Correo:</label>
+                              <p id="txtCorreoCliente" class="col-9 col-sm-8">Cristian Ferreri Lorenzo</p>    
+                          </div>       
+                      </div>                   
+                  </div>
+                </div>                       
+            </div>   
         </div>
         <br/>
         <br/>
@@ -276,23 +273,23 @@
                   </div>
                   <div class="row">
                     <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Monto a Enviar:</label>
-                    <p class="col-12 col-sm-5 text-right fuente14 semiNegrita"><span style="color:green;"><i class="fas fa-paper-plane"></i></span>23000 PES</p>
+                    <p class="col-12 col-sm-5 text-right fuente14 semiNegrita"><span style="color:green;"><i class="fas fa-paper-plane"></i></span id="txtTicketMontoEnviar">23000 PES</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Monto a Recibir:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita">5.000.000 VES</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketMontoRecibir">5.000.000 VES</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Vencimiento:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita">13/05/2019</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="dtpTicketVencimiento">13/05/2019</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Usuario:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita">Cristian Ferreri</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketCliente">Cristian Ferreri</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Documento:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita">51294519</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketDni">51294519</p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -301,23 +298,23 @@
                     </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Nombre:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita">Tony Stark</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketBeneficiario">Tony Stark</p>
                     </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Pais:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita">Venezuela</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketPais">Venezuela</p>
                       </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Banco:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita">Banco Belasco</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketBanco">Banco Belasco</p>
                     </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Tipo de Cuenta:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita">AHORRO</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketTipoCuenta">AHORRO</p>
                       </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">N° de Cuenta:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita">123456789987456311232145</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketNumeroCuenta">123456789987456311232145</p>
                     </div>
                 </div>
               </div>
@@ -371,9 +368,7 @@
   </div>
 </div> <!-- /.row -->
 </div>
-                
-
-   
+  
 @endsection
 
 
@@ -381,19 +376,28 @@
 <script src="{{asset("js/UtilScripts/wizards.js")}}"></script>
 <!-- Select2 -->
 <script src="{{asset("assets/$temaDashboard/plugins/select2/js/select2.full.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/Dashboard/Transferencias/altaTransferencia.js")}}"></script>
 <script>
       const dolar = 1
       const peso = 2
       var moneda = 1
       var cotizacionDolar = 2
       var cotizacionPesos = 4
-    $(document).ready(function() {
-     
-      
-
+    $(document).ready(function(){ 
         $('.selectUsuarios').select2();
+        var datos = new Array();
+        @foreach ($usuarios as $usuario)
+          var id = '{{$usuario->IdUsuarioR}}';
+          var nuevoDato = {'Nombre': '{{$usuario->DatosPersonales->Nombre . ' ' . $usuario->DatosPersonales->PrimerApellido . ' ' . $usuario->DatosPersonales->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersonales->Documento}}', 'Email': '{{$usuario->Email}}'}
+          datos.push(nuevoDato);      
+        @endforeach
+
+        sessionStorage.setItem('Clientes', JSON.stringify(datos));
+        var usuarios = sessionStorage.getItem('Clientes');
+        console.log(usuarios);
     });
     
+
     function ponerImagen(imagen, simbolo){
       $("#banderita").html('<img class="d-none d-sm-inline-block" style="margin-top: -5px;" src="'+ imagen + '"> <span> </span><label class="pt-1">' + simbolo + '</label>');
     };

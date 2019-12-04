@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ActivacionCuenta;
 use App\Mail\ConfirmacionCuentaCreadaAdmin;
+use App\Models\BeneficiaryAccount;
 use App\Models\PhysicalPerson;
 use App\User;
 use Carbon\Carbon;
@@ -16,10 +17,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
-    protected function getCiudades(Request $request){
-        $ciudades = Ciudad::where('IdPais', $request->pais)->where('Activo', 1)->select('IdCiudad', 'Ciudad')->orderBy('Ciudad')->get(); 
-        return $ciudades->toJson();
-    }
 
     //Genera un cliente y devuelve una respuesta de la creacion del usuario
     protected function createCliente(Request $request){
@@ -97,6 +94,13 @@ class ClienteController extends Controller
             'NumeroPuerta' => $data['numeroPuerta'],
             'Telefono' => $data['telefono'],
         ]);
+    }
+
+
+    protected function ObtenerBeneficiarios(Request $request){
+       $idUsuario = $request->input("idUsuario");
+       $cuentasBeneficiarias = BeneficiaryAccount::where('IdUsuario', $idUsuario)->get();
+        return $cuentasBeneficiarias->toJson();
     }
     
     }
