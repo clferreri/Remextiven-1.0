@@ -38,6 +38,11 @@ class PhysicalPerson extends Model
         'IdUsuario', 'Nombre', 'PrimerApellido', 'SegundoApellido','Documento', 'TipoDocumento', 'FechaNacimiento','Sexo', 'IdPaisDocumento', 'IdPais', 'IdCiudad', 'Direccion', 'NumeroPuerta', 'Telefono'
     ];
 
+
+
+    public function DatosPersonales(){
+            return $this->hasOne('App\User', 'IdUsuarioR', 'IdUsuario');
+    }
 }
 
 

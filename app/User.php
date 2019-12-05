@@ -88,15 +88,6 @@ class User extends Authenticatable
         }
     }
 
-    public function datosPersonales(){
-        if($this->TipoUsuario == "P"){
-            return $this->hasOne('App\Models\PhysicalPerson', 'IdUsuario', 'IdUsuarioR');
-        }
-        else{
-            return $this->hasOne('App\Models\LegalPerson');
-        }
-    }
-
     //Retorna un string con el nombre completo del usuario (para Persona o empresa)
     public function getNombreCompleto()
     {
@@ -159,6 +150,30 @@ class User extends Authenticatable
         $ciudad = Ciudad::where('IdCiudad', $idCiudad)->first();
         return $ciudad->Ciudad;
     }    
+
+    //////////////////////////////////////////////////////////////////////////
+    ///////////////// INICIO DE RELACIONES //////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
+
+    // RELACION (1 A 1) (Usuario - Persona)
+    public function DatosPersona(){
+            return $this->hasOne('App\Models\PhysicalPerson', 'IdUsuario', 'IdUsuarioR');
+    }
+
+    // RELACION (1 A 1) (Usuario - Empresa)
+    public function DatosEmpresa(){
+        return $this->hasOne('App\Models\LegalPerson', 'IdUsuario', 'IdUsuarioR');
+    }
+
+    // Relacion (1 a N) (Usuario - CuentasBeneficiarias)
+    // protected function CuentasBeneficiarias(){
+    //     return $this->hasMany()
+    // }
+
+    // RELACION (1 A 1) (Usuario - Rol)
+    protected function Rol(){
+
+    }
 
 
 }
