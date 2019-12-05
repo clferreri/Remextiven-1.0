@@ -10,12 +10,27 @@
 |
 */
 
+use GuzzleHttp\Client;
+
+$cliente = new Client([
+    'base_uri' => 'https://s3.amazonaws.com/dolartoday/',
+    'timeout' => 2.0,
+]);
+
+
+// Route::get('chinchulin', function () {
+//     $client = new GuzzleHttp\Client(['base_uri' => 'https://s3.amazonaws.com/dolartoday/']);
+//     $response = $client->request('GET', 'data.json');
+//     $esteJson = $response->getBody()->getContents();
+    
+//     dd(json_decode(substr($esteJson, 3)))['USD'];
+// });
 
 Route::view('/', 'Home.Inicio')->name('inicio');
 
-Route::get('salir', function () {
-    return Auth::logout();
-});
+// Route::get('salir', function () {
+//     return Auth::logout();
+// });
 
 ////  REGISTRO   ///////////////////////////////////////////////
 // RUTAS DE REGISTRO                                          //
