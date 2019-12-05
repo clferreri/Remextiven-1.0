@@ -155,6 +155,7 @@ class User extends Authenticatable
     ///////////////// INICIO DE RELACIONES //////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
 
+    //------------------  1 A 1  -----------------------------
     // RELACION (1 A 1) (Usuario - Persona)
     public function DatosPersona(){
             return $this->hasOne('App\Models\PhysicalPerson', 'IdUsuario', 'IdUsuarioR');
@@ -165,15 +166,22 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\LegalPerson', 'IdUsuario', 'IdUsuarioR');
     }
 
-    // Relacion (1 a N) (Usuario - CuentasBeneficiarias)
-    // protected function CuentasBeneficiarias(){
-    //     return $this->hasMany()
-    // }
-
-    // RELACION (1 A 1) (Usuario - Rol)
-    protected function Rol(){
-
+      // RELACION (1 A 1) (Usuario - Rol)
+      protected function Rol(){
+        return $this->hasOne('App\Models\UserRol', 'IdRol', 'IdRol');
     }
 
+    //--------------------  1 a N  -----------------------------------
+
+    // Relacion (1 a N) (Usuario - Cuentas Beneficiarias)
+    protected function CuentasBeneficiarias(){
+        return $this->hasMany('App\Models\BeneficiaryAccount', 'IdUsuario', 'IdUsuarioR');
+    }
+
+
+    // RELACION (1 A N) (Usuario - Cuentas Bancarias)
+    protected function CuentasBancarias(){
+        return $this->hasMany('App\Models\BankAccount', 'IdUsuario', 'IdUsuarioR');
+    }
 
 }

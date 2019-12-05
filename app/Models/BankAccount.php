@@ -10,7 +10,7 @@ class BankAccount extends Model
     protected $table = 'CuentasBancariasUsuariosR';
     protected $primaryKey = 'IdCuentaBancaria';
 
-    protected $fillable = ['IdUsuario', 'IdBanco', 'TipoCuenta', 'NumeroCuenta'];
+    protected $fillable = ['IdUsuario', 'IdBanco', 'TipoCuenta', 'NumeroCuenta', 'Alias'];
 
 
     public function getNombreBanco(){

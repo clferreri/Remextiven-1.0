@@ -14,7 +14,7 @@ class CrearTablaSolicitudesTransferencias extends Migration
     public function up()
     {
         Schema::create('SolicitudesTransferencia', function (Blueprint $table) {
-            $table->increments('IdSolicitudTransferencia');
+            $table->bigIncrements('IdSolicitudTransferencia');
             $table->unsignedInteger('IdUsuarioSolicita');
             $table->unsignedTinyInteger('IdEstadoTransferencia');
             $table->unsignedTinyInteger('IdTipoTransferencia');
@@ -22,6 +22,7 @@ class CrearTablaSolicitudesTransferencias extends Migration
             $table->decimal('MontoComision', 8, 2);
             $table->decimal('MontoTotal', 8, 2);
             $table->unsignedTinyInteger('IdMoneda');
+            $table->decimal('Cambio', 6, 2);
             $table->unsignedTinyInteger('IdMedioPago');
             $table->unsignedInteger('CotizacionVES');
             $table->unsignedInteger('IdUsuarioResponde')->nullable();
@@ -29,9 +30,15 @@ class CrearTablaSolicitudesTransferencias extends Migration
             $table->unsignedInteger('IdCuentaBeneficiaria')->nullable();
             $table->date('FechaSolicitada');
             $table->date('FechaFinalizada')->nullable();
-
-
             $table->timestamps();
+
+
+            $table->foreign('IdUsuarioSolicita', 'FK_SolicitudTransferencia_UsuarioSolicita')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
+            $table->foreign('IdEstadoTransferencia', 'FK_SolicitudTransferencia_EstadoTransferencia')->references('IdEstado')->on('EstadosSolicitudTransferencia')->onDelete('restrict');
+            $table->foreign('IdTipoTransferencia', 'FK_SolicitudTransferencia_TipoTransferencia')->references('IdTipo')->on('TiposSolicitudTransferencia')->onDelete('restrict');
+            $table->foreign('IdUsuarioResponde', 'FK_SolicitudTransferencia_UsuarioResponde')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
+            $table->foreign('IdCuentaBancaria', 'FK_SolicitudTransferencia_CuentaBancaria')->references('IdCuentaBancaria')->on('CuentasBancariasUsuariosR')->onDelete('restrict');
+            $table->foreign('IdCuentaBeneficiaria', 'FK_SolicitudTransferencia_CuentaBeneficiaria')->references('IdCuenta')->on('CuentasBeneficiarios')->onDelete('restrict');
         });
     }
 

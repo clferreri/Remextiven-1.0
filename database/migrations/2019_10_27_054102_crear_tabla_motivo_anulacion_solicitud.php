@@ -14,7 +14,11 @@ class CrearTablaMotivoAnulacionSolicitud extends Migration
     public function up()
     {
         Schema::create('MotivoAnulacionSolicitud', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('IdAnulacion');
+            $table->string('Motivo', 200);
+            $table->unsignedTinyInteger('IdTipoAnulacion');
+            $table->unsignedBigInteger('IdSolicitudTransferencia');
+            $table->boolean('AnulacionPorCliente');
             $table->timestamps();
         });
     }

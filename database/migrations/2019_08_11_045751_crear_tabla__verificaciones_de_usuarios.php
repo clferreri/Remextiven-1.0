@@ -18,7 +18,8 @@ class CrearTablaVerificacionesDeUsuarios extends Migration
             $table->unsignedInteger('IdUsuario');
             $table->unsignedInteger('IdDigitador')->nullable();
             $table->unsignedTinyInteger('IdPais')->nullable();
-            $table->string('RutaImagen', 100);
+            $table->string('RutaImagenDocumento', 100);
+            $table->string('RutaImagenVerificacion', 100);
             $table->timestamps();
 
             $table->foreign('IdUsuario', 'FK_VerificacionUsuario_Usuario')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');

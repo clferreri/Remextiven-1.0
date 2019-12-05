@@ -13,8 +13,10 @@ class CrearTablaTipoAnulacion extends Migration
      */
     public function up()
     {
-        Schema::create('TipoAnulacion', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('TiposAnulacion', function (Blueprint $table) {
+            $table->bigIncrements('IdTipo');
+            $table->string('Tipo', 25);
+            $table->boolean('Activo');
             $table->timestamps();
         });
     }

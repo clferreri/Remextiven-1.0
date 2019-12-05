@@ -19,6 +19,7 @@ class CrearTablaCuentasBancarias extends Migration
             $table->unsignedInteger('IdBanco');
             $table->enum('TipoCuenta', ['Ahorro', 'Corriente']);
             $table->string('NumeroCuenta', 50)->nullable();
+            $table->string('Alias', 25);
             $table->timestamps();
 
             $table->foreign('IdUsuario', 'FK_CuentaBancaria_Usuario')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');

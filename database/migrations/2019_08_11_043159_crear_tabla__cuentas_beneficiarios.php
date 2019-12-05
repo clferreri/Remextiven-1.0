@@ -16,9 +16,9 @@ class CrearTablaCuentasBeneficiarios extends Migration
         Schema::create('CuentasBeneficiarios', function (Blueprint $table) {
             $table->increments('IdCuenta');
             $table->unsignedInteger('IdUsuario');
-            $table->string('Banco', 50);
+            $table->unsignedInteger('IdBanco');
             $table->enum('TipoCuenta', ['Ahorro', 'Corriente']);
-            $table->string('NumeroCuenta', 50);
+            $table->string('NumeroCuenta', 50)->nullable();
             $table->string('NombreTitular', 20);
             $table->string('ApellidoTitular', 20);
             $table->string('TipoDocumento', 6);
@@ -27,6 +27,7 @@ class CrearTablaCuentasBeneficiarios extends Migration
             $table->timestamps();
 
             $table->foreign('IdUsuario', 'FK_CuentasBeneficiarios_Usuario')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
+            $table->foreign('IdBanco', 'FK_CuentasBeneficiarios_Banco')->references('IdBanco')->on('BancosR')->onDelete('restrict');
         });
     }
 
