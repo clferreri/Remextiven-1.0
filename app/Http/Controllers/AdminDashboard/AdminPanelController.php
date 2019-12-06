@@ -11,14 +11,15 @@ class AdminPanelController extends Controller
 {
 
     protected function AgregarTransferencia(){
-        $usuarios = User::where('Activo', 1)->get();
+        $usuariosPersonas = User::where('Activo', 1)->where('TipoUsuario', 1)->with('DatosPersona')->get();
+        $usuariosEmpresas = User::where('Activo', 1)->where('TipoUsuario', 2)->with('DatosEmpresa')->get();
 
-        return view('AdminDashboard.Transferencias.generar', compact('usuarios'));
+        return view('AdminDashboard.Transferencias.generar', compact('usuariosPersonas', 'usuariosEmpresas'));
     }
 
 
     protected function AgregarCliente(){
-        $paises = Pais::where('Activo', 1)->get();
+        $paises = Pais::where('Activo', 1)->where()->get();
 
         return view('AdminDashboard.Clientes.nuevoCliente', compact('paises'));
     }

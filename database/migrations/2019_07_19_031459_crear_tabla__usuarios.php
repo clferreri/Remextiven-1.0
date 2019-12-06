@@ -15,7 +15,7 @@ class CrearTablaUsuarios extends Migration
     {
         Schema::create('UsuariosR', function (Blueprint $table) {
             $table->increments('IdUsuarioR');
-            $table->char('TipoUsuario', 1);
+            $table->unsignedTinyInteger('TipoUsuario');
             $table->string('Email', 35);
             $table->string('Password', 60);
             $table->date('FechaRegistro');
@@ -35,6 +35,7 @@ class CrearTablaUsuarios extends Migration
             
             //Claves foraneas
             $table->foreign('IdRol', 'FK_Usuario_Rol')->references('IdRol')->on('RolesUsuariosR')->onDelete('restrict');
+            $table->foreign('TipoUsuario', 'FK_Usuario_TipoUsuario')->references('IdTipoUsuario')->on('TiposUsuario')->onDelete('restrict');
 
 
         });
