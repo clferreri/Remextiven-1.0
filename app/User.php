@@ -166,6 +166,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\LegalPerson', 'IdUsuario', 'IdUsuarioR');
     }
 
+    // RELACION (1 A 1) (Usuario - Empleado)
+    public function DatosEmpleado(){
+        return $this->hasOne('App\Models\Employee', 'IdUsuario', 'IdUsuarioR');
+    }
+
       // RELACION (1 A 1) (Usuario - Rol)
       protected function Rol(){
         return $this->hasOne('App\Models\UserRol', 'IdRol', 'IdRol');

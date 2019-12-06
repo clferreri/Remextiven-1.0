@@ -10,12 +10,12 @@
 |
 */
 
-use GuzzleHttp\Client;
+// use GuzzleHttp\Client;
 
-$cliente = new Client([
-    'base_uri' => 'https://s3.amazonaws.com/dolartoday/',
-    'timeout' => 2.0,
-]);
+// $cliente = new Client([
+//     'base_uri' => 'https://s3.amazonaws.com/dolartoday/',
+//     'timeout' => 2.0,
+// ]);
 
 
 // Route::get('chinchulin', function () {
