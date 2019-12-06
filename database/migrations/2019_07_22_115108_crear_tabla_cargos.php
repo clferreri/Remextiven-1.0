@@ -15,7 +15,8 @@ class CrearTablaCargos extends Migration
     {
         Schema::create('Cargos', function (Blueprint $table) {
             $table->tinyIncrements('IdCargo');
-            $table->string('NombreCargo');
+            $table->string('Sigla', 8);
+            $table->string('NombreCargo', 35);
             $table->boolean('Activo');
             $table->timestamps();
         });

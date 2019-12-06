@@ -62,7 +62,7 @@ class ClienteController extends Controller
 
     private function CrearUsuarioCliente($datos, $contra){
         return User::create([
-            'TipoUsuario' => 'P',
+            'TipoUsuario' => 1,
             'Email' => $datos['email'],
             'Password' =>  Hash::make($contra),
             'FechaRegistro' => Carbon::today(),

@@ -15,7 +15,7 @@ class CrearTablaTiposUsuario extends Migration
     {
         Schema::create('TiposUsuario', function (Blueprint $table) {
             $table->tinyIncrements('IdTipoUsuario');
-            $table->string('Tipo',25);
+            $table->string('Tipo',25); 
             $table->boolean('Activo');
             $table->timestamps();
         });

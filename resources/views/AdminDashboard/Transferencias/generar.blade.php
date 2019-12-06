@@ -25,6 +25,85 @@
 
 @section('contenido')
 <div class="container-fluid">
+
+  <!-- Modal Cuentas Bancarias -->
+<div class="modal fade" id="modalAgregarCuentaBancaria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div class></div>
+            <div class="col-2"></div>
+            <div class="col-8 titleModal titleGreen" style="margin-top: -30px;">
+                <h4 class="modal-title text-center">Agregar Beneficiario</h4>  
+            </div>          
+            <div class="col-1"></div> 
+            <button type="button" class="close col-1" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+              <div class="row mt-1">
+                  <div class="col-12 col-md-6 mb-4">
+                    <label for="">Nombre Titular</label>
+                    <input class="form-control" type="text" id="txtNombreBeneficiario">
+                  </div>
+                  <div class="col-12 col-md-6 mb-2 mb-4">
+                    <label for="">Apellido Titular</label>
+                    <input class="form-control" type="text" id="txtApellidoBeneficiario">
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-2 mb-4">
+                    <label for="">Documento</label>
+                    <input class="form-control" type="text" id="txtNombreBeneficiario">
+                  </div>
+                  <div class="col-12 col-md-6 mb-2 mb-4">
+                    <label for="">Tipo documento</label>
+                    <select class="form-control" name="" id="">
+                      <option value="DNI">DNI</option>
+                      <option value="PAS">PASAPORTE</option>
+                    </select>
+                  </div>
+
+                  <div class="col-12 col-md-6 mb-4">
+                      <label for="">Banco</label>
+                      <select class="form-control" id="cmbBanco">
+                          <option value="0">Seleccione un Banco...</option>
+                          <option value="">Banesco</option>
+                          <option value="">Banco Venezolano de Crédito</option>
+                          <option value="">Banco Guayana</option>
+                          @foreach ($bancos as $banco)
+                              <option value="{{$banco->idBanco}}"> {{$banco->Banco}} </option>
+                          @endforeach
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                      <label for="">Tipo de Cuenta</label>
+                      <select class="form-control" id="cmbTipoCuenta">
+                          <option value="0">Seleccione el tipo...</option>
+                          <option value="Ahorro">AHORRO</option>
+                          <option value="Corriente">CORRIENTE</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-2 mb-4">
+                        <label for="">Numero de Cuenta</label>
+                        <input class="form-control" type="text" id="txtNombreBeneficiario">
+                      </div>
+                      <div class="col-12 col-md-6 mb-2 mb-4">
+                        <label for="">Alias</label>
+                        <input class="form-control" type="text" id="txtApellidoBeneficiario">
+                      </div>
+                 
+              </div>
+              <div class="row mt-4 mb-3">
+                  <button type="button" class="btn btn-danger btnCircle col-4 m-auto" data-dismiss="modal" onclick="limpiarModalCuentaBancaria();">Cancelar</button>
+                  <button id="btnAgregarCuenta"type="button" class="btn btn-success btnCircle col-4 m-auto">Agregar</button>
+              </div>      
+          </div>
+      </div>
+    </div>
+  </div><!--Fin Modal Agregar Cuenta Bancaria-->
+
   <div class="row">
     <div id="wizard" class="wizard col-12 col-md-10">
     <div class="wizard__content">
@@ -148,8 +227,8 @@
                         <div class="form-group col-12 col-md-7">
                                 <select id="cmbClientes"class="form-control select2bs4" style="width: 100%;">
                                     <option disabled selected="selected">Seleccione un usuario...</option>
-                                    @foreach ($usuarios as $usuario)
-                                      <option value="{{$usuario->IdUsuario}}">{{$usuario->DatosPersonales->Nombre . ' ' . $usuario->DatosPersonales->PrimerApellido . ' ' . $usuario->DatosPersonales->SegundoApellido}}</option>
+                                    @foreach ($usuariosPersonas as $usuario)
+                                      <option value="{{$usuario->IdUsuario}}">{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}</option>
                                     @endforeach
                                 </select>              
                         </div>
@@ -163,15 +242,15 @@
                       <div class="col-12 col-sm-8">
                           <div class="row">
                               <label class="col-3 col-sm-4">Nombre:</label>
-                              <p id="txtNombreCliente" class="col-9 col-sm-8">Cristian Ferreri Lorenzo</p>
+                              <p id="txtNombreCliente" class="col-9 col-sm-8">Nombre del cliente</p>
                           </div>
                           <div class="row">
                               <label class="col-3 col-sm-4">DNI:</label>
-                              <p id="txtDNICliente" class="col-9 col-sm-8">Cristian Ferreri Lorenzo</p>    
+                              <p id="txtDNICliente" class="col-9 col-sm-8">Documento del cliente</p>    
                           </div> 
                           <div class="row">
                               <label class="col-3 col-sm-4">Correo:</label>
-                              <p id="txtCorreoCliente" class="col-9 col-sm-8">Cristian Ferreri Lorenzo</p>    
+                              <p id="txtCorreoCliente" class="col-9 col-sm-8">Correo del cliente</p>    
                           </div>       
                       </div>                   
                   </div>
@@ -239,20 +318,20 @@
                 <div class="panel__content">
                   <div class="container-fluid">
                     <div class="row">
-                        <select name="" id="" class="form-control col-12 col-sm-7 col-md-5">
+                        <select name="" id="" class="form-control col-12 col-sm-7 col-md-5 mb-2">
                             <option value="">Banco andes</option>
                             <option value="">Banco loco</option>
                           </select>
-                          <button class="btn btn-success col-6 col-md-4 ml-2">+ Agregar Cuenta</button>
+                          <button class="btn btn-success col-12 col-md-4 h-75 w-100" onclick="$('#modalAgregarCuentaBancaria').modal('show')">+ Agregar Cuenta</button>
                     </div>
                     <div class="row mt-5">
                       <div class="col-12"><label>Datos del Beneficiario</label></div>
                     </div>
                     <div class="row mt-3">
-                      <label class="col-12 col-md-6 col-lg-2" for="">Beneficiario:</label><p class="col-12 col-md-6 col-lg-4">Tony stark</p>
-                      <label class="col-12 col-md-6 col-lg-2" for="">Banco:</label><p class="col-12 col-md-6 col-lg-4">Tony stark</p>
-                      <label class="col-12 col-md-6 col-lg-2" for="">Cuenta:</label><p class="col-12 col-md-6 col-lg-4">AHORRO</p>
-                      <label class="col-12 col-md-6 col-lg-2" for="">N° Cuenta:</label><p class="col-12 col-md-6 col-lg-4">39403928394839483948394839</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">Beneficiario:</label><p class="col-12 col-lg-4 centrarMobile">Steven Valentin Ladera</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">Banco:</label><p class="col-12 col-md-6 col-lg-4 centrarMobile">Mi abuela linda</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">Cuenta:</label><p class="col-12 col-md-6 col-lg-4 centrarMobile">AHORRO</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">N° Cuenta:</label><p class="col-12 col-md-6 col-lg-4 centrarMobile">39403928394839483948394839</p>
                     </div>
                   </div>               
                 </div>
@@ -386,9 +465,9 @@
     $(document).ready(function(){ 
         $('.selectUsuarios').select2();
         var datos = new Array();
-        @foreach ($usuarios as $usuario)
+        @foreach ($usuariosPersonas as $usuario)
           var id = '{{$usuario->IdUsuarioR}}';
-          var nuevoDato = {'Nombre': '{{$usuario->DatosPersonales->Nombre . ' ' . $usuario->DatosPersonales->PrimerApellido . ' ' . $usuario->DatosPersonales->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersonales->Documento}}', 'Email': '{{$usuario->Email}}'}
+          var nuevoDato = {'Nombre': '{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersona->Documento}}', 'Email': '{{$usuario->Email}}'}
           datos.push(nuevoDato);      
         @endforeach
 
