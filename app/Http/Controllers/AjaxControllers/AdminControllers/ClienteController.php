@@ -95,12 +95,5 @@ class ClienteController extends Controller
             'Telefono' => $data['telefono'],
         ]);
     }
-
-
-    protected function ObtenerBeneficiarios(Request $request){
-       $idUsuario = $request->input("idUsuario");
-       $cuentasBeneficiarias = BeneficiaryAccount::where('IdUsuario', $idUsuario)->get();
-        return $cuentasBeneficiarias->toJson();
-    }
     
     }
