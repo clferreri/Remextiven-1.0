@@ -54,7 +54,7 @@ function crearCliente(){
     var tel = $("#txtTelefono").val();
 
     if (validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2, documento, paisEmisor, paisResidente, ciudadResidente,direccion, numeroPuerta, tel)){
-        $("#mantaLoading").fadeIn(400);
+        $("#mantaLoading").modal('show');
         $.ajax({
             url:'../api/createClient',
             data:{'email': email, 'nombre': nombre, 'apellido': apellido, 'segundoApellido': apellido2, 'documento': documento, 'tipoDocumento': tipoDocumento, 'fechaNacimiento': fechaNacimiento, 'paisDocumento': paisEmisor, 'pais': paisResidente, 'ciudad': ciudadResidente, 'dir': direccion, 'numeroPuerta': numeroPuerta, 'telefono': tel},
@@ -62,32 +62,19 @@ function crearCliente(){
             dataType: "json",
             success: function (response) {
                 $("#formularioNuevoCliente")[0].reset();
-                $("#mantaLoading").fadeOut(500);
-                Swal.fire({
-                    icon: 'success',
-                    title: response.respuesta,
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3500,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                  })
-
+                $("#mantaLoading").modal('hide');
+                alertaToast(tipoAlertaOK, response.respuesta, 3500);
     
                     
             },
             statusCode: {              
                 404: function() {
-                $("#mantaLoading").fadeOut(500);
-                alert('El servicio Remextiven no se encuentra disponible');
+                $("#mantaLoading").modal('hide');
+                alertaToast(tipoAlertaError, 'El servicio Remextiven no se encuentra disponible', 3500);
                 }
             },
             error:function(x,xs,xt){
-                $("#mantaLoading").fadeOut(500);
+                $("#mantaLoading").modal('hide');
                 alert(JSON.stringify(x));
                 alert(xs);
                 alert(xt);
@@ -182,67 +169,6 @@ function validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2
     return validacionCorrecta;
 }
 
-
-function peticionAjaxNuevoCli(){
-    $.ajax({
-        url:'AddBankAccount',
-        data:{'email': banco, 'tipoCuenta': tipoCuenta, 'NumeroCuenta': numCuenta},
-        type:'post',
-        dataType: "json",
-        success: function (response) {
-                    var tablaCuentasBancarias = '<table class="table">' +
-                                                '<thead>' +
-                                                    '<tr>' +
-                                                        '<th scope="col">ID</th>' +
-                                                        '<th scope="col">Banco</th>' +
-                                                        '<th scope="col">Tipo de Cuenta</th>' +
-                                                        '<th scope="col">N° de cuenta</th>' +
-                                                        '<th scope="col">Eliminar</th>' +
-                                                    '</tr>' +
-                                                '</thead>' +
-                                                '<tbody>';
-                    $.each(response, function (index, value) {
-                            var idCuenta =  value.IdCuentaBancaria;
-                             tablaCuentasBancarias +=   '<tr>' +
-                                                            '<th>' + value.IdCuentaBancaria + '</th>' +
-                                                            '<td>' + value.nombre + '</td>' +
-                                                            '<td>' + value.TipoCuenta + '</td>' +
-                                                            '<td>' + value.NumeroCuenta + '</td>' +
-                                                            '<td><div class="btnIconDelete" onclick="borrarCuentaBancaria(' + idCuenta + ')"><img src="img/icons/mediumIcons/trash.png" alt="Borrar"/></div> </td>' +
-                                                        '</tr>';
-                    });
-
-                    tablaCuentasBancarias += '</tbody></table>';
-                    $("#tablaCuentasBancarias").html(tablaCuentasBancarias);
-                    $("#loadingModal").modal('hide');
-                    toastr.success('Se creo la cuenta correctamente ', 'Cuenta creada',{
-                        "closeButton": true,
-                        "progressBar": true,
-                        "extendedTimeOut": "2000"
-                      });
-
-                
-        },
-        statusCode: {
-            404: function() {
-            $("#loadingModal").modal('hide');
-            alert('El servicio Remextiven no se encuentra disponible');
-            }
-        },
-        error:function(x,xs,xt){
-            $("#loadingModal").modal('hide');
-            obj = JSON.parse(x['responseText']);
-            var textoError = Object.keys(obj['errors']);
-            toastr.error(obj['errors'][textoError], obj['message'],{
-                "closeButton": true,
-                "progressBar": true,
-                "extendedTimeOut": "2000"
-              });
-            
-            
-        }
-    });
-}
 
 
 function casillaCorreo(){

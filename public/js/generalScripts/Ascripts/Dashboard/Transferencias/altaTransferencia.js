@@ -10,10 +10,21 @@ $(document).ready(function(){
 
         //coloco en el ticket el cliente
         ClienteTicket(usuario[opcionSeleccionada]['Nombre'], usuario[opcionSeleccionada]['Dni']);
-        
+        obtenerBeneficiarios();
+    });
+
+    $("#cmbBeneficiario").change(function(){
+        var opcionSeleccionada = $("#cmbBeneficiario")[0].selectedIndex -1;
+        var beneficiario = JSON.parse(sessionStorage.getItem('Beneficiarios'));
+
+        $("#txtDatosBeneficiarioNombre").html(beneficiario[opcionSeleccionada]['Beneficiario']);
+        $("#txtDatosBeneficiarioBanco").html(beneficiario[opcionSeleccionada]['Banco']);
+        $("#txtDatosBeneficiarioCuenta").html(beneficiario[opcionSeleccionada]['Cuenta']);
+        $("#txtDatosBeneficiarioNumero").html(beneficiario[opcionSeleccionada]['NumeroCuenta']);
+
+        BeneficiarioTicket(beneficiario[opcionSeleccionada]['Beneficiario'], 'Venezuela', beneficiario[opcionSeleccionada]['Banco'], beneficiario[opcionSeleccionada]['Cuenta'], beneficiario[opcionSeleccionada]['NumeroCuenta']);
     });
 });
-
 
 
 function ClienteTicket (cliente, dni){
@@ -22,4 +33,12 @@ function ClienteTicket (cliente, dni){
          .join(' ');
     $("#txtTicketCliente").html(cliente);
     $("#txtTicketDni").html(dni);
+}
+
+function BeneficiarioTicket(beneficiario, pais, banco, tipoCuenta, numeroCuenta){
+    $("#txtTicketBeneficiario").html(beneficiario);
+    $("#txtTicketPais").html(pais);
+    $("#txtTicketBanco").html(banco);
+    $("#txtTicketTipoCuenta").html(tipoCuenta);
+    $("#txtTicketNumeroCuenta").html(numeroCuenta);
 }
