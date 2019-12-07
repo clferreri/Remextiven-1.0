@@ -15,9 +15,6 @@ function armarModal(titulo, subtitulo, mensaje, tipoModal){
 
 }
 
-
-
-
 function armarModalCorrecto(){
 
 }
