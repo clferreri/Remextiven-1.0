@@ -16,7 +16,7 @@ class CrearTablaReclamos extends Migration
         Schema::create('Reclamos', function (Blueprint $table) {
             $table->increments('IdReclamo');
             $table->unsignedInteger('IdUsuarioReclama');
-            $table->string('IdTipoReclamo');
+            $table->unsignedTinyInteger('IdTipoReclamo');
             $table->string('Motivo', 400);
             $table->unsignedInteger('IdUsuarioReportado')->nullable();
             $table->unsignedTinyInteger('IdPrioridad');
@@ -27,10 +27,10 @@ class CrearTablaReclamos extends Migration
 
 
             $table->foreign('IdUsuarioReclama', 'FK_Reclamo_UsuarioReclama')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
-            $table->foreign('IdTipoReclamo', 'FK_Reclamo_UsuarioReclama')->references('IdTipoReclamo')->on('TiposReclamo')->onDelete('restrict');
+            $table->foreign('IdTipoReclamo', 'FK_Reclamo_TipoReclamo')->references('IdTipoReclamo')->on('TiposReclamo')->onDelete('restrict');
             $table->foreign('IdUsuarioReportado', 'FK_Reclamo_UsuarioReportado')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
             $table->foreign('IdPrioridad', 'FK_Reclamo_Prioridad')->references('IdPrioridad')->on('Prioridades')->onDelete('restrict');
-            $table->foreign('IdEstadoReclamo', 'FK_Reclamo_Estado')->references('IdEstado')->on('EstadosReclamo')->onDelete('restrict');
+            $table->foreign('IdEstadoReclamo', 'FK_Reclamo_Estado')->references('IdEstado')->on('EstadosReclamos')->onDelete('restrict');
             $table->foreign('IdDigitadorResuelve', 'FK_Reclamo_DigitadorResuelve')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
             
 
