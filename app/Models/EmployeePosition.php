@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EmployeePosition extends Model
 {
     protected $table = 'Cargos';
-    protected $primaryKey = 'IdCargo';
-
-
+    protected $primaryKey = 'IdCargo'; 
 
      
 
