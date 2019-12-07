@@ -150,10 +150,10 @@ body, html {
 	margin: 0;
   }
   .panel.movingOutBackward {
-	transform: translateX(-1000px);
+	transform: translateX(-100%);
   }
   .panel.movingOutFoward {
-	transform: translateX(1000px);
+	transform: translateX(100%);
   }
   .panel.movingIn {
 	transform: translateX(0);
