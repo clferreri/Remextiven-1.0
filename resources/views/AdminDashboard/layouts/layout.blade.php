@@ -42,9 +42,11 @@
         <!--fin de aside-->
 
             <div class="content-wrapper">
-                <div id="mantaLoading" class="manta">
-                    <img class="imgCentradaManta" src="{{ asset('img/Spin-1s-200px.svg') }}"/>
-                </div>               
+                    <div class="modal fade" id="mantaLoading" tabindex="5" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+                        <div class="modal-dialog modal-dialog-centered" style="justify-content:center;" role="document">
+                            <img width="150" src="{{ asset('img/Spin-1s-200px.svg') }}"/>
+                        </div>
+                    </div>              
                 <section class="content-header">
                     @yield('contenidoHeader')
                 </section>
@@ -73,6 +75,7 @@
 
 <script src="{{asset("assets/$temaDashboard/dist/js/temaDashboard.min.js")}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script type="text/javascript" src="{{asset("js/UtilScripts/alertas.js")}}"></script>
 
 <script src="{{asset("assets/$temaDashboard/dist/js/demo.js")}}"></script>
 @yield('scripts')

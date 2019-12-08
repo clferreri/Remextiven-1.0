@@ -45,20 +45,20 @@
               <div class="row mt-1">
                   <div class="col-12 col-md-6 mb-4">
                     <label for="">Nombre Titular</label>
-                    <input class="form-control" type="text" id="txtNombreBeneficiario">
+                    <input class="form-control" type="text" id="txtBeneficiarioNombre">
                   </div>
                   <div class="col-12 col-md-6 mb-2 mb-4">
                     <label for="">Apellido Titular</label>
-                    <input class="form-control" type="text" id="txtApellidoBeneficiario">
+                    <input class="form-control" type="text" id="txtBeneficiarioApellido">
                   </div>
 
                   <div class="col-12 col-md-6 mb-2 mb-4">
                     <label for="">Documento</label>
-                    <input class="form-control" type="text" id="txtNombreBeneficiario">
+                    <input class="form-control" type="text" id="txtBeneficiarioDocumento">
                   </div>
                   <div class="col-12 col-md-6 mb-2 mb-4">
                     <label for="">Tipo documento</label>
-                    <select class="form-control" name="" id="">
+                    <select class="form-control" name="" id="cmbBeneficiarioTipoDocumento">
                       <option value="DNI">DNI</option>
                       <option value="PAS">PASAPORTE</option>
                     </select>
@@ -66,11 +66,8 @@
 
                   <div class="col-12 col-md-6 mb-4">
                       <label for="">Banco</label>
-                      <select class="form-control" id="cmbBanco">
+                      <select class="form-control" id="cmbBeneficiarioBanco">
                           <option value="0">Seleccione un Banco...</option>
-                          <option value="">Banesco</option>
-                          <option value="">Banco Venezolano de Crédito</option>
-                          <option value="">Banco Guayana</option>
                           @foreach ($bancos as $banco)
                               <option value="{{$banco->idBanco}}"> {{$banco->Banco}} </option>
                           @endforeach
@@ -78,7 +75,7 @@
                     </div>
                     <div class="col-12 col-md-6 mb-4">
                       <label for="">Tipo de Cuenta</label>
-                      <select class="form-control" id="cmbTipoCuenta">
+                      <select class="form-control" id="cmbBeneficiarioTipoCuenta">
                           <option value="0">Seleccione el tipo...</option>
                           <option value="Ahorro">AHORRO</option>
                           <option value="Corriente">CORRIENTE</option>
@@ -87,17 +84,17 @@
 
                     <div class="col-12 col-md-6 mb-2 mb-4">
                         <label for="">Numero de Cuenta</label>
-                        <input class="form-control" type="text" id="txtNombreBeneficiario">
+                        <input class="form-control" type="text" id="txtBeneficiarioNumeroCuenta">
                       </div>
                       <div class="col-12 col-md-6 mb-2 mb-4">
                         <label for="">Alias</label>
-                        <input class="form-control" type="text" id="txtApellidoBeneficiario">
+                        <input class="form-control" type="text" id="txtBeneficiarioAlias">
                       </div>
                  
               </div>
               <div class="row mt-4 mb-3">
                   <button type="button" class="btn btn-danger btnCircle col-4 m-auto" data-dismiss="modal" onclick="limpiarModalCuentaBancaria();">Cancelar</button>
-                  <button id="btnAgregarCuenta"type="button" class="btn btn-success btnCircle col-4 m-auto">Agregar</button>
+                  <button id="btnAgregarCuenta"type="button" class="btn btn-success btnCircle col-4 m-auto" onclick="altaBeneficiario();">Agregar</button>
               </div>      
           </div>
       </div>
@@ -226,13 +223,13 @@
                     <div class="row">                        
                         <div class="form-group col-12 col-md-7">
                                 <select id="cmbClientes"class="form-control select2bs4" style="width: 100%;">
-                                    <option disabled selected="selected">Seleccione un usuario...</option>
+                                    <option value="0" disabled selected="selected">Seleccione un usuario...</option>
                                     @foreach ($usuariosPersonas as $usuario)
-                                      <option value="{{$usuario->IdUsuario}}">{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}</option>
+                                      <option value="{{$usuario->IdUsuarioR}}">{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido . ' - ' . $usuario->DatosPersona->Documento }}</option>
                                     @endforeach
                                 </select>              
                         </div>
-                      <button class="btn btn-success col-12 col-sm-8 col-md-4 h-75 w-100" onclick="location.href='{{route('nuevoCliente')}}';">+ Crear usuario</button>                  
+                      <button class="btn btn-success col-12 col-sm-8 col-md-4 col-xl-3 h-75 w-100" onclick="location.href='{{route('nuevoCliente')}}';">+ Crear usuario</button>                  
                   </div>
                   <br/>
                   <br/>
@@ -318,7 +315,7 @@
                 <div class="panel__content">
                   <div class="container-fluid">
                     <div class="row">
-                        <select name="" id="" class="form-control col-12 col-sm-7 col-md-5 mb-2">
+                        <select id="cmbBeneficiario" class="form-control col-12 col-sm-7 col-md-5 mb-2">
                             <option value="">Banco andes</option>
                             <option value="">Banco loco</option>
                           </select>
@@ -328,10 +325,10 @@
                       <div class="col-12"><label>Datos del Beneficiario</label></div>
                     </div>
                     <div class="row mt-3">
-                      <label class="col-12 col-md-6 col-lg-2" for="">Beneficiario:</label><p class="col-12 col-lg-4 centrarMobile">Steven Valentin Ladera</p>
-                      <label class="col-12 col-md-6 col-lg-2" for="">Banco:</label><p class="col-12 col-md-6 col-lg-4 centrarMobile">Mi abuela linda</p>
-                      <label class="col-12 col-md-6 col-lg-2" for="">Cuenta:</label><p class="col-12 col-md-6 col-lg-4 centrarMobile">AHORRO</p>
-                      <label class="col-12 col-md-6 col-lg-2" for="">N° Cuenta:</label><p class="col-12 col-md-6 col-lg-4 centrarMobile">39403928394839483948394839</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">Beneficiario:</label><p id="txtDatosBeneficiarioNombre" class="col-12 col-lg-4 centrarMobile">Steven Valentin Ladera</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">Banco:</label><p id="txtDatosBeneficiarioBanco" class="col-12 col-md-6 col-lg-4 centrarMobile">Mi abuela linda</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">Cuenta:</label><p id="txtDatosBeneficiarioCuenta" class="col-12 col-md-6 col-lg-4 centrarMobile">AHORRO</p>
+                      <label class="col-12 col-md-6 col-lg-2" for="">N° Cuenta:</label><p id="txtDatosBeneficiarioNumero" class="col-12 col-md-6 col-lg-4 centrarMobile">39403928394839483948394839</p>
                     </div>
                   </div>               
                 </div>
@@ -388,11 +385,11 @@
                         <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketBanco">Banco Belasco</p>
                     </div>
                     <div class="row">
-                        <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Tipo de Cuenta:</label>
+                        <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Tipo Cuenta:</label>
                         <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketTipoCuenta">AHORRO</p>
                       </div>
                     <div class="row">
-                        <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">N° de Cuenta:</label>
+                        <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">N° Cuenta:</label>
                         <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketNumeroCuenta">123456789987456311232145</p>
                     </div>
                 </div>
@@ -455,6 +452,7 @@
 <script src="{{asset("js/UtilScripts/wizards.js")}}"></script>
 <!-- Select2 -->
 <script src="{{asset("assets/$temaDashboard/plugins/select2/js/select2.full.min.js")}}"></script>
+<script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/cuentaBeneficiaria.js")}}"></script>
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/Dashboard/Transferencias/altaTransferencia.js")}}"></script>
 <script>
       const dolar = 1
@@ -466,14 +464,13 @@
         $('.selectUsuarios').select2();
         var datos = new Array();
         @foreach ($usuariosPersonas as $usuario)
-          var id = '{{$usuario->IdUsuarioR}}';
+         
           var nuevoDato = {'Nombre': '{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersona->Documento}}', 'Email': '{{$usuario->Email}}'}
           datos.push(nuevoDato);      
         @endforeach
 
         sessionStorage.setItem('Clientes', JSON.stringify(datos));
-        var usuarios = sessionStorage.getItem('Clientes');
-        console.log(usuarios);
+       
     });
     
 
