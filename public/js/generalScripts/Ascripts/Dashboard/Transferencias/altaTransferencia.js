@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+    sessionStorage.setItem('Moneda', 'USD');
+    //configuracion inicial
+    limpiarFormulario();
+    VES();
+    USD();
+    cotizaciones();
+    ////////////////////////////7
+
     $("#cmbClientes").change(function(){
         var opcionSeleccionada = $("#cmbClientes")[0].selectedIndex -1;
         var usuario = JSON.parse(sessionStorage.getItem('Clientes'));
@@ -24,6 +32,13 @@ $(document).ready(function(){
 
         BeneficiarioTicket(beneficiario[opcionSeleccionada]['Beneficiario'], 'Venezuela', beneficiario[opcionSeleccionada]['Banco'], beneficiario[opcionSeleccionada]['Cuenta'], beneficiario[opcionSeleccionada]['NumeroCuenta']);
     });
+
+
+    $("#cmbMargen").change(function(){
+        ActualizarTasas();
+    });
+
+    
 });
 
 
@@ -41,4 +56,171 @@ function BeneficiarioTicket(beneficiario, pais, banco, tipoCuenta, numeroCuenta)
     $("#txtTicketBanco").html(banco);
     $("#txtTicketTipoCuenta").html(tipoCuenta);
     $("#txtTicketNumeroCuenta").html(numeroCuenta);
+}
+
+
+function limpiarFormulario(){
+    $("#cmbClientes")[0].selectedIndex = 0;
+
+    $("#txtNombreCliente").html('-');
+    $("#txtDNICliente").html('-');
+    $("#txtCorreoCliente").html('-');
+
+    $("#txtMontoEnviar").val('');
+    $("#txtMontoRecibir").val('');
+
+    $("#cmbBeneficiario")[0].selectedIndex = 0;
+
+    $("#txtDatosBeneficiarioNombre").html('-');
+    $("#txtDatosBeneficiarioBanco").html('-');
+    $("#txtDatosBeneficiarioCuenta").html('-');
+    $("#txtDatosBeneficiarioNumero").html('-');
+    
+}
+
+function CotizacionesAjax(){
+    VES();
+    USD();
+}
+
+function cotizaciones(){
+    var cotizacionVES = sessionStorage.getItem('CotiVES');
+    console.log(cotizacionVES + 'AQUI');
+    if (cotizacionVES == null){
+        setTimeout(cotizaciones, 400);
+    }
+    else{
+        $("#txtCambioVESBanesco").html(cotizacionVES + ' VES');
+        $("#txtCambioVES").html(cotizacionVESOtrosBancos(cotizacionVES) + ' VES');
+        $("#txtCambioUSD").html(sessionStorage.getItem('CotiUSD') + ' USD');
+    }
+}
+
+function cotizacionVESOtrosBancos(VES){
+    var margenActual = parseInt($("#txtMargenActual").val());
+    var margenDeVES = (1 - margenActual) * 100;
+    var RealVES = (VES * 100) / margenDeVES
+
+    return (RealVES * (1 - (margenActual + 0.02))).toFixed(2);
+
+}
+
+function VES(){
+    $.ajax({
+        url:'../api/cotizacionVESRemextiven',
+        type:'get',
+        dataType: "json",
+        async:true,
+        success: function (response) {
+            sessionStorage.setItem('CotiVES', response);
+            
+        },
+        statusCode: {
+            404: function() {
+                alertaToast(tipoAlertaExclamacion, servicioOFF, 3500);
+            }
+        },
+        error:function(x,xs,xt){
+            alertaToast(tipoAlertaError, 'Error al cargar cotizacion VES.', 3500);
+        }
+    });
+}
+
+function USD(){
+    $.ajax({
+        url:'../api/cotizacionUSDRemextiven',
+        type:'get',
+        dataType: "json",
+        async:true,
+        success: function (response) {
+            sessionStorage.setItem('CotiUSD', response);
+            
+        },
+        statusCode: {
+            404: function() {
+                alertaToast(tipoAlertaExclamacion, servicioOFF, 3500);
+            }
+        },
+        error:function(x,xs,xt){
+            alertaToast(tipoAlertaError, 'Error al cargar cotizacion USD.', 3500);
+        }
+    });
+}
+
+function ponerImagen(imagen, simbolo){
+    $("#banderita").html('<img class="d-none d-sm-inline-block" style="margin-top: -5px;" src="'+ imagen + '"> <span> </span><label class="pt-1">' + simbolo + '</label>');
+    sessionStorage.setItem('Moneda', simbolo);
+    var cotiVES = sessionStorage.getItem('CotiVES');
+    var dolar = sessionStorage.getItem('CotiUSD');
+
+    if(simbolo == 'USD'){
+        $("#txtCambioVESBanesco").html(cotiVES + ' VES');
+        $("#txtCambioVES").html((((cotiVES / 9) * 10) * 0.88).toFixed(2) + ' VES');
+    }
+
+    else{
+        $("#txtCambioVESBanesco").html((cotiVES / dolar).toFixed(2) + ' VES');
+        $("#txtCambioVES").html(((((cotiVES / 9) * 10) * 0.88) / dolar).toFixed(2) + ' VES');
+    }
+
+    CalcularMontoRecibir();
+}
+
+function CalcularMontoRecibir(){
+        var valor = $("#txtMontoEnviar").val();
+        var tasa = cotizacionUSDaVES();
+        var tasaBanesco = cotizacionUSDaVES(true);
+        var moneda = sessionStorage.getItem('Moneda')
+        if (moneda == 'PES'){
+            tasa = cotizacionPESaVES();
+            tasaBanesco = cotizacionPESaVES(true);
+        }
+        
+        
+        $("#txtMontoRecibir").val((valor * tasa).toFixed(2));   
+        $("#txtMontoRecibirBanesco").val((valor * tasaBanesco).toFixed(2));
+
+        $("#txtTicketMontoEnviar").html(valor + ' ' + moneda);
+  }
+
+
+function cotizacionUSDaVES(banesco = false){
+    return sessionStorage.getItem('CotiVES');
+ 
+}
+
+function cotizacionPESaVES(banesco = false){
+    var cotiVES = sessionStorage.getItem('CotiVES');
+    var dolar = sessionStorage.getItem('CotiUSD');
+        if (banesco){
+            return (cotiVES / dolar).toFixed(2);
+    }
+     else{
+            return ((((cotiVES / 9) * 10) * 0.88) / dolar).toFixed(2);
+    }
+}
+
+
+
+function HabilitarModificarMargen(){
+    var margenActual = parseInt($("#txtMargenActual").val());
+    $('#cmbMargen option[value="' + margenActual + '"]').removeAttr("selected");
+    if ($("#chkEditarMargen").prop('checked')){
+        $("#cmbMargen").prop('disabled', false);
+        $("#cmbMargen").prop("selectedIndex", 0);
+        
+    }
+    else{
+        $('#cmbMargen option[value="' + margenActual + '"]').attr("selected", true);
+        $("#cmbMargen").prop('disabled', true);
+    }
+}
+
+function ModificarMargen(){
+    var margenSeleccionado = $("#cmbMargen").val();
+    var margenActual = parseInt($("#txtMargenActual").val());
+    var VES = sessionStorage.getItem('CotiVES');
+    var RealVES = (VES * 100) / ((1 - margenActual) * 100)
+
+
 }

@@ -14,24 +14,17 @@ class CrearTablaSolicitudesTransferencias extends Migration
     public function up()
     {
         Schema::create('SolicitudesTransferencia', function (Blueprint $table) {
-            $table->bigIncrements('IdSolicitudTransferencia');
+            $table->increments('IdSolicitudTransferencia');
             $table->unsignedInteger('IdUsuarioSolicita');
             $table->unsignedTinyInteger('IdEstadoTransferencia');
-            $table->unsignedTinyInteger('IdTipoTransferencia');
-            $table->decimal('MontoEnviar', 8, 2);
-            $table->decimal('MontoComision', 8, 2);
-            $table->decimal('MontoTotal', 8, 2);
-            $table->unsignedTinyInteger('IdMoneda');
-            $table->decimal('Cambio', 6, 2);
+            $table->unsignedTinyInteger('IdTipoTransferencia');         
             $table->unsignedTinyInteger('IdMedioPago');
-            $table->unsignedInteger('CotizacionVES');
             $table->unsignedInteger('IdUsuarioResponde')->nullable();
             $table->unsignedInteger('IdCuentaBancaria')->nullable();
             $table->unsignedInteger('IdCuentaBeneficiaria')->nullable();
             $table->date('FechaSolicitada');
             $table->date('FechaFinalizada')->nullable();
             $table->timestamps();
-
 
             $table->foreign('IdUsuarioSolicita', 'FK_SolicitudTransferencia_UsuarioSolicita')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
             $table->foreign('IdEstadoTransferencia', 'FK_SolicitudTransferencia_EstadoTransferencia')->references('IdEstado')->on('EstadosSolicitudTransferencia')->onDelete('restrict');

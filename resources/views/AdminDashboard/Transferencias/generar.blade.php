@@ -94,7 +94,7 @@
               </div>
               <div class="row mt-4 mb-3">
                   <button type="button" class="btn btn-danger btnCircle col-4 m-auto" data-dismiss="modal" onclick="limpiarModalCuentaBancaria();">Cancelar</button>
-                  <button id="btnAgregarCuenta"type="button" class="btn btn-success btnCircle col-4 m-auto" onclick="altaBeneficiario();">Agregar</button>
+                  <button id="btnAgregarCuenta" type="button" class="btn btn-success btnCircle col-4 m-auto" onclick="altaBeneficiario();">Agregar</button>
               </div>      
           </div>
       </div>
@@ -222,7 +222,7 @@
                         <label for="cmbUsuarios">Cliente:</label>
                     <div class="row">                        
                         <div class="form-group col-12 col-md-7">
-                                <select id="cmbClientes"class="form-control select2bs4" style="width: 100%;">
+                                <select id="cmbClientes" class="form-control select2bs4" style="width: 100%;">
                                     <option value="0" disabled selected="selected">Seleccione un usuario...</option>
                                     @foreach ($usuariosPersonas as $usuario)
                                       <option value="{{$usuario->IdUsuarioR}}">{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido . ' - ' . $usuario->DatosPersona->Documento }}</option>
@@ -247,7 +247,7 @@
                           </div> 
                           <div class="row">
                               <label class="col-3 col-sm-4">Correo:</label>
-                              <p id="txtCorreoCliente" class="col-9 col-sm-8">Correo del cliente</p>    
+                              <p id=" " class="col-9 col-sm-8">Correo del cliente</p>    
                           </div>       
                       </div>                   
                   </div>
@@ -272,9 +272,9 @@
                 </div> 
                 <div class="row">   
                 <div class="input-group input-group-lg">
-                    <input id="txtMontoEnviar" type="text" class="form-control col-6 col-sm-9 m-0" onkeydown="CalcularMontoRecibir();">
+                    <input id="txtMontoEnviar" type="text" class="form-control col-6 col-sm-9 m-0" onkeyup="CalcularMontoRecibir();">
           
-                    <a id="banderita" class="dropdown-toggle col-6 col-sm-3 text-center pt-2" data-toggle="dropdown" style="border: 1px solid red;">
+                    <a id="banderita" class="dropdown-toggle col-6 col-sm-3 text-center pt-2" data-toggle="dropdown" style="border: 1px solid gray;">
                         <img class="d-none d-sm-inline-block" style="margin-top: -8px; margin-left:-5px;" src="{{asset("img/images/banderas/EstadosUnidos.png")}}"><span> </span><label class="pt-1"> USD</label>
                     </a>
                     
@@ -286,11 +286,14 @@
             </div>
                 <br/>   
                 <div class="row">
-                  <label>Monto a recibir</label>
+                  <label class="d-none d-sm-block">Monto a recibir / Monto a recibir Banesco</label>
+                  <label class="d-sm-none">Monto a recibir</label>
                 </div>
                 <div class="row">   
                     <div class="input-group input-group-lg">
-                        <input id="txtMontoRecibir" type="text" class="form-control col-6 col-sm-9 m-0" >
+
+                        <input id="txtMontoRecibir" type="text" class="form-control col-6 col-sm-4 m-0" >
+                        <input id="txtMontoRecibirBanesco" readonly type="text" class="form-control col-6 col-sm-5 m-0 d-none d-sm-block" >
               
                         <a class="col-6 col-sm-3 text-center pt-2">
                             <img class="d-none d-sm-inline-block" style="margin-top: -8px;" src="{{asset("img/images/banderas/Venezuela.png")}}"><span> </span><label class="pt-1"> VES</label>
@@ -299,10 +302,51 @@
                   </div>
                 </div>
                 <br/>
-                <div class="row cajaPunteada text-center">
-                      <label class="col-11">Tipo de cambio:</label>
-                      <label class="col-11">Costo total:(Ya incluido)</label>             
-                </div>            
+                <br/>
+                <div class="row text-center mt-1 pt-2" style="border-style: solid; border-width: 3px; border-radius:5px;">
+                      <div class="col-12 col-sm-4 mb-2">
+                        <label class="col-12">Tasa de cambio</label><span class="col-12" id="txtCambioVES"></span>
+                      </div>
+                      <div class="col-12 col-sm-4 mb-2">
+                        <label class="col-12">Tasa Banesco</label> <span class="col-12" id="txtCambioVESBanesco"> </span>
+                      </div>
+                      <div class="col-12 col-sm-4 mb-2">
+                        <label class="col-12">Tasa Dolar</label> <span class="col-12" id="txtCambioUSD"> </span>
+                      </div>
+                      <button class="btn btn-success col-12 m-auto">Actualizar</button>               
+                </div>
+                <div class="row cajaPunteada text-center mt-1">
+                    
+                </div>
+                <br/>
+                <label class=" col-12 text-center">Margen</label>
+                <div class="col-12 col-md-4 m-auto">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <input type="checkbox" id="chkEditarMargen" onclick="HabilitarModificarMargen();">
+                        </span>
+                      </div>
+                      <select id="cmbMargen" class="form-control text-center">
+                        <option value="1" disabled>Seleccione un margen...</option>
+                        @foreach ($porcentajesGanancia as $porcentaje)
+                          @if ($porcentaje->Actual)
+                            <option selected value="{{$porcentaje->PorcentajeGanancia}}">{{$porcentaje->TextoGanancia}}</option>
+                            
+                          @else
+                            <option value="{{$porcentaje->PorcentajeGanancia}}">{{$porcentaje->TextoGanancia}}</option>
+                          @endif                
+                        @endforeach                    
+                      </select>
+                    </div>
+                      @foreach ($porcentajesGanancia as $porcentaje)
+                          @if ($porcentaje->Actual)
+                            <input id="txtMargenActual" type="text" value="{{$porcentaje->PorcentajeGanancia}}" hidden/>
+                          @endif                
+                      @endforeach  
+                    
+                    <!-- /input-group -->
+                  </div>           
             </div>
           </div>                         
         </div>
@@ -316,8 +360,7 @@
                   <div class="container-fluid">
                     <div class="row">
                         <select id="cmbBeneficiario" class="form-control col-12 col-sm-7 col-md-5 mb-2">
-                            <option value="">Banco andes</option>
-                            <option value="">Banco loco</option>
+                          <option value="0">Seleccione un Beneficiario</option>
                           </select>
                           <button class="btn btn-success col-12 col-md-4 h-75 w-100" onclick="$('#modalAgregarCuentaBancaria').modal('show')">+ Agregar Cuenta</button>
                     </div>
@@ -349,23 +392,23 @@
                   </div>
                   <div class="row">
                     <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Monto a Enviar:</label>
-                    <p class="col-12 col-sm-5 text-right fuente14 semiNegrita"><span style="color:green;"><i class="fas fa-paper-plane"></i></span id="txtTicketMontoEnviar">23000 PES</p>
+                    <p id="txtTicketMontoEnviar" class="col-12 col-sm-5 text-right fuente14 semiNegrita">-   PES</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Monto a Recibir:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketMontoRecibir">5.000.000 VES</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketMontoRecibir">-  VES</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Vencimiento:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="dtpTicketVencimiento">13/05/2019</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="dtpTicketVencimiento">-</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Usuario:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketCliente">Cristian Ferreri</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketCliente">-</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Documento:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketDni">51294519</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketDni">-</p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -374,7 +417,7 @@
                     </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Nombre:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketBeneficiario">Tony Stark</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketBeneficiario">-</p>
                     </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Pais:</label>
@@ -382,15 +425,15 @@
                       </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Banco:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketBanco">Banco Belasco</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketBanco">-</p>
                     </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">Tipo Cuenta:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketTipoCuenta">AHORRO</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketTipoCuenta">-</p>
                       </div>
                     <div class="row">
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">N° Cuenta:</label>
-                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketNumeroCuenta">123456789987456311232145</p>
+                        <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketNumeroCuenta">-</p>
                     </div>
                 </div>
               </div>
@@ -455,11 +498,7 @@
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/cuentaBeneficiaria.js")}}"></script>
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/Dashboard/Transferencias/altaTransferencia.js")}}"></script>
 <script>
-      const dolar = 1
-      const peso = 2
-      var moneda = 1
-      var cotizacionDolar = 2
-      var cotizacionPesos = 4
+
     $(document).ready(function(){ 
         $('.selectUsuarios').select2();
         var datos = new Array();
@@ -472,27 +511,6 @@
         sessionStorage.setItem('Clientes', JSON.stringify(datos));
        
     });
-    
-
-    function ponerImagen(imagen, simbolo){
-      $("#banderita").html('<img class="d-none d-sm-inline-block" style="margin-top: -5px;" src="'+ imagen + '"> <span> </span><label class="pt-1">' + simbolo + '</label>');
-    };
-
-    function CalcularMontoRecibir(){
-      if(!isNaN(event.key)){
-          if(moneda = dolar) {
-          $("#txtMontoRecibir").val($("#txtMontoEnviar").val() + event.key * cotizacionDolar);
-        }
-        else{
-          $("#txtMontoRecibir").val($("#txtMontoEnviar").val() * cotizacionPesos);
-        }
-      }
-      else{
-        event.preventDefault
-      }
-      
-    };
-
     function CalcularMontoEnviar(){
 
     };
