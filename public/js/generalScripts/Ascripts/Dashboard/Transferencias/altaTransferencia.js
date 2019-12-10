@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 
     $("#cmbMargen").change(function(){
-        ActualizarTasas();
+        ModificarMargen();
     });
 
     
@@ -85,9 +85,8 @@ function CotizacionesAjax(){
 
 function cotizaciones(){
     var cotizacionVES = sessionStorage.getItem('CotiVES');
-    console.log(cotizacionVES + 'AQUI');
     if (cotizacionVES == null){
-        setTimeout(cotizaciones, 400);
+        setTimeout(cotizaciones, 600);
     }
     else{
         $("#txtCambioVESBanesco").html(cotizacionVES + ' VES');
@@ -97,6 +96,7 @@ function cotizaciones(){
 }
 
 function cotizacionVESOtrosBancos(VES){
+    //PARAM VES SON LOS BOLIVARES QUE YA ESTAN CON EL PORCENTAJE DE GANANCIA
     var margenActual = parseInt($("#txtMargenActual").val());
     var margenDeVES = (1 - margenActual) * 100;
     var RealVES = (VES * 100) / margenDeVES
@@ -166,17 +166,30 @@ function ponerImagen(imagen, simbolo){
     CalcularMontoRecibir();
 }
 
-function CalcularMontoRecibir(){
-        var valor = $("#txtMontoEnviar").val();
-        var tasa = cotizacionUSDaVES();
-        var tasaBanesco = cotizacionUSDaVES(true);
-        var moneda = sessionStorage.getItem('Moneda')
-        if (moneda == 'PES'){
-            tasa = cotizacionPESaVES();
-            tasaBanesco = cotizacionPESaVES(true);
+function CalcularMontoRecibir(banescoVES = 0, otroVES = 0){
+    var valor = $("#txtMontoEnviar").val();
+    var margen = $("#cmbMargen").val(); 
+    var margenActual = $("#txtMargenActual").val();
+    var moneda = sessionStorage.getItem('Moneda')
+    var tasaBanesco = sessionStorage.getItem('CotiVES'); 
+
+    if (banescoVES != 0 && otroVES != 0 || $("#chkEditarMargen").prop('checked')){
+        if (banescoVES != 0 && otroVES != 0){
+            tasaBanesco = banescoVES;
+            tasa = otroVES;
+        }else{
+            tasaBanesco = ((tasaBanesco * 100) / ((1 - margenActual) * 100 )) * (1 - margen);
+            tasa = cotizacionVESOtrosBancos(tasaBanesco)
         }
         
-        
+    }
+    else{      
+        var tasa = cotizacionVESOtrosBancos(sessionStorage.getItem('CotiVES'));               
+        if (moneda == 'PES'){
+            tasaBanesco = tasaBanesco / sessionStorage.getItem('CotiUSD');
+            tasa = tasa / sessionStorage.getItem('CotiUSD');        
+        }
+    }
         $("#txtMontoRecibir").val((valor * tasa).toFixed(2));   
         $("#txtMontoRecibirBanesco").val((valor * tasaBanesco).toFixed(2));
 
@@ -203,7 +216,7 @@ function cotizacionPESaVES(banesco = false){
 
 
 function HabilitarModificarMargen(){
-    var margenActual = parseInt($("#txtMargenActual").val());
+    var margenActual = $("#txtMargenActual").val();
     $('#cmbMargen option[value="' + margenActual + '"]').removeAttr("selected");
     if ($("#chkEditarMargen").prop('checked')){
         $("#cmbMargen").prop('disabled', false);
@@ -218,9 +231,35 @@ function HabilitarModificarMargen(){
 
 function ModificarMargen(){
     var margenSeleccionado = $("#cmbMargen").val();
-    var margenActual = parseInt($("#txtMargenActual").val());
+    var margenActual = $("#txtMargenActual").val();
     var VES = sessionStorage.getItem('CotiVES');
-    var RealVES = (VES * 100) / ((1 - margenActual) * 100)
+    var realVES = (VES * 100) / ((1 - margenActual) * 100);
 
+    ConfigurarNuevaTasa(realVES, margenSeleccionado);
 
 }
+
+
+function ConfigurarNuevaTasa(valorVES, nuevoMargen){
+    var moneda = sessionStorage.getItem('Moneda')
+    var montoEnviar = $("#txtMontoEnviar").val();
+    if (isNaN(montoEnviar)){
+        montoEnviar = 0;
+    }
+
+    var montoBanesco = (valorVES * (1 - nuevoMargen)).toFixed(2);
+    var montoOtros = (valorVES * ((1 - nuevoMargen) - 0.02)).toFixed(2);
+    if (moneda == 'USD'){
+        $("#txtCambioVESBanesco").html(montoBanesco);
+        $("#txtCambioVES").html(montoOtros);
+    }
+    else{
+        var cambio = sessionStorage.getItem('CotiUSD');
+        $("#txtCambioVESBanesco").html((montoBanesco / cambio).toFixed(2));
+        $("#txtCambioVES").html((montoOtros / cambio).toFixed(2));
+    }
+
+    CalcularMontoRecibir(montoBanesco, montoOtros);
+
+}
+

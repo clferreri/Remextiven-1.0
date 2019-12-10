@@ -327,7 +327,7 @@
                           <input type="checkbox" id="chkEditarMargen" onclick="HabilitarModificarMargen();">
                         </span>
                       </div>
-                      <select id="cmbMargen" class="form-control text-center">
+                      <select disabled id="cmbMargen" class="form-control text-center">
                         <option value="1" disabled>Seleccione un margen...</option>
                         @foreach ($porcentajesGanancia as $porcentaje)
                           @if ($porcentaje->Actual)
