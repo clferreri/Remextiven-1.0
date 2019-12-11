@@ -98,10 +98,11 @@ function cotizaciones(){
 function cotizacionVESOtrosBancos(VES){
     //PARAM VES SON LOS BOLIVARES QUE YA ESTAN CON EL PORCENTAJE DE GANANCIA
     var margenActual = parseInt($("#txtMargenActual").val());
+    var margenSeleccionado = parseInt($("#cmbMargen").val());
     var margenDeVES = (1 - margenActual) * 100;
     var RealVES = (VES * 100) / margenDeVES
 
-    return (RealVES * (1 - (margenActual + 0.02))).toFixed(2);
+    return (RealVES * (1 - (margenSeleccionado + 0.02))).toFixed(2);
 
 }
 
@@ -167,33 +168,30 @@ function ponerImagen(imagen, simbolo){
 }
 
 function CalcularMontoRecibir(banescoVES = 0, otroVES = 0){
-    var valor = $("#txtMontoEnviar").val();
-    var margen = $("#cmbMargen").val(); 
-    var margenActual = $("#txtMargenActual").val();
+    var valor = parseInt($("#txtMontoEnviar").val());
     var moneda = sessionStorage.getItem('Moneda')
-    var tasaBanesco = sessionStorage.getItem('CotiVES'); 
-
+    var tasa;
+    var tasaBanesco;
     if (banescoVES != 0 && otroVES != 0 || $("#chkEditarMargen").prop('checked')){
         if (banescoVES != 0 && otroVES != 0){
             tasaBanesco = banescoVES;
             tasa = otroVES;
         }else{
-            tasaBanesco = ((tasaBanesco * 100) / ((1 - margenActual) * 100 )) * (1 - margen);
-            tasa = cotizacionVESOtrosBancos(tasaBanesco)
+            tasaBanesco = TasaUSDVES(true);
+            tasa = TasaUSDVES(false);
         }
         
     }
-    else{      
-        var tasa = cotizacionVESOtrosBancos(sessionStorage.getItem('CotiVES'));               
+    else{                     
         if (moneda == 'PES'){
-            tasaBanesco = tasaBanesco / sessionStorage.getItem('CotiUSD');
-            tasa = tasa / sessionStorage.getItem('CotiUSD');        
+            tasaBanesco = TasaUSDVES(true) / sessionStorage.getItem('CotiUSD');
+            tasa = TasaUSDVES(false) / sessionStorage.getItem('CotiUSD');        
         }
     }
         $("#txtMontoRecibir").val((valor * tasa).toFixed(2));   
         $("#txtMontoRecibirBanesco").val((valor * tasaBanesco).toFixed(2));
 
-        $("#txtTicketMontoEnviar").html(valor + ' ' + moneda);
+        $("#txtTicketMontoEnviar").val(valor + ' ' + moneda);
   }
 
 
@@ -250,16 +248,47 @@ function ConfigurarNuevaTasa(valorVES, nuevoMargen){
     var montoBanesco = (valorVES * (1 - nuevoMargen)).toFixed(2);
     var montoOtros = (valorVES * ((1 - nuevoMargen) - 0.02)).toFixed(2);
     if (moneda == 'USD'){
-        $("#txtCambioVESBanesco").html(montoBanesco);
-        $("#txtCambioVES").html(montoOtros);
+        $("#txtCambioVESBanesco").html(montoBanesco + ' VES');
+        $("#txtCambioVES").html(montoOtros + ' VES');
     }
     else{
         var cambio = sessionStorage.getItem('CotiUSD');
-        $("#txtCambioVESBanesco").html((montoBanesco / cambio).toFixed(2));
-        $("#txtCambioVES").html((montoOtros / cambio).toFixed(2));
+        $("#txtCambioVESBanesco").html((montoBanesco / cambio).toFixed(2) + ' VES');
+        $("#txtCambioVES").html((montoOtros / cambio).toFixed(2) + ' VES');
     }
 
     CalcularMontoRecibir(montoBanesco, montoOtros);
-
 }
+
+function TasaUSDVES(banesco = false, cotiVES = sessionStorage.getItem('CotiVES')){ //Parametro CotiVES es la cotizacion al margen actual fijado.
+    
+    var margenActual = $("#txtMargenActual").val(); //Margene actual del sistema (el fijado como actual a tomar en cuenta).
+    var margenSeleccionado = $("#cmbMargen").val(); //Margen seleccionado por el usuario.
+    var tasaUSDVESBanesco;
+    tasaUSDVESBanesco = parseFloat((cotiVES * 100) / ((1 - margenActual) * 100));
+    if ($("#chkEditarMargen").prop('checked')){ //Si el usuario decidio cambiar el margen       
+        if (banesco){
+            return parseFloat((tasaUSDVESBanesco * (1 - margenSeleccionado)).toFixed(2));
+        }
+        else{
+            return parseFloat((tasaUSDVESBanesco * (1 - (margenSeleccionado + 0.02))).toFixed(2));
+        }
+        
+    }
+    else{
+        if (banesco){
+            return parseFloat(cotiVES);
+        }
+        else{
+            return parseFloat((tasaUSDVESBanesco * (1 - (margenSeleccionado + 0.02))).toFixed(2));
+        }
+        
+    }
+}
+
+
+function TasaPESVESBanesco(){
+    return (TasaUSDVESBanesco / sessionStorage.getItem('CotiUSD')).toFixed(2);
+}
+
 
