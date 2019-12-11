@@ -459,20 +459,56 @@
               </div>
             </div>
           </div>
+        </div>
 
+        <div class="panel d-none" style="width:100%;">
+          <header class="panel__header">
+            <h2 class="panel__title">Medio de pago</h2>
+            <p class="panel__subheading">Selecciona como abonara el cliente</p>
+           </header>
+          
+          <div class="panel__content">
+              <div class="container-fluid">
+                  <div class="row text-center">
 
-          <div class="panel d-none" style="width:100%;">
-              <header class="panel__header">
-                <h2 class="panel__title">Información de la trasnferencia</h2>
-                <p class="panel__subheading">Valida con el cliente que los datos esten correctos</p>
-               </header>
-              
-              <div class="panel__content">
+                    <div class="card col-12 col-md-6 col-xl-4 text-center" style="width: 18rem;">
+                        <img width="240px" src="{{asset("img/images/metodosDePago/santander.png")}}" alt="">
+                      <div class="card-body">
+                        <p class="card-text">Trensferencia o deposito en cajero</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">SIN COSTO</li>
+                          <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
+                        </ul>
+                    </div>
+
+                    <div class="card col-12 col-md-6 col-xl-4 text-center" style="width: 18rem;">
+                        <img width="200px" src="{{asset("img/images/metodosDePago/prex.png")}}" alt="">
+                      <div class="card-body">
+                        <p class="card-text">Trensferencia Prex a Prex</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Costo de 9 UYU</li>
+                          <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
+                        </ul>
+                    </div>
+
+                    <div class="card col-12 col-md-6 col-xl-4 text-center" style="width: 18rem;">
+                        <img width="200px" src="{{asset("img/images/metodosDePago/prex.png")}}" alt="">
+                      <div class="card-body">
+                        <p class="card-text">Trensferencia Prex a Prex</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Costo de 9 UYU</li>
+                          <li class="list-group-item"></li>
+                        </ul>
+                    </div>
+                    <input class="custom-control-input" type="radio" name="optMedioPago" id="">
+                  </div>
               </div>
           </div>
+      </div>
 
-
-        </div>
       </div>
 
       <div class="wizard__footer">
@@ -495,8 +531,11 @@
 <script src="{{asset("js/UtilScripts/wizards.js")}}"></script>
 <!-- Select2 -->
 <script src="{{asset("assets/$temaDashboard/plugins/select2/js/select2.full.min.js")}}"></script>
+<!-- Custom Controls -->
+<script src="{{asset("assets/$temaDashboard/plugins/bs-custom-file-input/bs-custom-file-input.min.js")}}"></script>
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/cuentaBeneficiaria.js")}}"></script>
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/Dashboard/Transferencias/altaTransferencia.js")}}"></script>
+
 <script>
 
     $(document).ready(function(){ 
