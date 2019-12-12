@@ -471,10 +471,10 @@
               <div class="container-fluid">
                   <div class="row text-center">
 
-                    <div class="card col-12 col-md-6 col-xl-4 text-center" style="width: 18rem;">
-                        <img width="240px" src="{{asset("img/images/metodosDePago/santander.png")}}" alt="">
+                    <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style=" justify-content:center;">
+                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/santander.png")}}" alt="">
                       <div class="card-body">
-                        <p class="card-text">Trensferencia o deposito en cajero</p>
+                        <p class="card-text">Trensferencia <br/> deposito en cajero</p>
                       </div>
                       <ul class="list-group list-group-flush">
                           <li class="list-group-item">SIN COSTO</li>
@@ -482,28 +482,63 @@
                         </ul>
                     </div>
 
-                    <div class="card col-12 col-md-6 col-xl-4 text-center" style="width: 18rem;">
-                        <img width="200px" src="{{asset("img/images/metodosDePago/prex.png")}}" alt="">
+                    <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style="width: 18rem; justify-content:center;">
+                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/prex.png")}}" alt="">
                       <div class="card-body">
-                        <p class="card-text">Trensferencia Prex a Prex</p>
+                        <p class="card-text">Trensferencia <br/>Prex a Prex</p>
+                      </div>
+                      <ul for="optPrex" class="list-group list-group-flush">
+                          <li class="list-group-item">Costo de 9 UYU</li>
+                          <li class="list-group-item"><input type="radio" name="optMedioPago" id="optPrex"></li>
+                        </ul>
+                    </div>
+
+                    <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style="width: 18rem; justify-content:center;">
+                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/abitab.png")}}" alt="">
+                      <div class="card-body">
+                        <p class="card-text">Giro Abitab</p>
                       </div>
                       <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Costo de 9 UYU</li>
+                          <li class="list-group-item">Costo de 100 UYU</li>
+                          <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
+                        </ul>
+                    </div>
+                  </div>
+
+                  <div class="row text-center mt-3">
+
+                    <div class="card col-12 col-md-6 col-xl-4 text-center m-auto" style="width: 18rem; justify-content:center;">
+                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/midinero.png")}}" alt="">
+                      <div class="card-body">
+                        <p class="card-text">Transferencia o deposito en cajero</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">SIN COSTO</li>
                           <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
                         </ul>
                     </div>
 
-                    <div class="card col-12 col-md-6 col-xl-4 text-center" style="width: 18rem;">
-                        <img width="200px" src="{{asset("img/images/metodosDePago/prex.png")}}" alt="">
-                      <div class="card-body">
-                        <p class="card-text">Trensferencia Prex a Prex</p>
-                      </div>
-                      <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Costo de 9 UYU</li>
-                          <li class="list-group-item"></li>
-                        </ul>
+                    <div class="card col-12 col-md-6 col-xl-4 text-center m-auto" style="width: 18rem; justify-content:center;">
+                      <img class="img-fluid" src="{{asset("img/images/metodosDePago/midinero.png")}}" alt="">
+                    <div class="card-body">
+                      <p class="card-text">Transferencia o deposito en cajero</p>
                     </div>
-                    <input class="custom-control-input" type="radio" name="optMedioPago" id="">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">SIN COSTO</li>
+                        <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
+                      </ul>
+                  </div>
+
+                  <div class="card col-12 col-md-6 col-xl-4 text-center m-auto" style="width: 18rem; justify-content:center;">
+                    <img class="img-fluid" src="{{asset("img/images/metodosDePago/midinero.png")}}" alt="">
+                  <div class="card-body">
+                    <p class="card-text">Transferencia o deposito en cajero</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">SIN COSTO</li>
+                      <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
+                    </ul>
+                </div>                    
                   </div>
               </div>
           </div>
