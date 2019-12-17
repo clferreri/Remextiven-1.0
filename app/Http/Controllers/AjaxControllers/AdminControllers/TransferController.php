@@ -23,7 +23,7 @@ class TransferController extends Controller
             'idUsuario' => ['required', 'exists:UsuariosR,IdUsuarioR'],
             'idTipoTransferencia' => ['required', 'exists:TipossolicitudTransferencia,IdTipo'],
             'idMedioPago' => ['required'], 
-            'idCuentaBeneficiaria' => ['required'],
+            'idCuentaBeneficiaria' => ['required', 'exists:CuentasBeneficiarios,IdCuenta'],
             'idMoneda' => ['required','numeric','unique:personasfr,Documento'], 
             'IdMoneda' => ['required','numeric'], 
             'MontoEnviar' => ['required','numeric'], 
