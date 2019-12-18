@@ -505,41 +505,6 @@
                     </div>
                   </div>
 
-                  <div class="row text-center mt-3">
-
-                    <div class="card col-12 col-md-6 col-xl-4 text-center m-auto" style="width: 18rem; justify-content:center;">
-                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/midinero.png")}}" alt="">
-                      <div class="card-body">
-                        <p class="card-text">Transferencia o deposito en cajero</p>
-                      </div>
-                      <ul class="list-group list-group-flush">
-                          <li class="list-group-item">SIN COSTO</li>
-                          <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
-                        </ul>
-                    </div>
-
-                    <div class="card col-12 col-md-6 col-xl-4 text-center m-auto" style="width: 18rem; justify-content:center;">
-                      <img class="img-fluid" src="{{asset("img/images/metodosDePago/midinero.png")}}" alt="">
-                    <div class="card-body">
-                      <p class="card-text">Transferencia o deposito en cajero</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">SIN COSTO</li>
-                        <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
-                      </ul>
-                  </div>
-
-                  <div class="card col-12 col-md-6 col-xl-4 text-center m-auto" style="width: 18rem; justify-content:center;">
-                    <img class="img-fluid" src="{{asset("img/images/metodosDePago/midinero.png")}}" alt="">
-                  <div class="card-body">
-                    <p class="card-text">Transferencia o deposito en cajero</p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                      <li class="list-group-item">SIN COSTO</li>
-                      <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
-                    </ul>
-                </div>                    
-                  </div>
               </div>
           </div>
       </div>

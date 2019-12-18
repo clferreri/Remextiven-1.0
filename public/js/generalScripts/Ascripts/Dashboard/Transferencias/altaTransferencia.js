@@ -291,4 +291,37 @@ function TasaPESVESBanesco(){
     return (TasaUSDVESBanesco / sessionStorage.getItem('CotiUSD')).toFixed(2);
 }
 
-
+function altaTransferencia(cliente, montoEnviar, montoRecibirBanesco, montoRecibirOtro, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago){
+    $.ajax({
+        url:'../api/cotizacionUSDRemextiven',
+        data:{'idUsuario': cliente, 
+                'montoEnviar': montoEnviar,
+                'montoRecibirBanesco': montoRecibirBanesco,
+                'montoRecibirOtro': montoRecibirOtro,
+                'idMoneda': moneda,
+                'margen': margen,
+                'cotiVESBanesco': cotizacionVESBanesco,
+                'cotiVESOtro': cotizacionVESOtro,
+                'cotiUSD': cotiDolar,
+                'idBeneficiario': beneficiario,
+                'idMedioPago': metodoPago,
+                'idTipoTransferencia': $("#cmbPropositoEnvio").val(),
+            
+        },
+        type:'post',
+        dataType: "json",
+        async:true,
+        success: function (response) {
+            sessionStorage.setItem('CotiUSD', response);
+            
+        },
+        statusCode: {
+            404: function() {
+                alertaToast(tipoAlertaExclamacion, servicioOFF, 3500);
+            }
+        },
+        error:function(x,xs,xt){
+            alertaToast(tipoAlertaError, 'Error al cargar cotizacion USD.', 3500);
+        }
+    });
+}

@@ -53,8 +53,9 @@ Route::get('cotizacionUSDRemextiven', function () {
 });
 //-------------------------------------------//
 
+
 //-----------------------//
-//////// Cliente //////////
+//////// CLIENTE //////////
 //-----------------------//
 
 //Creacion de usuario 
@@ -67,6 +68,14 @@ Route::post('createBeneficiaryAccount', 'AjaxControllers\AdminControllers\Benefi
 Route::post('BeneficiaryAccount', 'AjaxControllers\AdminControllers\BeneficiaryAccountController@getBeneficiaryAccount');
 
 //-------------------------------------------//
+
+
+//------------------------------//
+//////// TRANSFERENCIA //////////
+//-----------------------------//
+
+Route::post('createTransfer', 'AjaxControllers\AdminControllers\TransferController@createTransfer');
+
 
 //Traigo todas las cuentas Beneficiarias de un cliente
 //////////////////////////////////////////////////////////////////////////
