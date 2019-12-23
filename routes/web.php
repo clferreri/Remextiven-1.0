@@ -141,3 +141,7 @@ Route::view('/proce', 'AdminDashboard\Transferencias\enProceso');
 
 
 Route::view('/email', 'Mails\adminGeneracionCuentaCliente');
+
+
+
+Route::get('/pdf','PDFs\transferenciaController@index');
