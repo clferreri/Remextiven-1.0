@@ -27,7 +27,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="widgets.html" class="nav-link @yield('menu-dashboard')">
+                    <a href="{{route('inicioAdminPanel')}}" class="nav-link @yield('menu-dashboard')">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -44,7 +44,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../../index.html" class="nav-link @yield('link-transferencias-generar')">
+                            <a href="{{route('nuevaTransferencia')}}" class="nav-link @yield('link-transferencias-generar')">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Generar Transferencia</p>
                             </a>
@@ -79,7 +79,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../layout/top-nav.html" class="nav-link @yield('link-clientes-generar')">
+                            <a href="{{route('nuevoCliente')}}" class="nav-link @yield('link-clientes-generar')">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Generar</p>
                             </a>

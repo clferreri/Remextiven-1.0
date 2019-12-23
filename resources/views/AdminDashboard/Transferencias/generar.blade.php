@@ -469,20 +469,34 @@
           
           <div class="panel__content">
               <div class="container-fluid">
-                  <div class="row text-center">
-
-                    <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style=" justify-content:center;">
-                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/santander.png")}}" alt="">
-                      <div class="card-body">
-                        <p class="card-text">Trensferencia <br/> deposito en cajero</p>
-                      </div>
-                      <ul class="list-group list-group-flush">
-                          <li class="list-group-item">SIN COSTO</li>
-                          <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
+                  <div class="row text-center mb-4">
+                    @php
+                     $contador = 0
+                    @endphp
+                    @foreach ($mediosDePago as $medioPago)
+                      @php
+                        $contador = $contador +1    
+                      @endphp
+                      <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style=" justify-content:center;">
+                        <img class="img-fluid" src="{{asset($medioPago->UrlImagen)}}" alt="">
+                        <div class="card-body">
+                          <p class="card-text">{{$medioPago->Descripcion}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">{{$medioPago->TextoCosto}}</li>
+                          <li class="list-group-item"><input type="radio" name="optMedioPago" id="optSantander" value="{{$medioPago->IdMedioPago}}"></li>
                         </ul>
-                    </div>
+                      </div>
 
-                    <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style="width: 18rem; justify-content:center;">
+                      @if ($contador == 3 || $contador == 6)
+                      </div>
+                      <div class="row text-center">
+                      @endif
+                    @endforeach
+                    
+                    
+
+                    {{-- <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style="width: 18rem; justify-content:center;">
                         <img class="img-fluid" src="{{asset("img/images/metodosDePago/prex.png")}}" alt="">
                       <div class="card-body">
                         <p class="card-text">Trensferencia <br/>Prex a Prex</p>
@@ -500,9 +514,9 @@
                       </div>
                       <ul class="list-group list-group-flush">
                           <li class="list-group-item">Costo de 100 UYU</li>
-                          <li class="list-group-item"><input type="radio" name="optMedioPago" id=""></li>
+                          <li class="list-group-item"><input type="radio" name="optMedioPago" id="optAbitab"></li>
                         </ul>
-                    </div>
+                    </div> --}}
                   </div>
 
               </div>

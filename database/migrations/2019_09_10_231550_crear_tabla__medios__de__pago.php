@@ -16,7 +16,12 @@ class CrearTablaMediosDePago extends Migration
         Schema::create('MediosDePago', function (Blueprint $table) {
             $table->tinyIncrements('IdMedioPago');
             $table->string('MedioDePago', 30);
+            $table->string('Descripcion', 100);
+            $table->string('TextoCosto', 45);
+            $table->decimal('Costo', 6, 2);
             $table->boolean('Activo');
+            $table->boolean('PagoCliente');
+            $table->string('UrlImagen', 150);
             $table->timestamps();
         });
     }

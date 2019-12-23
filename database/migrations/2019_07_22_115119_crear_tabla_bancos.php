@@ -14,7 +14,7 @@ class CrearTablaBancos extends Migration
     public function up()
     {
         Schema::create('BancosR', function (Blueprint $table) {
-            $table->increments('idBanco');
+            $table->increments('IdBanco');
             $table->string('Banco');
             $table->unsignedTinyInteger('IdPais');
             $table->string('CodigoBanco')->nullable();

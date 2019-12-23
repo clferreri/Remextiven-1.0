@@ -13,4 +13,8 @@ class PaymentMethod extends Model
     protected $fillable = [
         'MedioDePago', 'Activo'
     ];
+
+
 }
+
+

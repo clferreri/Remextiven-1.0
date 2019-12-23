@@ -26,7 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('temaDashboard', 'dashboard');
+
         Schema::defaultStringLength(191);
+        
         
     }
 }

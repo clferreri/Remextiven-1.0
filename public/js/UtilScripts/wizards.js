@@ -144,8 +144,6 @@ class Wizard{
 
       //SEGUNDO PASO---------------------------------------
       var montoEnviar = $("#txtMontoEnviar").val();
-      var montoRecibirBanesco = $("#txtMontoRecibirBanesco").val();
-      var montoRecibirOtro = $("#txtMontoRecibir").val();
       var moneda = 1;
       if (sessionStorage.getItem("Moneda") == "USD"){
         moneda = 2;
@@ -162,10 +160,10 @@ class Wizard{
       //--------------------------------------------------
 
       //CUARTO PASO ---------------------------------
-      var metodoPago = $("#optMedioPago").val();
+      var metodoPago = $('input:radio[name=optMedioPago]:checked').val();
       //------------------------------------------
     
-    if (this.validarFormulario(cliente, montoEnviar, montoRecibirBanesco, montoRecibirOtro, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago)){
+    if (this.validarFormulario(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago)){
       this.concludeControlMoveStepMethod();
       this.wizard.classList.add('completed');
           
@@ -201,7 +199,7 @@ class Wizard{
     return fowardMov || backMov;
   }
 
-  validarFormulario(cliente, montoEnviar, montoRecibirBanesco, montoRecibirOtro, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago){
+  validarFormulario(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago){
     var formularioValido = true;
     var tituloErrores = "Error al generar transferencia"
     
@@ -215,16 +213,16 @@ class Wizard{
       return formularioValido
     }
 
-    if (montoEnviar == '' || montoRecibirBanesco == '' || montoRecibirOtro == '' || montoEnviar == ' ' || montoRecibirBanesco == ' ' || montoRecibirOtro == ' ' || isNaN(montoEnviar) || isNaN(montoRecibirBanesco) || isNaN(montoRecibirOtro) || montoEnviar < 5){
+    if (montoEnviar == '' || montoEnviar == ' ' || isNaN(montoEnviar) || (moneda == 1 && montoEnviar < 200) || (moneda == 2 && montoEnviar < 5)){
       formularioValido = false
-      alertaCaja('error', tituloErrores, 'Corrija los montos a enviar');
+      alertaCaja('error', tituloErrores, 'El monto a enviar no puede ser menor a U$S 5 o $ 200');
       for (var i = 0; i >= -2; i--){ 
         this.moveStep(-1);
       }
       return formularioValido
     }
 
-    if (moneda != 1 || moneda != 2 || margen == ''){
+    if ((moneda != 1 && moneda != 2) || margen == ''){
       formularioValido = false
       alertaCaja('error', tituloErrores, 'Valide la moneda o margen ingresado');
       for (var i = 0; i >= -2; i--){ 
@@ -262,7 +260,7 @@ class Wizard{
 
 
     if (formularioValido){
-      altaTransferencia(cliente, montoEnviar, montoRecibirBanesco, montoRecibirOtro, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago);
+      altaTransferencia(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago);
       return formularioValido;
     }
 

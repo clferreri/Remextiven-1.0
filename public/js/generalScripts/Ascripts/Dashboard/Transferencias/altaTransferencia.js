@@ -97,12 +97,12 @@ function cotizaciones(){
 
 function cotizacionVESOtrosBancos(VES){
     //PARAM VES SON LOS BOLIVARES QUE YA ESTAN CON EL PORCENTAJE DE GANANCIA
-    var margenActual = parseInt($("#txtMargenActual").val());
-    var margenSeleccionado = parseInt($("#cmbMargen").val());
+    var margenActual = $("#txtMargenActual").val();
+    var margenSeleccionado = $("#cmbMargen").val();
     var margenDeVES = (1 - margenActual) * 100;
     var RealVES = (VES * 100) / margenDeVES
 
-    return (RealVES * (1 - (margenSeleccionado + 0.02))).toFixed(2);
+    return parseFloat((RealVES * (1 - (margenSeleccionado + 0.02)))).toFixed(2);
 
 }
 
@@ -291,13 +291,11 @@ function TasaPESVESBanesco(){
     return (TasaUSDVESBanesco / sessionStorage.getItem('CotiUSD')).toFixed(2);
 }
 
-function altaTransferencia(cliente, montoEnviar, montoRecibirBanesco, montoRecibirOtro, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago){
+function altaTransferencia(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago){
     $.ajax({
-        url:'../api/cotizacionUSDRemextiven',
+        url:'../api/createTransfer',
         data:{'idUsuario': cliente, 
                 'montoEnviar': montoEnviar,
-                'montoRecibirBanesco': montoRecibirBanesco,
-                'montoRecibirOtro': montoRecibirOtro,
                 'idMoneda': moneda,
                 'margen': margen,
                 'cotiVESBanesco': cotizacionVESBanesco,
@@ -312,7 +310,7 @@ function altaTransferencia(cliente, montoEnviar, montoRecibirBanesco, montoRecib
         dataType: "json",
         async:true,
         success: function (response) {
-            sessionStorage.setItem('CotiUSD', response);
+            alert('ok');
             
         },
         statusCode: {
@@ -321,7 +319,7 @@ function altaTransferencia(cliente, montoEnviar, montoRecibirBanesco, montoRecib
             }
         },
         error:function(x,xs,xt){
-            alertaToast(tipoAlertaError, 'Error al cargar cotizacion USD.', 3500);
+            alertaToast(tipoAlertaError, 'Error al generar la transferencia. Contacte a Sistemas', 3500);
         }
     });
 }

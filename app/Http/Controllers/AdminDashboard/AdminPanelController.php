@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\Pais;
+use App\Models\PaymentMethod;
 use App\Models\PercentGain;
 use App\User;
 use GuzzleHttp\Client;
@@ -18,7 +19,8 @@ class AdminPanelController extends Controller
         //$usuariosEmpresas = User::where('Activo', 1)->where('TipoUsuario', "2")->with('DatosEmpresa')->get();
         $bancos = Bank::join('Paises', 'BancosR.IdPais', '=', 'Paises.IdPais')->where('BancosR.Activo', 1)->where('Paises.Pais', 'Venezuela')->get();
         $porcentajesGanancia = PercentGain::all();
-        return view('AdminDashboard.Transferencias.generar', compact('usuariosPersonas', 'bancos', 'porcentajesGanancia'));
+        $mediosDePago = PaymentMethod::where('Activo', 1)->where('PagoCliente', 1)->get();
+        return view('AdminDashboard.Transferencias.generar', compact('usuariosPersonas', 'bancos', 'porcentajesGanancia', 'mediosDePago'));
     }
 
 

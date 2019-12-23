@@ -113,7 +113,7 @@ Route::get('DashboardTransfer','UserDashboard\UserDashboardController@index')->n
 
 
 //-- INICIO --//
-
+Route::view('/admin', 'AdminDashboard\Dashboard')->name('inicioAdminPanel');
 //------------//
 
 
@@ -135,7 +135,7 @@ Route::get('/admin/newClient','AdminDashboard\AdminPanelController@AgregarClient
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::view('/ad', 'AdminDashboard\Transferencias\generar');
-Route::view('/admin', 'AdminDashboard\Dashboard');
+
 Route::view('/proce', 'AdminDashboard\Transferencias\enProceso');
 
 
