@@ -145,3 +145,4 @@ Route::view('/email', 'Mails\adminGeneracionCuentaCliente');
 
 
 Route::get('/pdf','PDFs\transferenciaController@index');
+Route::view('/pdfview', 'PDFs\Transferencia');

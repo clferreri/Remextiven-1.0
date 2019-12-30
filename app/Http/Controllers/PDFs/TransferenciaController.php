@@ -9,7 +9,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 class TransferenciaController extends Controller
 {
     function index(){
-        $pdf = PDF::loadView('PDFs.Transferencia');
+        $pdf = PDF::loadView('PDFs.ListadoTransferir');
 
 
         return $pdf->stream('prueba.pdf');
