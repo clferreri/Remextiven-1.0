@@ -10,8 +10,9 @@ class TransferenciaController extends Controller
 {
     function index(){
         $pdf = PDF::loadView('PDFs.ListadoTransferir');
-
+        $pdf->save(storage_path('app/public/ListadoTransferir/'). 'listado.pdf');
 
         return $pdf->stream('prueba.pdf');
+
     }
 }
