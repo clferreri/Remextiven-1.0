@@ -10,16 +10,19 @@ use App\Models\Transfer;
 use App\Models\TransferQuotation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\TransferenciaPDF;
 
 class TransferController extends Controller
 {
     
-
-    protected function createTransfer(Request $request){
+    public function createTransfer(Request $request){
         $datos = $request->all();
         if ($this->ValidarTransferencia($datos) && $this->ValidarCotizacionTransferencia($datos)){
             $transferencia = $this->AltaTransferenciaAdmin($datos);
             $cotizacionTransferencia = $this->AltaCotizacionAdmin($transferencia, $datos);
+            $pdf = TransferenciaPDF::generarPDF($transferencia, $cotizacionTransferencia);  
+            TransferenciaPDF::abrirPDF($transferencia->IdSolicitudTransferencia);   
+            TransferenciaPDF::enviarPorMail('clferreri94@hotmail.com', 'Cristian Pepito', $pdf, $transferencia->IdSolicitudTransferencia);     
         }
         dd('No funco');
     }

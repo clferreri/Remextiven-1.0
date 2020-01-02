@@ -98,11 +98,11 @@ function cotizaciones(){
 function cotizacionVESOtrosBancos(VES){
     //PARAM VES SON LOS BOLIVARES QUE YA ESTAN CON EL PORCENTAJE DE GANANCIA
     var margenActual = $("#txtMargenActual").val();
-    var margenSeleccionado = $("#cmbMargen").val();
+    var margenSeleccionado = parseFloat($("#cmbMargen").val());
     var margenDeVES = (1 - margenActual) * 100;
     var RealVES = (VES * 100) / margenDeVES
 
-    return parseFloat((RealVES * (1 - (margenSeleccionado + 0.02)))).toFixed(2);
+    return (RealVES * (1 - (margenSeleccionado + 0.02))).toFixed(2);
 
 }
 
@@ -295,15 +295,6 @@ function altaTransferencia(cliente, montoEnviar, moneda, margen, cotizacionVESBa
     $.ajax({
         url:'../api/createTransfer',
         data:{'idUsuario': cliente, 
-                'montoEnviar': montoEnviar,
-                'idMoneda': moneda,
-                'margen': margen,
-                'cotiVESBanesco': cotizacionVESBanesco,
-                'cotiVESOtro': cotizacionVESOtro,
-                'cotiUSD': cotiDolar,
-                'idBeneficiario': beneficiario,
-                'idMedioPago': metodoPago,
-                'idTipoTransferencia': $("#cmbPropositoEnvio").val(),
             
         },
         type:'post',

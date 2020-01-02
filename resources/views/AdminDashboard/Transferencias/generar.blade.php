@@ -69,7 +69,7 @@
                       <select class="form-control" id="cmbBeneficiarioBanco">
                           <option value="0">Seleccione un Banco...</option>
                           @foreach ($bancos as $banco)
-                              <option value="{{$banco->idBanco}}"> {{$banco->Banco}} </option>
+                              <option value="{{$banco->IdBanco}}"> {{$banco->Banco}} </option>
                           @endforeach
                       </select>
                     </div>
@@ -546,7 +546,6 @@
 <!-- Select2 -->
 <script src="{{asset("assets/$temaDashboard/plugins/select2/js/select2.full.min.js")}}"></script>
 <!-- Custom Controls -->
-<script src="{{asset("assets/$temaDashboard/plugins/bs-custom-file-input/bs-custom-file-input.min.js")}}"></script>
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/cuentaBeneficiaria.js")}}"></script>
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/Dashboard/Transferencias/altaTransferencia.js")}}"></script>
 

@@ -10,24 +10,18 @@
         <tr>
             <td style="background-color: #ecf0f1">
                 <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify; font-family: sans-serif">
-                    <h2 style="color: #e67e22; margin: 0 0 7px">¡Te dimos de alta en Remextiven!</h2>
+                    <h2 style="color: #e67e22; margin: 0 0 7px">¡Transferencia Generada!</h2>
                     <p style="margin: 2px; font-size: 15px;">
                         {{$nombreCompleto}},
                         <br/>
-                        Nuestro equipo te ha dado el alta en nuestro sistema como cliente.                                     
+                        Se cargado tu solicitud de transferencia a nuestro sistema.                                    
                     </p>
                     <p style="margin: 2px; font-size: 15px;">
-                        Gracias a los datos suministrados por ti, pudimos generarte la siguiente cuenta para que puedas operar en la plataforma.
-                    </p>
-                    <br/> 
-                    <p style="margin: 2px; font-size: 15px;">
-                        <span style="font-size: 18; font-weight: bold;">Usuario: </span> <span style="font-size: 18;">{{$email}}</span>
-                        <br/>
-                        <span style="font-size: 18; font-weight: bold;">Contraseña: </span> <span style="font-size: 18;">{{$contraseña}}</span>
+                        Adjuntamos el comprobante de la misma. No olvides chequear los datos.
                     </p>
                     <br/>
                     <p style="margin: 2px; font-size: 15px;">
-                        Si no solicitaste un alta de cuenta o no has proporcionado los datos como para realizarlo, comunícate a <a href="mailto:help-desk@remextiven.com">help-desk@remextiven.com</a>
+                        Si no generaste una transferencia o no has proporcionado los datos como para realizarlo, comunícate a <a href="mailto:help-desk@remextiven.com">help-desk@remextiven.com</a>
                     </p>
                     <br/>
                     <br/>
