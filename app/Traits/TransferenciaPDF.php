@@ -2,9 +2,13 @@
 
 namespace App\Traits;
 
+use App\Mail\ConfirmacionTransferencia as MailConfirmacionTransferencia;
 use App\Mail\Mail\ConfirmacionTransferencia;
+use App\Models\Bank;
+use App\Models\BeneficiaryAccount;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail;
+use App\User;
 
 //TRAIT GENERICO PARA USAR CON LOS PDF DE Transferencias
 trait TransferenciaPDF
@@ -20,7 +24,10 @@ trait TransferenciaPDF
     * @return PDF generado
     */
     public static function generarPDF($transferencia, $cotizacionTransferencia){
-        $pdf = PDF::loadView('PDFs.ListadoTransferir', compact('transferencia', 'cotizacionTransferencia'));
+        $cliente = User::find($transferencia->IdUsuarioSolicita);
+        $beneficiario = BeneficiaryAccount::find($transferencia->IdCuentaBeneficiaria);
+        $banco = Bank::find($beneficiario->IdBanco);
+        $pdf = PDF::loadView('PDFs.Transferencia', compact('transferencia', 'cotizacionTransferencia', 'cliente', 'beneficiario', 'banco'));
         $nombreArchivo = "Tr. N°". $transferencia->IdSolicitudTransferencia . ".pdf";
         $pdf->save(storage_path('app/public/Transferencias/'). $nombreArchivo);
         return $pdf;
@@ -39,8 +46,8 @@ trait TransferenciaPDF
     }
 
 
-    public static function enviarPorMail($mail, $nombre, $pdf, $numeroTransferencia){
-        Mail::to($mail)->send(new ConfirmacionTransferencia($nombre, $pdf, $numeroTransferencia));
+    public static function enviarPorMail($mail, $nombre, $numeroTransferencia){
+        Mail::to($mail)->send(new MailConfirmacionTransferencia($nombre, $numeroTransferencia));
     }
     
 }

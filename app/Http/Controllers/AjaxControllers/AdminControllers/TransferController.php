@@ -20,9 +20,9 @@ class TransferController extends Controller
         if ($this->ValidarTransferencia($datos) && $this->ValidarCotizacionTransferencia($datos)){
             $transferencia = $this->AltaTransferenciaAdmin($datos);
             $cotizacionTransferencia = $this->AltaCotizacionAdmin($transferencia, $datos);
-            $pdf = TransferenciaPDF::generarPDF($transferencia, $cotizacionTransferencia);  
-            TransferenciaPDF::abrirPDF($transferencia->IdSolicitudTransferencia);   
-            TransferenciaPDF::enviarPorMail('clferreri94@hotmail.com', 'Cristian Pepito', $pdf, $transferencia->IdSolicitudTransferencia);     
+            $pdf = TransferenciaPDF::generarPDF($transferencia, $cotizacionTransferencia);    
+            TransferenciaPDF::enviarPorMail('clferreri94@hotmail.com', 'Cristian Pepito', $transferencia->IdSolicitudTransferencia);     
+            return response('OK', 200);
         }
         dd('No funco');
     }

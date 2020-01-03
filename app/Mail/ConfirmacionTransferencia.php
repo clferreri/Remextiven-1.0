@@ -19,11 +19,10 @@ class ConfirmacionTransferencia extends Mailable
      *
      * @return void
      */
-    public function __construct($nombreCompleto, $pdf, $numeroTransferencia)
+    public function __construct($nombreCompleto, $numeroTransferencia)
     {
         $this->nombreCompleto = $nombreCompleto;
-        $this->adjunto = $pdf;
-        $this->nombreAdjunto = "Transferencia N°" . $numeroTransferencia . ".pdf";
+        $this->nombreAdjunto = "Tr. N°" . $numeroTransferencia . ".pdf";
     }
 
     /**
@@ -34,8 +33,8 @@ class ConfirmacionTransferencia extends Mailable
     public function build()
     {
         return $this->from('Accounts@Remextiven.com', 'Remextiven')
-                    ->subject('Se genero la Transferencia')
-                    ->attachData($this->adjunto, $this->nombreAdjunto, ['mime' => 'application/pdf',])
+                    ->subject('Transferencia Generada')
+                    ->attach(storage_path('app/public/Transferencias/') . $this->nombreAdjunto)
                     ->view('Mails.nuevaTransferencia');
     }
 }

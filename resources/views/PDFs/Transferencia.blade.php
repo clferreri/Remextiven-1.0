@@ -135,8 +135,7 @@
     <tr>
         <td></td>
         <td class="textoDerecha">
-            {{-- <p class="negrita" style="font-size: 13px; margin-bottom: -5px; margin-top: -7px;">No olvide notificar su pago</p> --}}
-            <p style="font-size: 10px; margin-top: -7px;">*Este documento NO posee valor legal siendo meramente informativo</p>
+            <p style="font-size: 10px; margin-top: -5px;">*Este documento NO posee valor legal siendo meramente informativo</p>
         </td>
     </tr>
 </table>
@@ -177,7 +176,7 @@
                         <p class="texto12 negrita textoSinMyP">Email </p>
                     </td>
                     <td>
-                        <p class="texto12 textoSinMyP">jparedez@hotmail.com</p>
+                        <p class="texto12 textoSinMyP">{{cliente->Email}}</p>
                     </td>
                     
                 </tr>
@@ -187,21 +186,21 @@
         <td style="width:230px;justify-content:right; padding-top: 2px;">         
             <div style="width:43%; float:right; text-align:center;">
                 <p class="texto11" style="border: 1px solid #ddd; margin:0; padding:1px; background-color: #f2f2f2;">N° de Transferencia</p>
-                <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;">235</p>
+            <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;">{{$transferencia->IdSolicitudTransferencia}}</p>
             </div>
             <br/>
             <br/>
             <br/>
                 <div style="width:43%; float:right; text-align:center;">
                     <p class="texto11" style="border: 1px solid #ddd; margin:0; background-color: #f2f2f2;">Fecha Vencimiento</p>
-                    <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;">10/01/2020</p>
+                    <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;"></p>
                 </div>
                 <div style="width:10%; float:right;">
 
                 </div>
                 <div style="width:43%; float:right; text-align:center;">
                     <p class="texto11" style="border: 1px solid #ddd; margin:0; background-color: #f2f2f2;">Fecha Realizada</p>
-                    <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;">08/01/2020</p>
+                <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;"></p>
                 </div>
                 
 
@@ -258,8 +257,8 @@
                     <td>USD</td>
                 </tr>
                 <tr>
-                    <td>43000</td>
-                    <td>38,7</td>
+                    <td>{{$cotizacionTransferencia->CotizacionVES}}</td>
+                    <td>{{$cotizacionTransferencia->Cambio}}</td>
                 </tr>
             </table>
         </td>
@@ -271,11 +270,11 @@
                 </tr>
                 <tr>
                     <td style="width:20%;">Nombre</td>
-                    <td>Cristian Lorenzo Ferreri</td>
+                    <td>{{$beneficiario->NombreTitular . $beneficiario->ApellidoTitular}}</td>
                 </tr>
                 <tr>
                     <td>Banco</td>
-                    <td>Banesco</td>
+                <td>{{$banco->Banco}}</td>
                 </tr>
             </table>      
 

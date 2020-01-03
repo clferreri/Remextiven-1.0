@@ -295,6 +295,15 @@ function altaTransferencia(cliente, montoEnviar, moneda, margen, cotizacionVESBa
     $.ajax({
         url:'../api/createTransfer',
         data:{'idUsuario': cliente, 
+        'montoEnviar': montoEnviar,
+        'idMoneda': moneda,
+        'margen': margen,
+        'cotiVESBanesco': cotizacionVESBanesco,
+        'cotiVESOtro': cotizacionVESOtro,
+        'cotiUSD': cotiDolar,
+        'idBeneficiario': beneficiario,
+        'idMedioPago': metodoPago,
+        'idTipoTransferencia': $("#cmbPropositoEnvio").val(),
             
         },
         type:'post',
