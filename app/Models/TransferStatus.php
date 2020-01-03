@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransferStatus extends Model
 {
-    protected $table = 'EstadoSolicitudTransferencia';
+    protected $table = 'EstadosSolicitudTransferencia';
     protected $primaryKey = 'IdEstado';
 
 
