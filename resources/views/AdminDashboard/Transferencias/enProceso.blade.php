@@ -107,7 +107,6 @@
               <tr>
                 <th>Usuario</th>
                 <th>Banco</th>
-                <th>N° de Cuenta</th>
                 <th>Monto a Enviar</th>
                 <th>Estado</th>
                 <th>Fecha Envio</th>
@@ -115,10 +114,31 @@
               </tr>
               </thead>
               <tbody>
+
+                @foreach ($transferencias as $trans)
+                  <tr>
+                    <td>Cristian Ferreri Cesar</td>
+                    <td>Banesco</td>
+                    <td>50420 VES</td>
+                    <td>
+                    <div class="dropdown show" id="estadoEnvio1">
+                    <span class="badge badge-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pendiente</span>
+    
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(1,2);">En proceso</a>
+                        <a class="dropdown-item" href="#">Transfiriendo</a>
+                        <a class="dropdown-item" href="#">Anulado</a>
+                      </div>
+                    </div>
+                    
+                    </td>
+                    <td>20/10/2019</td>
+                    <td><img src="eye.png" alt=""></td>
+                  </tr>
+                @endforeach
               <tr>
                 <td>Cristian Ferreri Cesar</td>
                 <td>Banesco</td>
-                <td>0352054024565458452</td>
                 <td>504202300 VES</td>
                 <td>
                 <div class="dropdown show" id="estadoEnvio1">
