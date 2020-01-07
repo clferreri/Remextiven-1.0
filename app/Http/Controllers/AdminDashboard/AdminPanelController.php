@@ -8,8 +8,10 @@ use App\Models\Bank;
 use App\Models\Pais;
 use App\Models\PaymentMethod;
 use App\Models\PercentGain;
+use App\Models\RateConfig;
 use App\Models\Transfer;
 use App\User;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 
 class AdminPanelController extends Controller
@@ -30,6 +32,11 @@ class AdminPanelController extends Controller
     }
 
 
+
+    //----------------------------------------------------------------------------------------------------//
+
+
+
     protected function AgregarCliente(){
         $paises = Pais::where('Activo', 1)->get();
 
@@ -37,4 +44,13 @@ class AdminPanelController extends Controller
     }
 
 
+
+
+
+    protected function ConfigurarTasa(){
+        $tasa = RateConfig::where('Fecha', Carbon::today()->toDateString())
+                ->orderBy('created_at', 'desc')->first();
+        $margenesGanancia = PercentGain::all();
+        return view('AdminDashboard.Config.tasas', compact('tasa', 'margenesGanancia')); 
+       }
 }

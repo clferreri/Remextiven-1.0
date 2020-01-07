@@ -50,6 +50,17 @@
     } 
 }
 
+function escribirSoloNumerosConComa(event){
+  var tecla = String.fromCharCode(event.which);
+  if(isNaN(tecla) && event.which != 8 && event.which != 37 && event.which != 39 && event.which != 44 && event.wicth != 46){
+      event.preventDefault();
+      return false;
+  }
+  else{
+      return true;
+  } 
+}
+
 //Valido si tiene numeros o caracteres raros
 function textoSoloLetras(texto){
   var caract = new RegExp("^[a-zñ A-ZÑ]+$");

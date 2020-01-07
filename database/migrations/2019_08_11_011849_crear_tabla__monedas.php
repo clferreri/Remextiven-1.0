@@ -16,7 +16,8 @@ class CrearTablaMonedas extends Migration
         Schema::create('Monedas', function (Blueprint $table) {
             $table->tinyIncrements('IdMoneda');
             $table->string('Moneda', 20);
-            $table->string('Codigo', 6); 
+            $table->string('CodigoValor', 6); 
+            $table->string('CodigoTexto', 6); 
             $table->boolean('Activo');
             $table->timestamps();
         });

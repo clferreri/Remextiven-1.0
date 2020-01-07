@@ -173,6 +173,14 @@
                         </li>                                                
                     </ul>                     
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('configTasas')}}" class="nav-link @yield('menu-config')">
+                        <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                        <p>
+                            Configuración
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">PERSONAL</li>
                 <li class="nav-item">
                     <a href="https://adminlte.io/docs/3.0" class="nav-link">
@@ -185,7 +193,7 @@
                         <i class="nav-icon fas fa-edit"></i>
                         <p>Lista de pendientes</p>
                     </a>
-                </li>                  
+                </li>                               
             </ul>
         </nav>
         <!-- / slidebar menu-->

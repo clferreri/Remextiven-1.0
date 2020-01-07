@@ -131,6 +131,12 @@ Route::get('/admin/newClient','AdminDashboard\AdminPanelController@AgregarClient
 //------------------//
 
 
+//-- CONFIGURACION --//
+
+Route::get('/admin/configRate', 'AdminDashboard\AdminPanelController@ConfigurarTasa')->name('configTasas');
+
+//-----------------//
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////FIN RUTAS ADMINISTRACION///////////////////////////////////////

@@ -17,7 +17,7 @@ class CrearTablaMonederoMovimentos extends Migration
             $table->increments('IdMovimiento');
             $table->unsignedTinyInteger('IdTipoMovimento');
             $table->string('Detalle', 200);
-            $table->tinyIncrements('IdMoneda');
+            $table->unsignedTinyInteger('IdMoneda');
             $table->decimal('Monto', 8, 2);
             $table->enum('Accion', ['Ingreso', 'Retiro']);
             $table->timestamps();

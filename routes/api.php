@@ -49,7 +49,7 @@ Route::get('cotizacionUSDRemextiven', function () {
     $jsonResultado = json_decode($resultado);
     $USDPorPES = $jsonResultado->result->value;
 
-    return number_format($USDPorPES * 1.024, 2);  
+    return number_format($USDPorPES * 1.03, 2);  
 });
 //-------------------------------------------//
 
@@ -75,6 +75,15 @@ Route::post('BeneficiaryAccount', 'AjaxControllers\AdminControllers\BeneficiaryA
 //-----------------------------//
 
 Route::post('createTransfer', 'AjaxControllers\AdminControllers\TransferController@createTransfer');
+
+
+//-----------------------------//
+///////// CONFIGURACION /////////
+//-----------------------------//
+Route::post('configRateSend', 'AjaxControllers\AdminControllers\ConfigController@UpdateRate');
+
+Route::post('configPercenSend', 'AjaxControllers\AdminControllers\ConfigController@UpdateMargen');
+
 
 
 //Traigo todas las cuentas Beneficiarias de un cliente
