@@ -128,6 +128,9 @@ Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@List
 //-- CLIENTES --//
 Route::get('/admin/newClient','AdminDashboard\AdminPanelController@AgregarCliente')->name('nuevoCliente');
 
+Route::get('/admin/checkClient','AdminDashboard\AdminPanelController@VerificarCliente')->name('verificarCliente');
+
+
 //------------------//
 
 

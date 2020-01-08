@@ -85,6 +85,12 @@
                             </a>
                         </li>  
                         <li class="nav-item">
+                            <a href="{{route('verificarCliente')}}" class="nav-link @yield('link-clientes-verificar')">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Verificar</p>
+                            </a>
+                        </li>   
+                        <li class="nav-item">
                             <a href="../layout/top-nav.html" class="nav-link @yield('link-clientes-listar')">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Listado de usuarios</p>

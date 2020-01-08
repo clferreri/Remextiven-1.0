@@ -43,6 +43,11 @@ class AdminPanelController extends Controller
         return view('AdminDashboard.Clientes.nuevoCliente', compact('paises'));
     }
 
+    protected function VerificarCliente(){
+        $usuariosPersonas = User::where('Activo', 1)->where('Verificado', 0)->with('DatosPersona')->get();
+        return view('AdminDashboard.Clientes.verificarCliente', compact('usuariosPersonas'));
+    }
+
 
 
 
