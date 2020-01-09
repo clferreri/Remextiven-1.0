@@ -105,9 +105,10 @@
             <table id="example2" class="table table-bordered table-hover">
               <thead>
               <tr>
+                <th>N°</th>
                 <th>Usuario</th>
-                <th>Banco</th>
-                <th>Monto a Enviar</th>
+                <th>Medio de Pago</th>
+                <th>Pago</th>
                 <th>Estado</th>
                 <th>Fecha Envio</th>
                 <th>Ver</th>
@@ -117,8 +118,9 @@
 
                 @foreach ($transferencias as $trans)
                   <tr>
+                    <td>239</td>
                     <td>Cristian Ferreri Cesar</td>
-                    <td>Banesco</td>
+                    <td>Santander</td>
                     <td>50420 VES</td>
                     <td>
                     <div class="dropdown show" id="estadoEnvio1">
@@ -126,35 +128,17 @@
     
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(1,2);">En proceso</a>
-                        <a class="dropdown-item" href="#">Transfiriendo</a>
-                        <a class="dropdown-item" href="#">Anulado</a>
+                        <a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(1,5);">Anulado</a>
                       </div>
                     </div>
                     
                     </td>
                     <td>20/10/2019</td>
-                    <td><img src="eye.png" alt=""></td>
+                    <td><button class="btn" style="height: 25px; margin-top:-15px;"><i class="fa fa-eye" aria-hidden="true"></i>
+                    </button></td>
                   </tr>
                 @endforeach
-              <tr>
-                <td>Cristian Ferreri Cesar</td>
-                <td>Banesco</td>
-                <td>504202300 VES</td>
-                <td>
-                <div class="dropdown show" id="estadoEnvio1">
-                <span class="badge badge-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pendiente</span>
 
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(1,2);">En proceso</a>
-                    <a class="dropdown-item" href="#">Transfiriendo</a>
-                    <a class="dropdown-item" href="#">Anulado</a>
-                  </div>
-                </div>
-                
-                </td>
-                <td>20/10/2019</td>
-                <td><img src="eye.png" alt=""></td>
-              </tr>
 
             
               </tbody>
@@ -172,15 +156,31 @@
 
   <script>
     function CambioEstadoPendiente(){
-
+      var codigoHTML = '<span class="badge badge-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pendiente</span>' +
+                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">' +
+                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(1,2);">En proceso</a>' +
+                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(1,5);">Anulado</a>' +
+                    '</div>'
     }
 
     function CambioEstadoEnProceso(){
-
+      var codigoHTML = '<span class="badge badge-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">En proceso</span>' +
+                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">' +
+                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(2,1);">Pendiente</a>' +
+                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(2,5);">Anulado</a>' +
+                    '</div>'
+      $("#estadoEnvio1").html(codigoHTML); 
     }
 
     function CambioEstadoTransfiriendo(){
+      var codigoHTML = '<span class="badge badge-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transfiriendo</span>' +
+                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">'
+                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(3,1)>Pendiente</a>' +
+                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(3,2)>En Proceso</a>' +
+                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(3,6)>Anulado</a>' +
+                    '</div>'
 
+      $("#estadoEnvio1").html(codigoHTML);    
     }
 
     function CambioEstadoAnulado(){
@@ -191,42 +191,48 @@
     function CambioDeEstadoEnvio(estadoAnterior, estadoNuevo){
       //Si el estado esta en pendiente y pasa a En Proceso
       if (estadoAnterior == 1 && estadoNuevo == 2){
-        var codigoHTML = '<span class="badge badge-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">En proceso</span>' +
-                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">' +
-                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(2,1);">Pendiente</a>' +
-                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(2,3);">Transfiriendo</a>' +
-                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(2,6);">Anulado</a>' +
-                    '</div>'
-
-        $("#estadoEnvio1").html(codigoHTML);       
+        CambioEstadoEnProceso();         
       }
 
       //Estado En Proceso pasa a Transfiriendo
-      else if (estadoAnterior == 2 && estadoNuevo == 3){
-        var codigoHTML = '<span class="badge badge-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transfiriendo</span>' +
-                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">'
-                    '<a class="dropdown-item" href="#">Pendiente</a>' +
-                    '<a class="dropdown-item" href="#">En Proceso</a>' +
-                    '<a class="dropdown-item" href="#">Anulado</a>' +
-                    '</div>'
-
-        $("#estadoEnvio1").html(codigoHTML);
-      }
+      // else if (estadoAnterior == 2 && estadoNuevo == 3){
+      //   $("#estadoEnvio1").html(CambioEstadoTransfiriendo());
+      // }
 
       //De Transifeindo pasa a Listo
-      else if (estadoAnterior == 3 && estadoNuevo == 4){
+      // else if (estadoAnterior == 3 && estadoNuevo == 4){
 
-      }
+      // }
       //Anulado
-      else if (estadoNuevo == 6){
-        alert("anulado");
+      else if (estadoNuevo == 5){
+        Swal.fire({
+          title: 'Anular transferencia',
+          text: "¿Esta seguro que desea realizar esta acción?",
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, anular',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Anulada',
+              'La transferencia a sido anulada.',
+              'success'
+            )
+          }
+        })
+        
+        CambioEstadoAnulado();
       }
+
       //Estoy volviendo el envio para atras
       else if (estadoAnterior > estadoNuevo){
         if (estadoNuevo == 3){
-          alert("no")
+          alert("no se puede pasar a transfiriendo")
         }
-        else{
+        else if (estadoNuevo == 2){
           alert("No");
         }
       }

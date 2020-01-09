@@ -35,7 +35,7 @@ const animacionEntradaGirarRapido =  animacionEntradaGirar + ' faster';
 const animacionEntradaCarrera = 'animated lightSpeedIn';
 const animacionEntradaCarreraRapida = animacionEntradaCarrera + ' faster';
 
-const animacionEntradaRotar = 'animated rotateIn';
+const animacionEntradaRotar = 'animated fadeInDown';
 const animacionEntradaRotarRapida = animacionEntradaRotar + ' faster';
 
 
