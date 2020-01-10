@@ -187,6 +187,7 @@
                         </p>
                     </a>
                 </li>
+
                 <li class="nav-header">PERSONAL</li>
                 <li class="nav-item">
                     <a href="https://adminlte.io/docs/3.0" class="nav-link">
@@ -199,7 +200,15 @@
                         <i class="nav-icon fas fa-edit"></i>
                         <p>Lista de pendientes</p>
                     </a>
-                </li>                               
+                </li>
+                
+                <li class="nav-header">SISTEMAS</li>
+                <li class="nav-item">
+                    <a href="https://adminlte.io/docs/3.0" class="nav-link">
+                        <i class="nav-icon fa fa-user-plus"></i>
+                        <p>Generar Usuario</p>
+                    </a>
+                </li>                                 
             </ul>
         </nav>
         <!-- / slidebar menu-->
