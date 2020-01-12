@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Transferencia 273</title>
+    <title>{{$transferencia->IdSolicitudTransferencia}}</title>
     
     <style>
 
@@ -256,8 +256,8 @@
                     <td>USD</td>
                 </tr>
                 <tr>
-                    <td>{{$cotizacionTransferencia->CotizacionVES}}</td>
-                    <td>{{$cotizacionTransferencia->Cambio}}</td>
+                    <td>{{$cotizacionTransferencia->CotizacionVES ?? 'EN ESPERA'}}</td>
+                    <td>{{$cotizacionTransferencia->Cambio ?? 'EN ESPERA'}}</td>
                 </tr>
             </table>
         </td>

@@ -18,7 +18,7 @@ class CrearTablaCotizacionesTransferencia extends Migration
             $table->unsignedInteger('IdSolicitudTransferencia');
             $table->unsignedTinyInteger('IdMoneda');
             $table->decimal('MontoEnviar', 8, 2);
-            $table->decimal('MontoRecibir', 11,2);
+            $table->decimal('MontoRecibir', 11,2)->nullable();
             $table->decimal('Cambio', 5, 2)->nullable();
             $table->decimal('CotizacionVES', 9, 2)->nullable();
             $table->unsignedtinyInteger('MargenGanancia')->default(10);
