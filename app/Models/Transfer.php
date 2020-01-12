@@ -18,20 +18,28 @@ class Transfer extends Model
     
 
     //RELACIONES-------------------
-    public function CotizacionTransferencia(){
-            return $this->hasOne('App\Models\TransferQuotation', 'IdSolicitudTransferencia', 'IdSolicitudTransferencia');
+    public function Cotizacion(){
+        return $this->hasOne('App\Models\TransferQuotation', 'IdSolicitudTransferencia', 'IdSolicitudTransferencia');
     }
 
-    public function EstadoTransferencia(){
-            return $this->hasOne('App\Models\TransferStatus', 'IdEstado', 'IdEstadoTransferencia');
+    public function Estado(){
+        return $this->hasOne('App\Models\TransferStatus', 'IdEstado', 'IdEstadoTransferencia');
     }
 
     public function UsuarioTransferencia(){
-            return $this->hasOne('App\User', 'IdUsuarioR', 'IdUsuarioSolicita');
+        return $this->hasOne('App\User', 'IdUsuarioR', 'IdUsuarioSolicita');
     }
 
-    public function DatosCliente(){
-        $usu = $this->hasOne('App\User', 'IdUsuarioR', 'IdUsuarioSolicita');
+    public function Tipo(){
+        return $this->hasOne('App\Models\TransferType', 'IdTipo', 'IdTipoTransferencia');
+    }
+
+    public function CuentaBeneficiaria(){
+        return $this->hasOne('App\Models\BeneficiaryAccount', 'IdCuenta' ,'IdCuentaBeneficiaria');
+    }
+
+    public function MedioPago(){
+        return $this->hasOne('App\Models\PaymentMethod', 'IdMedioPago', 'IdMedioPago');
     }
 
 

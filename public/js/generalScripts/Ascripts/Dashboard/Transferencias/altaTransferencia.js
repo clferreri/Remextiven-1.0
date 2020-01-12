@@ -51,6 +51,14 @@ function BeneficiarioTicket(beneficiario, pais, banco, tipoCuenta, numeroCuenta)
     $("#txtTicketBeneficiario").html(beneficiario);
     $("#txtTicketPais").html(pais);
     $("#txtTicketBanco").html(banco);
+    moneda = sessionStorage.getItem('Moneda');
+    var montoRecibir = 0;
+    if(banco.includes('BANESCO')){
+        montoRecibir = $("#txtMontoRecibirBanesco").val();        
+    }else{
+        montoRecibir = $("#txtMontoRecibir").val();     
+    }
+    $("#txtTicketMontoRecibir").html(montoRecibir);
     $("#txtTicketTipoCuenta").html(tipoCuenta);
     $("#txtTicketNumeroCuenta").html(numeroCuenta);
 }
@@ -78,59 +86,50 @@ function limpiarFormulario(){
 function ponerImagen(imagen, simbolo){
     $("#banderita").html('<img class="d-none d-sm-inline-block" style="margin-top: -5px;" src="'+ imagen + '"> <span> </span><label class="pt-1">' + simbolo + '</label>');
     sessionStorage.setItem('Moneda', simbolo);
-    var cotiVES = sessionStorage.getItem('CotiVES');
-    var dolar = sessionStorage.getItem('CotiUSD');
+    coti =  JSON.parse(sessionStorage.getItem('Cotizacion'));   
 
-    if(simbolo == 'USD'){
-        $("#txtCambioVESBanesco").html(cotiVES + ' VES');
-        $("#txtCambioVES").html((((cotiVES / 9) * 10) * 0.88).toFixed(2) + ' VES');
+    if (coti != null){
+        if(simbolo == 'USD'){
+            $("#lblTasaBanesco").html(coti.TasaBanescoUSD);
+            $("#lbTasaOtro").html(coti.TasaOtroUSD);
+        }    
+        else{
+            $("#lblTasaBanesco").html(coti.TasaBanescoUYU);
+            $("#lbTasaOtro").html(coti.TasaOtroUYU);
+        }
     }
-
-    else{
-        $("#txtCambioVESBanesco").html((cotiVES / dolar).toFixed(2) + ' VES');
-        $("#txtCambioVES").html(((((cotiVES / 9) * 10) * 0.88) / dolar).toFixed(2) + ' VES');
-    }
-
     CalcularMontoRecibir();
 }
 
-function CalcularMontoRecibir(banescoVES = 0, otroVES = 0){
+function CalcularMontoRecibir(){
     var valor = parseInt($("#txtMontoEnviar").val());
     var moneda = sessionStorage.getItem('Moneda')
-    var tasa;
-    var tasaBanesco;
-    if (banescoVES != 0 && otroVES != 0 || $("#chkEditarMargen").prop('checked')){
-        if (banescoVES != 0 && otroVES != 0){
-            tasaBanesco = banescoVES;
-            tasa = otroVES;
-        }else{
-            tasaBanesco = TasaUSDVES(true);
-            tasa = TasaUSDVES(false);
-        }
-        
+    
+    if (isNaN($("#lblTasaBanesco").html()) || isNaN($("#lbTasaOtro").html())){
+       $("#txtMontoRecibir").val('A espera de tasa');
+       $("#txtMontoRecibirBanesco").val('A espera de tasa');
     }
-    else{                     
+    else{              
+        coti =  JSON.parse(sessionStorage.getItem('Cotizacion'));     
         if (moneda == 'PES'){
-            tasaBanesco = TasaUSDVES(true) / sessionStorage.getItem('CotiUSD');
-            tasa = TasaUSDVES(false) / sessionStorage.getItem('CotiUSD');        
+            $("#txtMontoRecibir").val((valor * coti.TasaOtroUYU).toFixed(2));
+            $("#txtMontoRecibirBanesco").val((valor * coti.TasaBanescoUYU).toFixed(2));
         }
-    }
-        $("#txtMontoRecibir").val((valor * tasa).toFixed(2));   
-        $("#txtMontoRecibirBanesco").val((valor * tasaBanesco).toFixed(2));
-
-        $("#txtTicketMontoEnviar").val(valor + ' ' + moneda);
+        else{
+            $("#txtMontoRecibir").val((valor * coti.TasaOtroUSD).toFixed(2));
+            $("#txtMontoRecibirBanesco").val((valor * coti.TasaBanescoUSD).toFixed(2));
+        }
+    }      
+    
+    $("#txtTicketMontoEnviar").html(valor + ' ' + moneda);
   }
 
-function altaTransferencia(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago){
+function altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPago){
     $.ajax({
         url:'../api/createTransfer',
         data:{'idUsuario': cliente, 
         'montoEnviar': montoEnviar,
         'idMoneda': moneda,
-        'margen': margen,
-        'cotiVESBanesco': cotizacionVESBanesco,
-        'cotiVESOtro': cotizacionVESOtro,
-        'cotiUSD': cotiDolar,
         'idBeneficiario': beneficiario,
         'idMedioPago': metodoPago,
         'idTipoTransferencia': $("#cmbPropositoEnvio").val(),

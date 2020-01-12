@@ -17,6 +17,11 @@ class TransferQuotation extends Model
 
 
     protected $fillable = [
-        'IdSolicitudTransferencia', 'IdMoneda' , 'MontoEnviar', 'Cambio', 'CotizacionVES', 'CotizacionRealVES', 'MargenGanancia', 'ComisionEstimada', 'ComisionReal'
+        'IdSolicitudTransferencia', 'IdMoneda' , 'MontoEnviar', 'MontoRecibir', 'Cambio', 'CotizacionVES', 'CotizacionRealVES', 'MargenGanancia', 'ComisionEstimada', 'ComisionReal'
     ];
+
+
+    public function Moneda(){
+        return $this->hasOne('App\Models\Coin', 'IdMoneda', 'IdMoneda');
+    }
 }

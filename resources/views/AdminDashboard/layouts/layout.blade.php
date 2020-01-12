@@ -25,6 +25,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset("css/Utilidades/modals.css")}}">
   <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
   <link rel="stylesheet" href="css/Inputs/estiloLetras.css">
+  <link rel="stylesheet" href="{{asset("css/Complementos/Animaciones/animate.css")}}">
 
 
   @yield('styles')

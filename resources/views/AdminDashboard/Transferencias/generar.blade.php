@@ -303,50 +303,48 @@
                 </div>
                 <br/>
                 <br/>
+                @if (is_null($tasa))
                 <div class="row text-center mt-1 pt-2" style="border-style: solid; border-width: 3px; border-radius:5px;">
-                      <div class="col-12 col-sm-4 mb-2">
-                        <label class="col-12">Tasa de cambio</label><span class="col-12" id="txtCambioVES"></span>
-                      </div>
-                      <div class="col-12 col-sm-4 mb-2">
-                        <label class="col-12">Tasa Banesco</label> <span class="col-12" id="txtCambioVESBanesco"> </span>
-                      </div>
-                      <div class="col-12 col-sm-4 mb-2">
-                        <label class="col-12">Tasa Dolar</label> <span class="col-12" id="txtCambioUSD"> </span>
-                      </div>
-                      <button class="btn btn-success col-12 m-auto">Actualizar</button>               
+                  <div class="col-12 col-sm-4 mb-2">
+                    <label class="col-12">Tasa de cambio</label><span class="col-12" id="lbTasaOtro" style="color:red;">En espera</span>
+                  </div>
+                  <div class="col-12 col-sm-4 mb-2">
+                    <label class="col-12">Tasa Banesco</label> <span class="col-12" id="lblTasaBanesco" style="color:red;">En espera</span>
+                  </div>
+                  <div class="col-12 col-sm-4 mb-2">
+                    <label class="col-12">Tasa Dolar</label> <span class="col-12" id="lblTasaDolar" style="color:red;">En espera</span>
+                  </div>
+                  {{-- <button class="btn btn-success col-12 m-auto">Actualizar</button>                --}}
                 </div>
+                @else
+                  <div class="row text-center mt-1 pt-2" style="border-style: solid; border-width: 3px; border-radius:5px;">
+                    <div class="col-12 col-sm-4 mb-2">
+                    <label class="col-12">Tasa Otros</label><span class="col-12" id="lbTasaOtro">{{$tasa->TasaOtroUSD}}</span>
+                    </div>
+                    <div class="col-12 col-sm-4 mb-2">
+                      <label class="col-12">Tasa Banesco</label> <span class="col-12" id="lblTasaBanesco">{{$tasa->TasaBanescoUSD}}</span>
+                    </div>
+                    <div class="col-12 col-sm-4 mb-2">
+                      <label class="col-12">Tasa Dolar</label> <span class="col-12" id="lblTasaDolar">{{$tasa->USDUYU}}</span>
+                    </div>
+                    {{-- <button class="btn btn-success col-12 m-auto">Actualizar</button>--}}
+                  </div>
+                @endif
+              
                 <div class="row cajaPunteada text-center mt-1">
                     
                 </div>
-                <br/>
+                {{-- <br/>
                 <label class=" col-12 text-center">Margen</label>
-                <div class="col-12 col-md-4 m-auto">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <input type="checkbox" id="chkEditarMargen" onclick="HabilitarModificarMargen();">
-                        </span>
-                      </div>
-                      <select disabled id="cmbMargen" class="form-control text-center">
-                        <option value="1" disabled>Seleccione un margen...</option>
-                        @foreach ($porcentajesGanancia as $porcentaje)
-                          @if ($porcentaje->Actual)
-                            <option selected value="{{$porcentaje->PorcentajeGanancia}}">{{$porcentaje->TextoGanancia}}</option>
-                            
-                          @else
-                            <option value="{{$porcentaje->PorcentajeGanancia}}">{{$porcentaje->TextoGanancia}}</option>
-                          @endif                
-                        @endforeach                    
-                      </select>
-                    </div>
+                <div class="col-12 col-md-3 m-auto text-center">
                       @foreach ($porcentajesGanancia as $porcentaje)
                           @if ($porcentaje->Actual)
-                            <input id="txtMargenActual" type="text" value="{{$porcentaje->PorcentajeGanancia}}" hidden/>
+                          <label>{{$porcentaje->TextoGanancia}}</label>
                           @endif                
                       @endforeach  
                     
                     <!-- /input-group -->
-                  </div>           
+                  </div>            --}}
             </div>
           </div>                         
         </div>
@@ -375,7 +373,39 @@
                     </div>
                   </div>               
                 </div>
+
+                {{-- <header class="panel__header">
+                  <h2 class="panel__title">Medio de pago</h2>
+                  <p class="panel__subheading">¿Como pagara el cliente?</p>
+               </header>
+               <div class="panel__content">
+                <div class="container-fluid">
+                  <div class="row">
+                    <table class="col-12">
+                      <tr>
+                        @foreach ($mediosDePago as $medioPago)
+                        <th><img src="{{asset($medioPago->UrlImagen)}}" alt="" width="100px"></th>                         
+                        @endforeach
+                      </tr>
+                      <tr>
+                        @foreach ($mediosDePago as $medioPago)
+                          <td><p>{{$medioPago->Descripcion}}</p></td>
+                        @endforeach
+                      </tr>
+                      <tr>
+                        @foreach ($mediosDePago as $medioPago)
+                          <td><p>{{$medioPago->TextoCosto}}</p></td>
+                        @endforeach
+                      </tr>
+                      
+                   
+                      
+                    </table> --}}
+                  {{-- </div>
+                </div>               
+              </div> --}}
              </div>
+            
 
         <div class="panel d-none" style="width:100%;">
           <header class="panel__header">
@@ -386,7 +416,75 @@
           <div class="panel__content">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-6 cajaTransaccion">
+                <div class="col-12 col-lg-6 table-responsive">
+                  <table class="table table-bordered m-0">
+                    <tr>
+                      <th class="text-center" style="border: none;" colspan="2">Transacción</th>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Envía:</td>
+                      <td class="text-right fuente14 semiNegrita col-8 align-middle" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketMontoEnviar">-   PES</p></td>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Recibe:</td>
+                      <td class="text-right fuente14 semiNegrita col-8 align-middle" style="border-left: none; border-right: none;"><p style="margin:0;"><span id="txtTicketMontoRecibir">-</span> VES</p></td>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Vencimiento:</td>
+                      <td class="text-right fuente14 semiNegrita col-8 align-middle" style="border-left: none; border-right: none;">-</td>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Cliente:</td>
+                      <td class="text-right fuente14 semiNegrita col-8 align-middle" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketCliente">-</p></td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Documento:</td>
+                      <td class="text-right fuente14 semiNegrita col-8 align-middle" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketDni">-</p></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="col-12 col-md-6 table-responsive">
+                  <table class="table table-bordered m-0">
+                    <tr>
+                      <th class="text-center" style="border: none;" colspan="2">Beneficiario</th>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Nombre:</td>
+                      <td class="text-right fuente14 semiNegrita" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketBeneficiario">-</p></td>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Pais:</td>
+                      <td class="text-right fuente14 semiNegrita" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketPais">Venezuela</p></td>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Banco:</td>
+                      <td class="text-right fuente14 semiNegrita" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketBanco">-</p></td>
+                    </tr>
+
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">Tipo Cuenta:</td>
+                      <td class="col-12 col-sm-5 text-right fuente14 semiNegrita" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketTipoCuenta">-</p></td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="font-weight-bold col-4 align-middle" style="border-left: none; border-right: none;">N° Cuenta:</td>
+                      <td class="text-left fuente14 semiNegrita" style="border-left: none; border-right: none;"><p style="margin:0;" id="txtTicketNumeroCuenta">-</p></td>
+                    </tr>
+                  </table>
+                </div>
+
+
+
+                {{-- <div class="col-6 cajaTransaccion">
                   <div class="row mb-3">
                     <label class="col-12 text-center font-weight-bold">Transacción</label>
                   </div>
@@ -396,7 +494,7 @@
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Monto a Recibir:</label>
-                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita" id="txtTicketMontoRecibir">-  VES</p>
+                      <p class="col-12 col-sm-5 text-right fuente14 semiNegrita"><span id="txtTicketMontoRecibir">-</span> VES</p>
                   </div>
                   <div class="row">
                       <label class="col-12 col-sm-6 pl-4 fuente12 grisClaro semiNegrita">Vencimiento:</label>
@@ -435,7 +533,7 @@
                         <label class="col-12 col-sm-5 pl-4 fuente13 grisClaro semiNegrita">N° Cuenta:</label>
                         <p class="col-12 col-sm-6 text-right fuente14 semiNegrita" id="txtTicketNumeroCuenta">-</p>
                     </div>
-                </div>
+                </div> --}}
               </div>
               <br/>
               <hr/>
@@ -556,12 +654,27 @@
         var datos = new Array();
         @foreach ($usuariosPersonas as $usuario)
          
-          var nuevoDato = {'Nombre': '{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersona->Documento}}', 'Email': '{{$usuario->Email}}'}
+          var nuevoDato = {'Nombre': '{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersona->Documento}}', 'Email': '{{$usuario->Email}}'};
           datos.push(nuevoDato);      
         @endforeach
 
         sessionStorage.setItem('Clientes', JSON.stringify(datos));
        
+
+        @if (is_null($tasa))
+          alertaCajaHTML(
+            tipoAlertaExclamacion, 
+            'Tasas en espera', 
+            'No se an ingresado las tasas del dia<br/> Al actualizar las tasas el envio tomara las ingresadas.', 
+             posicion = 'center', 
+             animacionEntrada = animacionEntradaEstirar, 
+             animacionSalida = animacionSalidaFadeOutRapida)
+
+        @else
+          var nuevoDato = {'TasaBanescoUSD': '{{$tasa->TasaBanescoUSD}}', 'TasaBanescoUYU': '{{$tasa->TasaBanescoUYU}}', 'TasaOtroUSD': '{{$tasa->TasaOtroUSD}}', 'TasaOtroUYU': '{{$tasa->TasaOtroUYU}}'};
+          sessionStorage.setItem('Cotizacion', JSON.stringify(nuevoDato));
+        @endif
+      
     });
     function CalcularMontoEnviar(){
 

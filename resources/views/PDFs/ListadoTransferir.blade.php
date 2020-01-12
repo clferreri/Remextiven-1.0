@@ -38,6 +38,7 @@
 </head>
 <body>
     <!--HEADER-->
+    <h1>{{$tran->IdUsuarioSolicita ?? 'text' }}</h1>
 <table style="margin-bottom: 10px; width:100%;">
     <tr>
         <td><img src="img/images/pdf/logoPDF1.png" style="width:290px;" alt=""></td>

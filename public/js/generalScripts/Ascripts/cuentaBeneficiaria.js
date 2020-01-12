@@ -20,7 +20,7 @@ function altaBeneficiario(){
             success: function (response) {
                 $("#cmbBeneficiario").append('<option value="'+ response.IdCuenta +'">' + response.Alias + '</option>');
                 var datosBeneficiarios = JSON.parse(sessionStorage.getItem('Beneficiarios'));
-                var nuevoBeneficiario = {'Beneficiario': response.NombreTitular + ' ' + response.ApellidoTitular, 'Banco': 'EN BUSQUEDA', 'Cuenta': response.TipoCuenta, 'NumeroCuenta': response.NumeroCuenta}
+                var nuevoBeneficiario = {'Beneficiario': response.NombreTitular + ' ' + response.ApellidoTitular, 'Banco': value.banco.Banco, 'Cuenta': response.TipoCuenta, 'NumeroCuenta': response.NumeroCuenta}
                 datosBeneficiarios.push(nuevoBeneficiario);
                 $("#mantaLoading").modal('hide');
                 sessionStorage.setItem('Beneficiarios', JSON.stringify(datosBeneficiarios));
@@ -43,51 +43,52 @@ function altaBeneficiario(){
 
 function validarDatosBeneficiario(nombre, apellido, documentoTitular, bancoBenef, tipoCuenta, numeroCuenta, alias){
     var realizarAlta = true;
-    var mensaje ="";
+    var mensaje ="<ul>";
     if (nombre == '' || nombre == ' ' || nombre.length < 4){
         $("#txtBeneficiarioNombre").addClass('is-invalid');
         realizarAlta = false;
-        mensaje += 'Nombre vacío o demasiado corto. <br/>';
+        mensaje += '<li>Nombre vacío o demasiado corto.</li>';
     }
 
     if (apellido == '' || apellido == ' ' || apellido.length < 4){
         $("#txtBeneficiarioApellido").addClass('is-invalid');
         realizarAlta = false;
-        mensaje += 'Apellido vacío o demasiado corto. <br/>';
+        mensaje += '<li>Apellido vacío o demasiado corto.</li>';
     }
 
     if (isNaN(documentoTitular) || documentoTitular.length < 8){
         $("#txtBeneficiarioDocumento").addClass('is-invalid');
         realizarAlta = false;
-        mensaje += 'El documento contiene caracteres no numéricos o su longitud es menor a 8. <br/>';
+        mensaje += '<li>El documento contiene caracteres no numéricos o su longitud es menor a 8.</li>';
     }
 
     if (bancoBenef == 0){
         $("#cmbBeneficiarioBanco").addClass('is-invalid');
         realizarAlta = false;
-        mensaje += 'No se seleccionó un banco. <br/>';
+        mensaje += '<li>No se seleccionó un banco.</li>';
     }
     
     if (tipoCuenta == 0){
         $("#cmbBeneficiarioTipoCuenta").addClass('is-invalid');
         realizarAlta = false;
-        mensaje += 'No se seleccionó un tipo de cuenta. <br/>';
+        mensaje += '<li>No se seleccionó un tipo de cuenta.</li>';
     }
 
     if (isNaN(numeroCuenta) || numeroCuenta.length < 20){
         $("#txtBeneficiarioNumeroCuenta").addClass('is-invalid');
         realizarAlta = false;
-        mensaje += 'El número de cuenta no es valido o su longitud es menor de 20.<br/>';
+        mensaje += '<li>El número de cuenta no es valido o su longitud es menor de 20.</li>';
     }
 
     if (alias == '' || alias == ' ' || alias.length < 3){
         $("#txtBeneficiarioAlias").addClass('is-invalid');
         realizarAlta = false;
-        mensaje += 'Alias vacío o demasiado corto. <br/>';
+        mensaje += '<li>Alias vacío o demasiado corto.</li>';
     }
+    mensaje += '</ul>'
     
     if (!realizarAlta){
-        alertaCaja(tipoAlertaError, 'Datos no validos. Favor de corregir los siguientes errores', mensaje);
+        alertaCajaHTML(tipoAlertaError, 'Datos no validos. Favor de corregir los siguientes errores', mensaje);
     }
 
     return realizarAlta
@@ -107,7 +108,7 @@ function obtenerBeneficiarios(){
                 $('#cmbBeneficiario').append('<option disabled value="0" selected>Seleccione un Beneficiario ...</option>');
                 var datosBenef = new Array(); 
                 $.each(response, function (index, value) {                      
-                        var nuevoDatoBenef = {'Beneficiario': value.NombreTitular + ' ' + value.ApellidoTitular, 'Banco': 'EN BUSQUEDA', 'Cuenta': value.TipoCuenta, 'NumeroCuenta': value.NumeroCuenta}
+                        var nuevoDatoBenef = {'Beneficiario': value.NombreTitular + ' ' + value.ApellidoTitular, 'Banco': value.banco.Banco, 'Cuenta': value.TipoCuenta, 'NumeroCuenta': value.NumeroCuenta}
                         datosBenef.push(nuevoDatoBenef);
                         $("#cmbBeneficiario").append('<option value="'+ value.IdCuenta +'">' + value.Alias + '</option>');
                 });

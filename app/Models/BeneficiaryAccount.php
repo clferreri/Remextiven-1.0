@@ -12,4 +12,17 @@ class BeneficiaryAccount extends Model
     protected $fillable = [
         'IdUsuario', 'IdBanco', 'TipoCuenta', 'NumeroCuenta', 'NombreTitular', 'ApellidoTitular', 'TipoDocumento', 'Documento', 'Alias'
     ];
+
+
+
+
+    //------RELACIONES------------------
+
+    public function Usuario(){
+        return $this->hasOne('App\User', 'IdUsuarioR', 'IdUsuario');
+    }
+
+    public Function Banco(){
+        return $this->hasOne('App\Models\Bank', 'IdBanco', 'IdBanco');
+    }
 }

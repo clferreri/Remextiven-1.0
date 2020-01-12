@@ -158,7 +158,7 @@
                         <p class="texto12 negrita textoSinMyP"><span style="font-weight: bold">Nombre </span></p>
                     </td>
                     <td>
-                        <p class="texto12 textoSinMyP">Juancho Paredez Soza</p>
+                        <p class="texto12 textoSinMyP">{{$transferencia->UsuarioTransferencia->DatosPersona->Nombre . ' ' . $transferencia->UsuarioTransferencia->DatosPersona->PrimerApellido . ' ' . $transferencia->UsuarioTransferencia->DatosPersona->SegundoApellido}}</p>
                     </td>
                 </tr>
                 
@@ -167,18 +167,17 @@
                         <p class="texto12 negrita textoSinMyP">CI / RUT </p>
                     </td>
                     <td>
-                        <p class="texto12 textoSinMyP">5129451-9</p>
+                        <p class="texto12 textoSinMyP">{{$transferencia->UsuarioTransferencia->DatosPersona->Documento}}</p>
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <p class="texto12 negrita textoSinMyP">Email </p>
+                        <p class="texto12 negrita textoSinMyP">Email</p>
                     </td>
                     <td>
-                        <p class="texto12 textoSinMyP">{{cliente->Email}}</p>
-                    </td>
-                    
+                    <p class="texto12 textoSinMyP">{{$transferencia->UsuarioTransferencia->Email}}</p>
+                    </td>                
                 </tr>
             </table>           
         </td>
@@ -193,14 +192,14 @@
             <br/>
                 <div style="width:43%; float:right; text-align:center;">
                     <p class="texto11" style="border: 1px solid #ddd; margin:0; background-color: #f2f2f2;">Fecha Vencimiento</p>
-                    <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;"></p>
+                <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;">{{date_format($transferencia->FechaSolicitada,"d/m/Y")}}</p>
                 </div>
                 <div style="width:10%; float:right;">
 
                 </div>
                 <div style="width:43%; float:right; text-align:center;">
                     <p class="texto11" style="border: 1px solid #ddd; margin:0; background-color: #f2f2f2;">Fecha Realizada</p>
-                <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;"></p>
+                <p style="border: 1px solid #ddd; margin-top:-1px; text-align:center;">{{date_format($transferencia->FechaSolicitada,"d/m/Y")}}</p>
                 </div>
                 
 
@@ -220,8 +219,8 @@
         <th class="textoCentrado">Costo</th>
     </tr>
     <tr>
-        <td class="detalle">Envio de 540 Dolares</td>
-        <td class="costo">U$S 540</td>
+        <td class="detalle">Envio de {{$cotizacionTransferencia->MontoEnviar . ' ' . $cotizacionTransferencia->Moneda->CodigoTexto}}</td>
+        <td class="costo">{{$cotizacionTransferencia->Moneda->CodigoValor . ' ' . $cotizacionTransferencia->MontoEnviar}}</td>
     </tr>
     <tr>
         <td>Transferencia mediante abitab</td>
@@ -233,7 +232,7 @@
     </tr>
     <tr>
         <td class="negrita" style="text-align:right; border: none !important;">Total</td>
-        <td class="costo">U$S 541</td>
+        <td class="costo">{{$cotizacionTransferencia->MontoEnviar}}</td>
     </tr>
 </table>
 
@@ -264,21 +263,20 @@
         </td>
         
         <td>
-            <table style="width: 400px; margin-left:70px; !important;" class="textoCentrado" id="cotizacion">
+            <table style="width: 100%; margin-left: 4px;" class="textoCentrado" id="cotizacion">
                 <tr>
                     <th colspan="2" class="titulos">Beneficiario</th>
                 </tr>
                 <tr>
-                    <td style="width:20%;">Nombre</td>
-                    <td>{{$beneficiario->NombreTitular . $beneficiario->ApellidoTitular}}</td>
+                    <td style="width:75px;">Nombre</td>
+                    <td>{{$transferencia->CuentaBeneficiaria->Nombre . ' ' . $transferencia->CuentaBeneficiaria->Apellido }}</td>
                 </tr>
                 <tr>
                     <td>Banco</td>
-                <td>{{$banco->Banco}}</td>
+                    <td>{{$transferencia->CuentaBeneficiaria->Banco->Banco}}</td>
                 </tr>
             </table>      
-
-            
+       
         </td>
     </tr>
 </table>

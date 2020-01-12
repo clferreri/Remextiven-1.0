@@ -77,6 +77,18 @@ Route::post('BeneficiaryAccount', 'AjaxControllers\AdminControllers\BeneficiaryA
 Route::post('createTransfer', 'AjaxControllers\AdminControllers\TransferController@createTransfer');
 
 
+
+
+
+
+
+////--------------------------//
+////////     PDFS    //////////
+///////////////////////////////
+Route::post('openTransferPDF', 'AjaxControllers\AdminControllers\TransferController@AbrirPDF');
+
+
+
 //-----------------------------//
 ///////// CONFIGURACION /////////
 //-----------------------------//

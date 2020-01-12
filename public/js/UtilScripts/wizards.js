@@ -139,7 +139,7 @@ class Wizard{
     //CARGO LAS VARIABLES!!!
       
       //PRIMER PASO----------------------------
-      var cliente = $("#cmbBeneficiario").val();
+      var cliente = $("#cmbClientes").val();
       //----------------------------------------
 
       //SEGUNDO PASO---------------------------------------
@@ -148,10 +148,6 @@ class Wizard{
       if (sessionStorage.getItem("Moneda") == "USD"){
         moneda = 2;
       }
-      var margen = $("#cmbMargen").find('option:selected').text();
-      var cotizacionVESBanesco = sessionStorage.getItem('CotiVES');
-      var cotizacionVESOtro = cotizacionVESOtrosBancos(cotizacionVESBanesco);
-      var cotiDolar = sessionStorage.getItem('CotiUSD');
       //----------------------------------------------
       
 
@@ -163,7 +159,7 @@ class Wizard{
       var metodoPago = $('input:radio[name=optMedioPago]:checked').val();
       //------------------------------------------
     
-    if (this.validarFormulario(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago)){
+    if (this.validarFormulario(cliente, montoEnviar, moneda, beneficiario, metodoPago)){
       this.concludeControlMoveStepMethod();
       this.wizard.classList.add('completed');
           
@@ -199,7 +195,7 @@ class Wizard{
     return fowardMov || backMov;
   }
 
-  validarFormulario(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago){
+  validarFormulario(cliente, montoEnviar, moneda, beneficiario, metodoPago){
     var formularioValido = true;
     var tituloErrores = "Error al generar transferencia"
     
@@ -222,27 +218,9 @@ class Wizard{
       return formularioValido
     }
 
-    if ((moneda != 1 && moneda != 2) || margen == ''){
+    if (moneda != 1 && moneda != 2){
       formularioValido = false
       alertaCaja('error', tituloErrores, 'Valide la moneda o margen ingresado');
-      for (var i = 0; i >= -2; i--){ 
-        this.moveStep(-1);
-      }
-      return formularioValido;
-    }
-
-    if (isNaN(cotizacionVESBanesco) || isNaN(cotizacionVESOtro)){
-      formularioValido = false
-      alertaCaja('error', tituloErrores, 'Valide la cotizacion del VES, la misma no es correcta o el sitema no la pudo calcular');
-      for (var i = 0; i >= -2; i--){ 
-        this.moveStep(-1);
-      }
-      return formularioValido;
-    }
-
-    if (isNaN(cotiDolar)){
-      formularioValido = false
-      alertaCaja('error', tituloErrores, 'Valide la cotizacion del USD, la misma no es correcta o el sitema no la pudo calcular');
       for (var i = 0; i >= -2; i--){ 
         this.moveStep(-1);
       }
@@ -260,7 +238,7 @@ class Wizard{
 
 
     if (formularioValido){
-      altaTransferencia(cliente, montoEnviar, moneda, margen, cotizacionVESBanesco, cotizacionVESOtro, cotiDolar , beneficiario, metodoPago);
+      altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPago);
       return formularioValido;
     }
 

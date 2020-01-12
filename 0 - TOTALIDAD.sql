@@ -766,7 +766,7 @@ INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Remexero', 1);
 INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Banco de Bolivares', 1);
 INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Digitador', 1);
 INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Lider', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Moderador', 1)
+INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Moderador', 1);
 INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Administrador', 1);
 
 INSERT INTO EstadosSolicitudTransferencia (Estado, Activo) VALUES
@@ -809,11 +809,11 @@ INSERT INTO MargenesDeGanancia (TextoGanancia, porcentajeGanancia, Actual, Activ
 
 
 INSERT INTO MediosDePago (MedioDePago, Descripcion, TextoCosto, Costo, Activo, PagoCliente, UrlImagen) VALUES
-('Santander', 'Transferencia o deposito en cajero', 'SIN COSTO', 0, 1, 1, ''),
+('Santander', 'Transferencia o deposito en cajero', 'SIN COSTO', 0, 1, 1, 'img/images/metodosDePago/santander.png'),
 ('Prex', 'Transferencia Prex a Prex', 'Costo de 9 UYU', 9, 1, 1, 'img/images/metodosDePago/prex.png'),
-('Abitab', 'Giros en Abitab', 'Costo  de 90 UYU + 0,5% de lo enviado', 90, 1, 1, ''),
-('Midinero', 'Trasnferencia desde aplicación', 'SIN COSTO', 0, 1, 1, ''),
-('Midinero', 'Deposito en Redpagos', 'Costo de 48 UYU', 48, 1, 1, '');
+('Abitab', 'Giros en Abitab', 'Costo  de 90 UYU + 0,5% de lo enviado', 90, 1, 1, 'img/images/metodosDePago/abitab.png'),
+('Midinero', 'Trasnferencia desde aplicación', 'SIN COSTO', 0, 1, 1, 'img/images/metodosDePago/midinero.png'),
+('Midinero', 'Deposito en Redpagos', 'Costo de 48 UYU', 48, 1, 1, 'img/images/metodosDePago/redpagos.png');
 
 
 INSERT INTO Monedas (Moneda, CodigoValor, CodigoTexto, Activo) VALUES

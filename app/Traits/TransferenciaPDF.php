@@ -24,10 +24,10 @@ trait TransferenciaPDF
     * @return PDF generado
     */
     public static function generarPDF($transferencia, $cotizacionTransferencia){
-        $cliente = User::find($transferencia->IdUsuarioSolicita);
-        $beneficiario = BeneficiaryAccount::find($transferencia->IdCuentaBeneficiaria);
-        $banco = Bank::find($beneficiario->IdBanco);
-        $pdf = PDF::loadView('PDFs.Transferencia', compact('transferencia', 'cotizacionTransferencia', 'cliente', 'beneficiario', 'banco'));
+        // $cliente = User::find($transferencia->IdUsuarioSolicita);
+        // $beneficiario = BeneficiaryAccount::find($transferencia->IdCuentaBeneficiaria);
+        // $banco = Bank::find($beneficiario->IdBanco);
+        $pdf = PDF::loadView('PDFs.Transferencia', compact('transferencia', 'cotizacionTransferencia'));
         $nombreArchivo = "Tr. N°". $transferencia->IdSolicitudTransferencia . ".pdf";
         $pdf->save(storage_path('app/public/Transferencias/'). $nombreArchivo);
         return $pdf;

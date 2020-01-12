@@ -49,7 +49,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Envios completados</span>
-                <span class="info-box-number">56</span>
+              <span class="info-box-number">{{$completados}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -62,7 +62,7 @@
   
                 <div class="info-box-content">
                   <span class="info-box-text">Envios pendientes</span>
-                  <span class="info-box-number">10</span>
+                <span class="info-box-number">{{$pendientes}}</span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -75,7 +75,7 @@
     
                   <div class="info-box-content">
                     <span class="info-box-text">Atrasados</span>
-                    <span class="info-box-number">2</span>
+                      <span class="info-box-number">{{$atrasados}}</span>
                   </div>
                   <!-- /.info-box-content -->
                 </div>
@@ -88,7 +88,7 @@
       
                     <div class="info-box-content">
                       <span class="info-box-text">Envios totales</span>
-                      <span class="info-box-number">67</span>
+                      <span class="info-box-number">{{$totales}}</span>
                     </div>
                     <!-- /.info-box-content -->
                   </div>
@@ -118,10 +118,10 @@
 
                 @foreach ($transferencias as $trans)
                   <tr>
-                    <td>239</td>
-                    <td>Cristian Ferreri Cesar</td>
-                    <td>Santander</td>
-                    <td>50420 VES</td>
+                    <td>{{$trans->IdSolicitudTransferencia}}</td>
+                    <td>{{$trans->UsuarioTransferencia->DatosPersona->Nombre . ' ' . $trans->UsuarioTransferencia->DatosPersona->PrimerApellido . ' ' . $trans->UsuarioTransferencia->DatosPersona->SegundoApellido }}</td>
+                    <td>{{$trans->MedioPago->MedioDePago}}</td>
+                    <td>{{$trans->Cotizacion->Moneda->CodigoValor . ' ' . $trans->Cotizacion->MontoEnviar}}</td>
                     <td>
                     <div class="dropdown show" id="estadoEnvio1">
                     <span class="badge badge-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pendiente</span>
@@ -133,9 +133,11 @@
                     </div>
                     
                     </td>
-                    <td>20/10/2019</td>
-                    <td><button class="btn" style="height: 25px; margin-top:-15px;"><i class="fa fa-eye" aria-hidden="true"></i>
-                    </button></td>
+                    <td>{{$trans->FechaSolicitada}}</td>
+                    <td style="width: 100px;">
+                      <button class="btn" style="height: 25px; margin-top:-15px; padding-right:1px;"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                      <button class="btn" style="height: 26px; margin-top:-15px; padding-right:1px;" onclick="abrirTransferenciaPDF({{$trans->IdSolicitudTransferencia}})"><i class="fas fa-file-pdf"></i></button>
+                  </td>
                   </tr>
                 @endforeach
 
@@ -242,4 +244,8 @@
       }
     }
   </script>
+@endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/Dashboard/Transferencias/listadoPendientes.js")}}"></script>
 @endsection

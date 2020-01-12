@@ -24,7 +24,7 @@ class BeneficiaryAccountController extends Controller
     //Obtiene las cuentas beneficiarias del usuario indicado
     protected function getBeneficiaryAccount(Request $request){
         $idUsuario = $request->input("idUsuario");
-        $cuentasBeneficiarias = BeneficiaryAccount::where('IdUsuario', $idUsuario)->get();
+        $cuentasBeneficiarias = BeneficiaryAccount::where('IdUsuario', $idUsuario)->with('Banco')->get();
          return $cuentasBeneficiarias->toJson();
      }
 

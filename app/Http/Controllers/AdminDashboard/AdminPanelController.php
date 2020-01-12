@@ -13,6 +13,7 @@ use App\Models\Transfer;
 use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 
 class AdminPanelController extends Controller
 {
@@ -23,12 +24,19 @@ class AdminPanelController extends Controller
         $bancos = Bank::join('Paises', 'BancosR.IdPais', '=', 'Paises.IdPais')->where('BancosR.Activo', 1)->where('Paises.Pais', 'Venezuela')->get();
         $porcentajesGanancia = PercentGain::all();
         $mediosDePago = PaymentMethod::where('Activo', 1)->where('PagoCliente', 1)->get();
-        return view('AdminDashboard.Transferencias.generar', compact('usuariosPersonas', 'bancos', 'porcentajesGanancia', 'mediosDePago'));
+        $tasa = RateConfig::where('Fecha', Carbon::today()->toDateString())
+                ->orderBy('created_at', 'desc')->first();
+        return view('AdminDashboard.Transferencias.generar', compact('usuariosPersonas', 'bancos', 'porcentajesGanancia', 'mediosDePago', 'tasa'));
     }
 
-    protected function ListadoTransferencias(){
+    protected function ListadoEnProceso(){
         $transferencias = Transfer::whereIn('IdEstadoTransferencia', [1,2,3])->get();
-        return view('AdminDashboard.Transferencias.enProceso', compact('transferencias'));
+        $completados = Transfer::where('FechaFinalizada', Carbon::today()->toDateString())->count();
+        $pendientes = $transferencias->count();
+        $atrasados = Transfer::where('FechaSolicitada','!=', Carbon::today()->toDateString())->count();
+        $totales = Transfer::where('FechaSolicitada', Carbon::today()->toDateString())->orWhereIn('IdEstadoTransferencia',[1,2,3])->count();
+       
+        return view('AdminDashboard.Transferencias.listado', compact('transferencias', 'completados', 'pendientes', 'atrasados', 'totales'));
     }
 
 

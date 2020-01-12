@@ -112,3 +112,19 @@ function alertaCaja(tipoAlerta, titulo, mensaje, posicion = 'center', animacionE
           }
       })
 }
+
+function alertaCajaHTML(tipoAlerta, titulo, mensaje, posicion = 'center', animacionEntrada = animacionEntradaFadeIn, animacionSalida = animacionSalidaFadeOut){
+  Swal.fire({
+      icon: tipoAlerta,
+      title: titulo,
+      position: posicion,
+      html: mensaje,
+
+      showClass: {
+          popup: animacionEntrada
+        },
+        hideClass: {
+          popup: animacionSalida
+        }
+    })
+}

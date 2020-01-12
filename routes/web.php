@@ -120,7 +120,7 @@ Route::view('/admin', 'AdminDashboard\Dashboard')->name('inicioAdminPanel');
 //-- TRANSFERENCIAS --//
 Route::get('/admin/newTransfer','AdminDashboard\AdminPanelController@AgregarTransferencia')->name('nuevaTransferencia');
 
-Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@ListadoTransferencias')->name('transferenciasEnProceso');
+Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@ListadoEnProceso')->name('transferenciasEnProceso');
 
 //-------------------//
 
