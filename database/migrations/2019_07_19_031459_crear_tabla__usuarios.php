@@ -27,7 +27,8 @@ class CrearTablaUsuarios extends Migration
             $table->boolean('NewsLetters');
             $table->string('TokenReferido', 20);
             $table->string('RutaImagen', 40);
-            $table->boolean('EsReferido')->default(1);
+            $table->boolean('EsReferido')->default(0);
+            $table->boolean('RequiereCambioPass')->default(0);
             $table->date('UltimoLogin')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
