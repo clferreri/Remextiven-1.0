@@ -24,6 +24,7 @@ class CrearTablaSolicitudesTransferencias extends Migration
             $table->unsignedInteger('IdCuentaBeneficiaria')->nullable();
             $table->date('FechaSolicitada');
             $table->date('FechaFinalizada')->nullable();
+            $table->string('ReciboBancario', 25)->nullable();
             $table->timestamps();
 
             $table->foreign('IdUsuarioSolicita', 'FK_SolicitudTransferencia_UsuarioSolicita')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
