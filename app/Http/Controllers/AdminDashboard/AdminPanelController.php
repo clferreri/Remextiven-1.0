@@ -8,8 +8,10 @@ use App\Models\Bank;
 use App\Models\Pais;
 use App\Models\PaymentMethod;
 use App\Models\PercentGain;
+use App\Models\Position;
 use App\Models\RateConfig;
 use App\Models\Transfer;
+use App\Models\UserRol;
 use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -41,7 +43,7 @@ class AdminPanelController extends Controller
 
 
 
-    //----------------------------------------------------------------------------------------------------//
+    //---------------------------------------  CLIENTES  --------------------------------------------//
 
 
 
@@ -57,7 +59,15 @@ class AdminPanelController extends Controller
     }
 
 
+    //---------------------------------------  USUARIOS  ---------------------------------------------//
 
+    protected function CrearUsuario(){
+        $roles = UserRol::where('Activo', 1)->where('SoloEmpleado', 1);
+        $cargos = Position::where('Activo', 1)->where('SoloAdmin', 0);
+        $paises = Pais::where('Activo', 1)->get();
+
+        return view('AdminDashboard.Usuarios.generar', compact('roles', 'cargos', 'paises'));
+    }
 
 
     protected function ConfigurarTasa(){

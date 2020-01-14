@@ -18,7 +18,7 @@ class CrearTablaPersonasFisicas extends Migration
             $table->unsignedInteger('IdUsuario');
             $table->string('Nombre', 20);
             $table->string('PrimerApellido', 25);
-            $table->string('SegundoApellido', 25); 
+            $table->string('SegundoApellido', 25)->nullable(); 
             $table->string('Documento', 20);
             $table->string('TipoDocumento', 6);
             $table->date('FechaNacimiento');

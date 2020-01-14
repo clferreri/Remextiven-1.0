@@ -17,7 +17,8 @@ class CrearTablaCargos extends Migration
             $table->tinyIncrements('IdCargo');
             $table->string('Sigla', 8);
             $table->string('NombreCargo', 35);
-            $table->boolean('Activo');
+            $table->boolean('Activo')->default(1);
+            $table->boolean('SoloAdmin')->default(0);
             $table->timestamps();
         });
     }

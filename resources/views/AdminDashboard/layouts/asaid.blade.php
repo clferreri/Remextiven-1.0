@@ -204,7 +204,7 @@
                 
                 <li class="nav-header">SISTEMAS</li>
                 <li class="nav-item">
-                    <a href="https://adminlte.io/docs/3.0" class="nav-link">
+                <a href="{{route('crearUsuario')}}" class="nav-link">
                         <i class="nav-icon fa fa-user-plus"></i>
                         <p>Generar Usuario</p>
                     </a>

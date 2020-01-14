@@ -11,6 +11,6 @@ class UserRol extends Model
 
 
     protected $fillable = [
-        'Rol', 'Activo'
+        'Rol', 'Activo', 'SoloEmpleado'
     ];
 }

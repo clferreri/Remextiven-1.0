@@ -141,6 +141,12 @@ Route::get('/admin/configRate', 'AdminDashboard\AdminPanelController@ConfigurarT
 //-----------------//
 
 
+//-- SISTEMAS --//
+
+Route::get('/admin/newUser', 'AdminDashboard\AdminPanelController@CrearUsuario')->name('crearUsuario');
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////FIN RUTAS ADMINISTRACION///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,3 +163,7 @@ Route::view('/email', 'Mails\adminGeneracionCuentaCliente');
 
 Route::get('/pdf','PDFs\transferenciaController@index');
 Route::view('/pdfview', 'PDFs\Transferencia');
+
+
+
+Route::view('/nuevotema', 'AdminPanel.index');

@@ -747,27 +747,28 @@ INSERT INTO TiposUsuario (Tipo, Activo) VALUES
 ('Persona Juridica', 2),
 ('Empleado Remextiven', 3);
 
-INSERT INTO Cargos (Sigla ,NombreCargo, Activo) VALUES
-('CEO', 'Director Ejecutivo', 0),
-('CFO', 'Director de Finanzas', 0),
-('CTO', 'Director de Tecnología', 0),
-('CMO', 'Director de Marketing', 0),
-('DGI', 'Digitador', 1),
-('OPE', 'Operador', 1),
-('RSC', 'Representante de Servicio al Cliente', 1),
-('CAD', 'Cadete Remextiven', 1),
-('STI', 'Soporte Técnico Informatico', 1),
-('DGR', 'Diseñador Grafico', 1),
-('LOP', 'Lider de Operaciones', 1);
+INSERT INTO Cargos (Sigla ,NombreCargo, Activo, SoloAdmin) VALUES
+('CEO', 'Director Ejecutivo', 0, 1),
+('CFO', 'Director de Finanzas', 0, 1),
+('CTO', 'Director de Tecnología', 0, 1),
+('CMO', 'Director de Marketing', 0, 1),
+('DGI', 'Digitador', 1, 0),
+('OPE', 'Operador', 1, 0),
+('RSC', 'Representante de Servicio al Cliente', 1, 0),
+('CAD', 'Cadete Remextiven', 1, 0),
+('STI', 'Soporte Técnico Informatico', 1, 0),
+('DGR', 'Diseñador Grafico', 1, 0),
+('LOP', 'Lider de Operaciones', 1, 0);
 
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Usuario', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Cajero', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Remexero', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Banco de Bolivares', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Digitador', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Lider', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Moderador', 1);
-INSERT INTO RolesUsuariosR (Rol, Activo) VALUES ('Administrador', 1);
+INSERT INTO RolesUsuariosR (Rol, Activo, SoloEmpleado) VALUES 
+('Usuario', 1, 0),
+('Cajero', 1, 0),
+('Remexero', 1, 1),
+('Banco de Bolivares', 1, 1),
+('Digitador', 1, 1),
+('Lider', 1, 1),
+('Moderador', 1, 1),
+('Administrador', 1, 1);
 
 INSERT INTO EstadosSolicitudTransferencia (Estado, Activo) VALUES
 ('Pendiente', 1),

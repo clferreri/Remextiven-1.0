@@ -16,7 +16,8 @@ class CrearTablaRolesUsuarios extends Migration
         Schema::create('RolesUsuariosR', function (Blueprint $table) {
             $table->tinyIncrements('IdRol');
             $table->string('Rol', 20)->unique();
-            $table->boolean('Activo');
+            $table->boolean('Activo')->default(1);
+            $table->boolean('SoloEmpleado')->default(0);
         });
     }
 
