@@ -54,7 +54,8 @@ Route::get('forwardActivationEmail/{email}', 'Auth\ActivationUserController@reen
 
 
 //LOGIN
-Route::view('login', 'Login.loginUser')->name('login');
+Route::view('login', 'AdminPanel.Usuarios.Login')->name('login');
+Route::view('loginViejo', 'Login.loginUser');
 Route::post('login', 'Auth\LoginController@Autenticar')->name('loginUser');
 Route::post('logout', function () {
     Auth::logout();
@@ -133,8 +134,12 @@ Route::get('/admin/checkClient','AdminDashboard\AdminPanelController@VerificarCl
 
 //------------------//
 
+//-- EQUIPO REMEXTIVEN --//
+Route::get('/admin/newUser', 'AdminDashboard\AdminPanelController@AgregarUsuario')->name('nuevoUsuarioR');
 
-//-- CONFIGURACION --//
+//-------------------------//
+
+//-- SISTEMA --//
 
 Route::get('/admin/configRate', 'AdminDashboard\AdminPanelController@ConfigurarTasa')->name('configTasas');
 
@@ -143,7 +148,7 @@ Route::get('/admin/configRate', 'AdminDashboard\AdminPanelController@ConfigurarT
 
 //-- SISTEMAS --//
 
-Route::get('/admin/newUser', 'AdminDashboard\AdminPanelController@CrearUsuario')->name('crearUsuario');
+
 
 
 

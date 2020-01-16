@@ -50,7 +50,7 @@ class AdminPanelController extends Controller
     protected function AgregarCliente(){
         $paises = Pais::where('Activo', 1)->get();
 
-        return view('AdminDashboard.Clientes.nuevoCliente', compact('paises'));
+        return view('AdminPanel.Clientes.nuevoCliente', compact('paises'));
     }
 
     protected function VerificarCliente(){
@@ -61,12 +61,12 @@ class AdminPanelController extends Controller
 
     //---------------------------------------  USUARIOS  ---------------------------------------------//
 
-    protected function CrearUsuario(){
+    protected function AgregarUsuario(){
         $roles = UserRol::where('Activo', 1)->where('SoloEmpleado', 1);
         $cargos = Position::where('Activo', 1)->where('SoloAdmin', 0);
         $paises = Pais::where('Activo', 1)->get();
 
-        return view('AdminDashboard.Usuarios.generar', compact('roles', 'cargos', 'paises'));
+        return view('AdminPanel.EquipoRemextiven.generar', compact('roles', 'cargos', 'paises'));
     }
 
 
@@ -74,6 +74,6 @@ class AdminPanelController extends Controller
         $tasa = RateConfig::where('Fecha', Carbon::today()->toDateString())
                 ->orderBy('created_at', 'desc')->first();
         $margenesGanancia = PercentGain::all();
-        return view('AdminDashboard.Config.tasas', compact('tasa', 'margenesGanancia')); 
+        return view('AdminPanel.Config.tasas', compact('tasa', 'margenesGanancia')); 
        }
 }

@@ -41,26 +41,6 @@
                 </a>
                 <a href="javascript:;" class="dropdown-item media">
                     <div class="media-left">
-                        <img src="../assets/img/user/user-2.jpg" class="media-object" alt="" />
-                        <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
-                    </div>
-                    <div class="media-body">
-                        <h6 class="media-heading">Olivia</h6>
-                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                        <div class="text-muted f-s-10">35 minutes ago</div>
-                    </div>
-                </a>
-                <a href="javascript:;" class="dropdown-item media">
-                    <div class="media-left">
-                        <i class="fa fa-plus media-object bg-silver-darker"></i>
-                    </div>
-                    <div class="media-body">
-                        <h6 class="media-heading"> New User Registered</h6>
-                        <div class="text-muted f-s-10">1 hour ago</div>
-                    </div>
-                </a>
-                <a href="javascript:;" class="dropdown-item media">
-                    <div class="media-left">
                         <i class="fa fa-envelope media-object bg-silver-darker"></i>
                         <i class="fab fa-google text-warning media-object-icon f-s-14"></i>
                     </div>

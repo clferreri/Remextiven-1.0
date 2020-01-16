@@ -49,7 +49,15 @@
 
     <!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{ asset("assets/$temaDashboardRemextiven/js/app.min.js")}}"></script>
-	<script src="{{ asset("assets/$temaDashboardRemextiven/js/theme/default.min.js")}}"></script>
+  <script src="{{ asset("assets/$temaDashboardRemextiven/js/theme/default.min.js")}}"></script>
+
+  <script src="{{asset("assets/$temaDashboardRemextiven/plugins/popper/umd/popper.js")}}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="{{asset("assets/$temaDashboardRemextiven/plugins/popper/umd/popper-utils.js")}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script type="text/javascript" src="{{asset("js/UtilScripts/alertas.js")}}"></script>
+
 	<!-- ================== END BASE JS ================== -->
     
     @yield('scripts')

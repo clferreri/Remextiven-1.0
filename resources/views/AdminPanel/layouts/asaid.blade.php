@@ -17,23 +17,23 @@
             </li>
             <li>
                 <ul class="nav nav-profile">
-                    <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
-                    <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
-                    <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
+                    <li><a href="javascript:;"><i class="fa fa-cog"></i> Configuración</a></li>
+                    <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Editar Perfil</a></li>
+                    <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Ayuda</a></li>
                 </ul>
             </li>
         </ul>
         <!-- end sidebar user -->
         <!-- begin sidebar nav -->
         <ul class="nav"><li class="nav-header">Panel de Administración</li>
-            <li class="active">
+            <li class="@yield('menu-dashboard')">
                 <a href="javascript:;">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
-            <li class="has-sub">
+            <li class="has-sub @yield('menu-transferencias')">
                 <a href="javascript:;">
                     <b class="caret"></b>
                     <i class="fas fa-hand-holding-usd"></i>
@@ -45,27 +45,26 @@
                 </ul>
             </li>
 
-            <li class="has-sub">
+            <li class="has-sub @yield('menu-clientes')">
                 <a href="javascript:;">
                     <b class="caret"></b>
                     <i class="fas fa-users"></i>
                     <span>Clientes</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="ui_general.html">Generar Transferencia</a></li>
-                    <li><a href="ui_typography.html">En proceso</a></li>
+                    <li class="@yield('link-clientes-generar')"><a href="{{route('nuevoCliente')}}">Nuevo Cliente</a></li>
+                    <li class="@yield('link-verificarCliente')"><a href="ui_typography.html">Verificar Cliente</a></li>
                 </ul>
             </li>
 
-            <li class="has-sub">
+            <li class="has-sub @yield('menu-equipo')">
                 <a href="javascript:;">
                     <b class="caret"></b>
                     <i class="fas fa-street-view"></i>
                     <span>Equipo</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="ui_general.html">Generar Transferencia</a></li>
-                    <li><a href="ui_typography.html">En proceso</a></li>
+                    <li class="@yield('link-equipo-generar')"><a href="{{route('nuevoUsuarioR')}}">Generar Usuario</a></li>
                 </ul>
             </li>
 
@@ -95,8 +94,8 @@
 
             <li class="nav-header">Sistema</li>
 
-            <li class="has-sub">
-                <a href="javascript:;">
+            <li class="has-sub @yield('menu-tasaYmargen')">
+                <a href="{{route('configTasas')}}">
                     <i class="fas fa-file-invoice-dollar"></i>
                     <span>Tasa y Margen</span>
                 </a>

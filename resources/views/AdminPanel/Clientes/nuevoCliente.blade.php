@@ -1,4 +1,4 @@
-@extends('AdminDashboard/layouts/layout')
+@extends('AdminPanel/layouts/layout')
 
 @section('contenidoHeader')
     
@@ -6,16 +6,14 @@
 
 
 @section('menu-clientes')
-  menu-open
-@endsection
-
-@section('link-clientes')
-  active
+  active has-sub
 @endsection
 
 @section('link-clientes-generar')
   active
 @endsection
+
+
 
 
 
@@ -39,13 +37,11 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Datos del cliente</h3>
+                <h3 class="card-title mb-0">Datos del cliente</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -191,16 +187,14 @@
                 </div>
                 <!-- /.card-body -->
 
-                <div class="card-footer">
-                  <button type="button" id="btnAgregarCliente" class="btn btn-success col-6 col-sm-5 col-md-3 float-right">Agregar</button>
+                <div class="card-footer text-right">
+                  <button type="button" id="btnAgregarCliente" class="btn btn-green m-auto col-12 col-md-6 col-xl-3">Agregar</button>
                 </div>
               </form>
             </div>
             <!-- /.card -->
             </div>
             </div>
-      </div><!-- /.container-fluid -->
-    </section>
     <!-- /.content -->
     
   @endsection

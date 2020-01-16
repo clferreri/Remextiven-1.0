@@ -1,21 +1,18 @@
-@extends('AdminDashboard/layouts/layout')
+@extends('AdminPanel/layouts/layout')
 
 @section('contenidoHeader')
     
 @endsection
 
 
-@section('menu-clientes')
-  menu-open
-@endsection
-
-@section('link-clientes')
+@section('menu-equipo')
   active
 @endsection
 
-@section('link-clientes-generar')
+@section('link-equipo-generar')
   active
 @endsection
+
 
 
 
@@ -26,12 +23,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Generar Cliente</h1>
+            <h1>Generar Usuario Remextiven</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Generar Cliente</li>
+              <li class="breadcrumb-item"><a href="#">Equipo</a></li>
+              <li class="breadcrumb-item active">Generar Usuario</li>
             </ol>
           </div>
         </div>
@@ -39,13 +36,11 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Datos del Usuario</h3>
+                <h3 class="card-title mb-0">Datos del Usuario</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -53,29 +48,68 @@
                 <div class="card-body">
 
                   <div class="row">
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-xs-6 col-md-3">
+                        <label for="exampleInputEmail1">Email (Usuario)</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text d-none d-sm-block"><i class="fas fa-envelope"></i></span>
+                          </div>
+                          <input required type="email" class="form-control" id="txtEmail" placeholder="Ingresa un correo" name="email" onblur="casillaCorreo();">
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-xs-6 col-md-3">
+                        <label for="exampleInputEmail1">Email Personal</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text d-none d-sm-block"><i class="fas fa-envelope"></i></span>
+                          </div>
+                          <input required type="email" class="form-control" id="txtEmail" placeholder="Ingresa un correo" name="email" onblur="casillaCorreo();">
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-xs-6 col-md-3">
+                        <label for="exampleInputEmail1">Rol</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          </div>
+                          <select name="" id="" class="form-control">
+
+                          </select>
+                        </div>                      
+                    </div>
+                      <div class="form-group col-12 col-xs-6 col-md-3">
+                          <label for="exampleInputEmail1">Fecha Nacimiento</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="date" class="form-control" id="dtpFechaNacimiento" placeholder="Ingresa la fecha de nacimiento" name="fechaNacimiento" onblur="casillaFechaNac();">
+                          </div>                      
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="form-group col-12 col-xs-6 col-md-3">
                         <label for="exampleInputPassword1">Primer Nombre</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text d-none d-sm-block"><i class="fas fa-address-card"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="txtNombre" placeholder="Primer nombre" name="nombre" onblur="casillaNombre();">
+                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre del Cliente" name="nombre" onblur="casillaNombre();">
                           </div>
                       </div>
 
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-xs-6 col-md-3">
                         <label for="exampleInputPassword1">Segundo Nombre</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text d-none d-sm-block"><i class="fas fa-address-card"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="txtNombre" placeholder="segundo nombre" name="nombre" onblur="casillaNombre();">
+                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre del Cliente" name="nombre" onblur="casillaNombre();">
                           </div>
                       </div>
-                  </div>
 
-                  <div class="row">
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-xs-6 col-md-3">
                         <label for="exampleInputPassword1">Primer Apellido</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
@@ -85,16 +119,19 @@
                         </div>        
                       </div>
 
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-xs-6 col-md-3">
                         <label for="exampleInputPassword1">Segundo Apellido</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text d-none d-sm-block"><i class="fas fa-address-card"></i></span>
                             </div>
                             <input type="text" class="form-control" id="txtSegundoApellido" placeholder="Segundo apellido / apellido Materno" name="segundoApellido" onblur="casillaApellido2();">
-                          </div>  
-                        
+                          </div>           
                       </div>
+                  </div>
+
+                  <div class="row">
+                   
                   </div>
                  
                   <div class="row">
@@ -179,16 +216,14 @@
                 </div>
                 <!-- /.card-body -->
 
-                <div class="card-footer">
-                  <button type="button" id="btnAgregarCliente" class="btn btn-success col-6 col-sm-5 col-md-3 float-right">Agregar</button>
+                <div class="card-footer text-right">
+                  <button type="button" id="btnAgregarCliente" class="btn btn-green m-auto col-12 col-md-6 col-xl-3">Agregar</button>
                 </div>
               </form>
             </div>
             <!-- /.card -->
             </div>
             </div>
-      </div><!-- /.container-fluid -->
-    </section>
     <!-- /.content -->
     
   @endsection

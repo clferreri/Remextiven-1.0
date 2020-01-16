@@ -1,11 +1,11 @@
-@extends('AdminDashboard/layouts/layout')
+@extends('AdminPanel/layouts/layout')
 
 @section('contenidoHeader')
     
 @endsection
 
 
-@section('menu-config')
+@section('menu-tasaYmargen')
   active
 @endsection
 
@@ -31,8 +31,6 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
             <div class="card card-primary">
@@ -257,7 +255,7 @@
             </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-3">
               <div class="col-md-12">
                 <div class="card card-primary">
                   <div class="card-header">
@@ -298,9 +296,6 @@
                 <!-- /.card -->
                 </div>
                 </div>
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
     
   @endsection
 
