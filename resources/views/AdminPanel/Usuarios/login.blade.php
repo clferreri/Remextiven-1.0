@@ -40,12 +40,9 @@
 				<!-- begin login-header -->
 				<div class="login-header">
 					<div class="brand">
-						<img style="margin-left: -6px;" class="col-10 col-xs-9 p-0" src="{{ asset('img/LogoFondoTransparente.png')}}" alt="">
+						<img class="col-12 p-0 mb-5" src="{{ asset('img/LogoFondoTransparente.png')}}" alt="">
 						<small>Bienvenido, inicia sesión</small>
-					</div>
-					<div class="icon">
-						<i class="fa fa-sign-in-alt"></i>
-					</div>
+					</div>			
 				</div>
 				<!-- end login-header -->
 				<!-- begin login-content -->
@@ -64,7 +61,8 @@
 							</label>
 						</div>
 						<div class="login-buttons text-center">
-                            <button type="submit" class="btn btn-success btn-block btn-lg mb-2">Iniciar</button>
+                            <button type="submit" class="btn btn-success btn-block btn-lg mb-2">Iniciar <i class="fa fa-sign-in-alt ml-2 fa-lg"></i>
+							</button>
                             <a href="#">Olvidé mi contraseña</a>
 						</div>
 						<div class="m-t-20 m-b-40 p-b-40 text-inverse text-center">

@@ -114,7 +114,7 @@ Route::get('DashboardTransfer','UserDashboard\UserDashboardController@index')->n
 
 
 //-- INICIO --//
-Route::view('/admin', 'AdminDashboard\Dashboard')->name('inicioAdminPanel');
+Route::get('/admin', 'AdminDashboard\AdminPanelController@index')->name('inicioAdminPanel');
 //------------//
 
 

@@ -48,37 +48,39 @@
                 <div class="card-body">
 
                   <div class="row">
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                        <label for="exampleInputEmail1">Email (Usuario)</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="txtEmailUsu">Email (Usuario)</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text d-none d-sm-block"><i class="fas fa-envelope"></i></span>
                           </div>
-                          <input required type="email" class="form-control" id="txtEmail" placeholder="Ingresa un correo" name="email" onblur="casillaCorreo();">
+                          <input required type="email" class="form-control" id="txtEmailUsuario" placeholder="Ingresa un correo" name="email" onblur="casillaCorreo();">
                         </div>
                       </div>
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                        <label for="exampleInputEmail1">Email Personal</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="txtEmailPersonal">Email Personal</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text d-none d-sm-block"><i class="fas fa-envelope"></i></span>
                           </div>
-                          <input required type="email" class="form-control" id="txtEmail" placeholder="Ingresa un correo" name="email" onblur="casillaCorreo();">
+                          <input required type="email" class="form-control" id="txtEmailPersonal" placeholder="Ingresa un correo" name="email" onblur="casillaCorreo();">
                         </div>
                       </div>
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                        <label for="exampleInputEmail1">Rol</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="cmbRol">Rol</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            <span class="input-group-text"><i class="fas fa-user-shield"></i></span>
                           </div>
-                          <select name="" id="" class="form-control">
-
+                          <select id="cmbRol" class="form-control">
+                            @foreach ($roles as $rol)
+                              <option value="{{ $Rol->IdRol }}">{{$rol->Rol}}</option>
+                            @endforeach
                           </select>
                         </div>                      
                     </div>
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                          <label for="exampleInputEmail1">Fecha Nacimiento</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                          <label for="dtpFechaNacimiento">Fecha Nacimiento</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
@@ -89,28 +91,28 @@
                   </div>
 
                   <div class="row">
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                        <label for="exampleInputPassword1">Primer Nombre</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="txtPrimerNombre">Primer Nombre</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text d-none d-sm-block"><i class="fas fa-address-card"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre del Cliente" name="nombre" onblur="casillaNombre();">
+                            <input type="text" class="form-control" id="txtPrimerNombre" placeholder="Nombre del Cliente" name="nombre" onblur="casillaNombre();">
                           </div>
                       </div>
 
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                        <label for="exampleInputPassword1">Segundo Nombre</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="txtSegundoNombre">Segundo Nombre</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text d-none d-sm-block"><i class="fas fa-address-card"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre del Cliente" name="nombre" onblur="casillaNombre();">
+                            <input type="text" class="form-control" id="txtSegundoNombre" placeholder="Nombre del Cliente" name="nombre" onblur="casillaNombre();">
                           </div>
                       </div>
 
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                        <label for="exampleInputPassword1">Primer Apellido</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="txtPrimerApellido">Primer Apellido</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text d-none d-sm-block"><i class="fas fa-address-card"></i></span>
@@ -119,8 +121,8 @@
                         </div>        
                       </div>
 
-                      <div class="form-group col-12 col-xs-6 col-md-3">
-                        <label for="exampleInputPassword1">Segundo Apellido</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="txtSegundoApellido">Segundo Apellido</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                               <span class="input-group-text d-none d-sm-block"><i class="fas fa-address-card"></i></span>
@@ -135,8 +137,8 @@
                   </div>
                  
                   <div class="row">
-                      <div class="form-group col-12 col-md-6">
-                          <label for="exampleInputPassword1">Documento</label>
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                          <label for="txtDocumento">Documento</label>
                           <div class="input-group">
                             <input type="text" class="form-control col-8" id="txtDocumento" placeholder="Cedula / Pasaporte" onblur="casillaDocumento();">
                             <select class="form-control col-4" id="cmbTipoDocumento">
@@ -145,7 +147,7 @@
                             </select>
                           </div>                  
                       </div>
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-md-6 col-xl-3">
                         <label for="exampleInputPassword1">Pais Emision de Documento</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
@@ -159,10 +161,24 @@
                           </select>
                         </div>
                       </div>
+
+                      <div class="form-group col-12 col-md-6">
+                        <label for="exampleInputPassword1">Cargo</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user-tie fa-lg"></i></span>
+                          </div>
+                          <select class="form-control" id="cmbPaisEmisionDocumento" onchange="quitarInvalido('cmbPaisEmisionDocumento');">
+                            @foreach ($cargos as $cargo)
+                                <option value="{{ $cargo->IdCargo }}">{{$cargo->NombreCargo}}</option>
+                              @endforeach
+                          </select>
+                        </div>
+                      </div>
                   </div>
 
                   <div class="row">
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-md-6 col-xl-3">
                           <label for="exampleInputPassword1">Pais</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -176,7 +192,7 @@
                             </select>
                           </div>
                       </div>
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-md-6 col-xl-3">
                         <label for="exampleInputPassword1">Ciudad</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -186,6 +202,10 @@
                               <option value="1"  selected>Seleccione una Ciudad...</option>
                             </select>
                           </div>
+                      </div>
+                      
+                      <div class="form-group col-12 col-md-6">
+                        <label for="">Sexo</label>
                       </div>
                   </div>
 
@@ -201,7 +221,17 @@
                           </div>
                       </div>
 
-                      <div class="form-group col-12 col-md-6">
+                      <div class="form-group col-12 col-md-6 col-xl-3">
+                        <label for="exampleInputPassword1">Telefono</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                          </div>
+                          <input type="text" class="form-control" id="txtTelefono" placeholder="Ingresa un telefono de contacto" onblur="quitarInvalidoCasillaNumerica('txtTelefono');">
+                        </div>
+                      </div>
+
+                      <div class="form-group col-12 col-md-6 col-xl-3">
                         <label for="exampleInputPassword1">Telefono</label>
                         <div class="input-group">
                           <div class="input-group-prepend">

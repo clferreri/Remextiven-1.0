@@ -101,6 +101,13 @@
                 </a>
             </li>
 
+            <li class="has-sub @yield('menu-tasaYmargen')">
+                <a href="{{route('configTasas')}}">
+                    <i class="fas fa-bug"></i>
+                    <span>Bugs</span>
+                </a>
+            </li>
+
 
             <li class="nav-header">Personal</li>
 

@@ -29,9 +29,10 @@ class CrearTablaPersonaEmpleado extends Migration
             $table->unsignedInteger('IdCiudad');
             $table->string('Direccion');
             $table->unsignedMediumInteger('NumeroPuerta');
-            $table->string('Telefono', '30');
+            $table->string('Telefono', 30)->nullable();
+            $table->string('Telefono2', 30)->nullable();
             $table->unsignedTinyInteger('IdCargo');
-            $table->string('CorreoEmpresarial', 30)->nullable(); 
+            $table->string('CorreoEmpresarial', 30);
             $table->string('CorreoPersonal', 30)->nullable(); 
             $table->timestamps();
 

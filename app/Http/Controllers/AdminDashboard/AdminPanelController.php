@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\DB;
 class AdminPanelController extends Controller
 {
 
+    protected function index(){
+        return view('AdminPanel.index');
+    }
+
     protected function AgregarTransferencia(){
         $usuariosPersonas = User::where('Activo', 1)->where('TipoUsuario', "1")->with('DatosPersona')->get();
         //$usuariosEmpresas = User::where('Activo', 1)->where('TipoUsuario', "2")->with('DatosEmpresa')->get();
@@ -66,7 +70,7 @@ class AdminPanelController extends Controller
         $cargos = Position::where('Activo', 1)->where('SoloAdmin', 0);
         $paises = Pais::where('Activo', 1)->get();
 
-        return view('AdminPanel.EquipoRemextiven.generar', compact('roles', 'cargos', 'paises'));
+        return view('AdminPanel.EquipoRemextiven.generarUsuario', compact('roles', 'cargos', 'paises'));
     }
 
 
