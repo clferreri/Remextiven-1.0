@@ -589,15 +589,14 @@
     </div>
     </div>
     <div class="col-12 text-center pt-5">
-      <h1>Transferencia En proceso...</h1>
+      <h1 id="lblTituloProcesoTransferencia">Transferencia En proceso...</h1>
       <br/>
-
         <a href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
           <span class="d-flex align-items-center text-left">
             <i class="fab fa-whatsapp fa-3x mr-3"></i>
             <span>
-              <span class="d-block mb-n1"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
-              <span class="f-s-12 f-w-600 text-white-transparent-7"></span>
+              <span id="lblTituloWhatsapp" class="d-block mb-n1"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+              <span id="lblTextoWhatsapp" class="f-s-12 f-w-600 text-white-transparent-7"></span>
             </span>
           </span>
         </a>
@@ -606,8 +605,8 @@
           <span class="d-flex align-items-center text-left">
             <i class="fas fa-download fa-3x mr-3"></i>
             <span>
-              <span class="d-block mb-n1"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
-              <span class="f-s-12 f-w-600 text-white-transparent-7"></span>
+              <span id="lblTituloDescargar" class="d-block mb-n1"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+              <span id="lblTextoDescarga" class="f-s-12 f-w-600 text-white-transparent-7"></span>
             </span>
           </span>
         </a>
@@ -649,7 +648,6 @@
         @endforeach
 
         sessionStorage.setItem('Clientes', JSON.stringify(datos));
-       
 
         @if (is_null($tasa))
           alertaCajaHTML(

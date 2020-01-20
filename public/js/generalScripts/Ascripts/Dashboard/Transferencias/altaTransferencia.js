@@ -140,6 +140,13 @@ function altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPag
         dataType: "json",
         async:true,
         success: function (response) {
+            $("#lblTituloProcesoTransferencia").html('¡Transferencia Completada!');
+            var link ="https://api.whatsapp.com/send?phone=" + response.numero + "&text=hola,%20necesito%20ayuda%20con%20mi%20enlace%20"
+            $("#linkWhatssap").attr("href", "https://api.whatsapp.com/send?phone=TUNUMEROAQUI&text=Hola,%20se a generado la transferencia N°" + response.transferencia +". Puedes%20ayuda%20con%20mi%20enlace%20")
+            $("#lblTituloWhatsapp").html('Compartir por Whatssap');
+            $("#lblTituloDescargar").html('Descargar Transferencia');
+            $("#lblTextoWhatsapp").html('A ' + response.nombre);
+            $("#lblTextoDescarga").html('Transferencia N° ' + response.transferencia);
             alert(response.nombre + " " + response.parametro + " " + response.numero);
             alertaToast(tipoAlertaOK, response.respuesta, 3500);
         },

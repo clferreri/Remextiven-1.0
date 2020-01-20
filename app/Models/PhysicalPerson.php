@@ -40,8 +40,16 @@ class PhysicalPerson extends Model
 
 
 
-    public function DatosPersonales(){
-            return $this->hasOne('App\User', 'IdUsuarioR', 'IdUsuario');
+    public function Usuario(){
+        return $this->hasOne('App\User', 'IdUsuarioR', 'IdUsuario');
+    }
+
+    public function Pais(){
+        return $this->hasOne('App\Models\Pais', 'IdPais', 'IdPais');
+    }
+
+    public function Ciudad(){
+        return $this->hasOne('App\Models\Ciudad', 'IdCiudad', 'IdCiudad');
     }
 }
 

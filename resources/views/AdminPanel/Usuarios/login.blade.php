@@ -10,7 +10,7 @@
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="{{ asset("assets/$temaDashboardRemextiven/css/default/app.min.css")}}" rel="stylesheet" />
-    <link href="{{ asset("assets/$temaDashboardRemextiven/css/default/theme/green.min.css")}}" rel="stylesheet" />
+	<link href="{{ asset("assets/$temaDashboardRemextiven/css/default/theme/green.min.css")}}" rel="stylesheet" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body class="pace-top">
@@ -31,27 +31,8 @@
 			</div>
 			<!-- end news-feed -->
 			<!-- begin right-content -->
-			<div class="right-content">
-				@if ($errors->any())
-					<div class="alert alert-danger col-12 col-sm-11 m-auto textoCentrado">
-						<div class="row">
-							<div class="col-2" style="display: flex; align-items: center;">
-								<img src="img/icons/triangle.png" class="m-auto img-fluid"/>
-							</div>
-							<div class="col-10" style="text-align: left;">
-								{!! $errors->first() !!}
-							</div>
-						</div>
-							
-					</div>
-					<script>
-						window.setTimeout(function() {
-							$(".alert").fadeTo(500, 0).slideUp(500, function(){
-								$(this).remove(); 
-							});
-						}, 8000);
-					</script>                 
-				@endif
+			<div id="cajita" class="right-content">
+			
 				<!-- begin login-header -->
 				<div class="login-header">
 					<div class="brand">
@@ -70,6 +51,19 @@
 						<div class="form-group m-b-15">
 							<input data-toggle="password" name="password" data-placement="after" class="form-control form-control-lg" type="password" value="" placeholder="Contraseña" required />
 						</div>
+						@if ($errors->any())
+							<div id="errorLogin" class="text-red mb-1">						
+									{!! $errors->first() !!}							
+							</div>
+							
+							<script>
+								window.setTimeout(function() {
+									$("#errorLogin").fadeTo(500, 0).slideUp(500, function(){
+										$(this).remove(); 
+									});
+								}, 8000);
+							</script>  
+						@endif
 						<div class="checkbox checkbox-css m-b-30">
 							<input type="checkbox" id="remember_me_checkbox" value="" />
 							<label for="remember_me_checkbox">
@@ -112,5 +106,7 @@
 	<script src="{{ asset("assets/$temaDashboardRemextiven/js/theme/default.min.js")}}"></script>
 	<script src="{{ asset("assets/$temaDashboardRemextiven/plugins/bootstrap-show-password/dist/bootstrap-show-password.js") }}"></script>
 	<!-- ================== END BASE JS ================== -->
+	
+
 </body>
 </html>

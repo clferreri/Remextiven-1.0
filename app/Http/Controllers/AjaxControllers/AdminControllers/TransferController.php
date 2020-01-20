@@ -33,16 +33,16 @@ class TransferController extends Controller
             $telefono ="";
             if ($usuario->TipoUsuario == 1){
                 $nombre = $usuario->DatosPersona->PrimerNombre . ' ' . $usuario->DatosPersona->PrimerApellido;
-                $telefono = $usuario->DatosPersona->Telefono;
+                $telefono = $usuario->DatosPersona->Pais->Prefijo . $usuario->DatosPersona->Telefono;
             }
             else{
                 $nombre = $usuario->DatosEmpresa->NombreFantasia;
-                $telefono = $usuario->DatosEmpresa->Telefono;
+                $telefono = $usuario->DatosEmpresa->Pais->Prefio . $usuario->DatosEmpresa->Telefono;
             }
             TransferenciaPDF::enviarPorMail($usuario->Email, $nombre, $transferencia->IdSolicitudTransferencia);
             $link = $this->GenerarLink($transferencia->IdSolicitudTransferencia);  
 
-            return response()->json(['respuesta' => 'Transferencia generada correctamente', 'nombre' => $nombre, 'parametro' => $link->Parametro, 'numero' => $telefono], 200);
+            return response()->json(['respuesta' => 'Transferencia generada correctamente', 'nombre' => $nombre, 'parametro' => $link->Parametro, 'numero' => $telefono, 'transferencia' => $transferencia->IdSolicitudTransferencia], 200);
         }
         return response()->json(['respuesta' => 'Error al generar la transferencia.'], 500);
     }

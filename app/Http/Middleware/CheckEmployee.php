@@ -16,6 +16,7 @@ class CheckEmployee
      */
     public function handle($request, Closure $next)
     {
+        
         $usuario = Auth::user();
         if($usuario != null){
             if($usuario->Rol->SoloEmpleado == 1){

@@ -748,6 +748,7 @@ INSERT INTO TiposUsuario (Tipo, Activo) VALUES
 ('Empleado Remextiven', 3);
 
 INSERT INTO Cargos (Sigla ,NombreCargo, Activo, SoloAdmin) VALUES
+('SIS', 'Sistema Informatico', 0, 1)
 ('CEO', 'Director Ejecutivo', 0, 1),
 ('CFO', 'Director de Finanzas', 0, 1),
 ('CTO', 'Director de Tecnología', 0, 1),

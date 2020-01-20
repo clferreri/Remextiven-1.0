@@ -204,7 +204,7 @@ function casillaFechaNac(){
 
 
 function casillaNombre(){
-    var nombre = $("#txtNombre").val();
+    var nombre = $("#txtPrimerNombre").val();
     if (nombre != '' && nombre != ' ' && nombre.length >= 4){
         $("#txtNombre").removeClass('is-invalid');
     }
