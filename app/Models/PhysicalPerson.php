@@ -35,7 +35,7 @@ class PhysicalPerson extends Model
      * @var array
      */
     protected $fillable = [
-        'IdUsuario', 'Nombre', 'PrimerApellido', 'SegundoApellido','Documento', 'TipoDocumento', 'FechaNacimiento','Sexo', 'IdPaisDocumento', 'IdPais', 'IdCiudad', 'Direccion', 'NumeroPuerta', 'Telefono'
+        'IdUsuario', 'PrimerNombre', 'PrimerApellido', 'SegundoApellido','Documento', 'TipoDocumento', 'FechaNacimiento','Sexo', 'IdPaisDocumento', 'IdPais', 'IdCiudad', 'Direccion', 'NumeroPuerta', 'Telefono'
     ];
 
 

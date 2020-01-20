@@ -11,7 +11,7 @@ $(document).ready(function(){
         $("#txtNombreCliente").html(usuario[opcionSeleccionada]['Nombre']);
         $("#txtDNICliente").html(usuario[opcionSeleccionada]['Dni']);
         $("#txtCorreoCliente").html(usuario[opcionSeleccionada]['Email']);
-        $("#imgAvatar").attr('src', 'https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-creador-de-avatar-masculino.jpg');
+        $("#imgAvatar").attr('src', '../' + usuario[opcionSeleccionada]['Avatar']);
 
         //coloco en el ticket el cliente
         ClienteTicket(usuario[opcionSeleccionada]['Nombre'], usuario[opcionSeleccionada]['Dni']);
@@ -125,6 +125,7 @@ function CalcularMontoRecibir(){
   }
 
 function altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPago){
+    $("#tituF").removeClass('d-none');
     $.ajax({
         url:'../api/createTransfer',
         data:{'idUsuario': cliente, 
@@ -139,8 +140,8 @@ function altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPag
         dataType: "json",
         async:true,
         success: function (response) {
-            alert('ok');
-            
+            alert(response.nombre + " " + response.parametro + " " + response.numero);
+            alertaToast(tipoAlertaOK, response.respuesta, 3500);
         },
         statusCode: {
             404: function() {

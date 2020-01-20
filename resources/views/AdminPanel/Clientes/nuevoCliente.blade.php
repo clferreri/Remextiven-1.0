@@ -125,7 +125,7 @@
                           <select class="form-control" id="cmbPaisEmisionDocumento" onchange="quitarInvalido('cmbPaisEmisionDocumento');">
                             <option value="0" disabled selected>Seleccione un Pais...</option>
                             @foreach ($paises as $pais)
-                                <option value="{{ $pais->IdPais }}" style="background-image:url({{$pais->ImagenBandera}});">{{$pais->Pais }}</option>
+                                <option value="{{ $pais->IdPais }}" style="background-image:url({{asset("$pais->ImagenBandera")}});">{{$pais->Pais }}</option>
                               @endforeach
                           </select>
                         </div>
@@ -142,7 +142,7 @@
                             <select class="form-control" id="cmbPaisResidente" onchange="quitarInvalido('cmbPaisResidente');">
                               <option value="0" disabled selected>Seleccione un Pais...</option>
                               @foreach ($paises as $pais)
-                                <option value="{{ $pais->IdPais }}" style="background-image:url({{$pais->ImagenBandera}});">{{$pais->Pais }}</option>
+                                <option value="{{ $pais->IdPais }}" style="background-image:url({{asset("$pais->ImagenBandera")}});">{{$pais->Pais }}</option>
                               @endforeach
                             </select>
                           </div>

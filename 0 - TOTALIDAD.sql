@@ -821,3 +821,6 @@ INSERT INTO Monedas (Moneda, CodigoValor, CodigoTexto, Activo) VALUES
 ('Pesos', '$', 'UYU', 1),
 ('Dolar', 'U$S', 'USD', 1),
 ('Bolívar', 'Bs', 'VES', 1);
+
+
+

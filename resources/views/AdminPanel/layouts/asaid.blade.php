@@ -1,3 +1,4 @@
+
 <div id="sidebar" class="sidebar">
     <!-- begin sidebar scrollbar -->
     <div data-scrollbar="true" data-height="100%">
@@ -7,27 +8,33 @@
                 <a href="javascript:;" data-toggle="nav-profile">
                     <div class="cover with-shadow"></div>
                     <div class="image">
-                        <img src="{{asset('img/images/avatar/av-clferreri941P.jpg')}}" alt="" />
+                        <img src="{{asset(auth()->user()->RutaImagen)}}" alt="" />
                     </div>
                     <div class="info">
-                        <b class="caret pull-right"></b>Cristian Ferreri
-                        <small>Director de Tecnologia</small>
+                        <b class="caret pull-right"></b>
+                        {{auth()->user()->getNombreCompleto()}}
+                        <small>{{auth()->user()->DatosEmpleado->Cargo->NombreCargo}}</small>
                     </div>
                 </a>
             </li>
             <li>
-                <ul class="nav nav-profile">
-                    <li><a href="javascript:;"><i class="fa fa-cog"></i> Configuración</a></li>
-                    <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Editar Perfil</a></li>
-                    <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Ayuda</a></li>
-                </ul>
+                <form action="{{route('logoutUser')}}" method="POST">
+                    @csrf
+                    <ul class="nav nav-profile">            
+                        <li><a href="javascript:;"><i class="fa fa-cog"></i> Configuración</a></li>
+                        <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Editar Perfil</a></li>
+                        <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Ayuda</a></li>
+                        
+                        <li><a onclick="$(this).closest('form').submit();" href="javascript:;"><i class="fa fa-pencil-alt"></i> Cerrar Sesion</a></li>                       
+                    </ul>
+                </form>
             </li>
         </ul>
         <!-- end sidebar user -->
         <!-- begin sidebar nav -->
         <ul class="nav"><li class="nav-header">Panel de Administración</li>
             <li class="@yield('menu-dashboard')">
-                <a href="javascript:;">
+                <a href="{{route('inicioAdminPanel')}}">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -40,7 +47,7 @@
                     <span>Transferencia</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="ui_general.html">Generar Transferencia</a></li>
+                    <li class="@yield('link-transferencias-generar')"><a href="{{ route('nuevaTransferencia')}}">Generar Transferencia</a></li>
                     <li><a href="ui_typography.html">En proceso</a></li>
                 </ul>
             </li>
@@ -53,7 +60,8 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="@yield('link-clientes-generar')"><a href="{{route('nuevoCliente')}}">Nuevo Cliente</a></li>
-                    <li class="@yield('link-verificarCliente')"><a href="ui_typography.html">Verificar Cliente</a></li>
+                    <li class="@yield('link-clientes-verificar')"><a href="{{route('verificarCliente')}}">Verificar Cliente</a></li>
+                    <li class="@yield('link-clientes-listado')"><a href="{{route('verificarCliente')}}">Listado Clientes</a></li>
                 </ul>
             </li>
 

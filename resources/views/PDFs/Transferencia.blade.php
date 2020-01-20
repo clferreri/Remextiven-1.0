@@ -223,8 +223,23 @@
         <td class="costo">{{$cotizacionTransferencia->Moneda->CodigoValor . ' ' . $cotizacionTransferencia->MontoEnviar}}</td>
     </tr>
     <tr>
-        <td>Transferencia mediante abitab</td>
-        <td class="costo">$ 69</td>
+        <td>{{$transferencia->MedioPago->Descripcion}}</td>
+        <td class="costo">
+            @if ($transferencia->MedioPago->IdMedioPago == 3)
+                @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
+                    {{$transferencia->MedioPago->Costo + ($cotizacionTransferencia->MontoEnviar * 0.005)}}
+                @else
+                    {{$transferencia->MedioPago->Costo / 38}}
+                @endif  
+            @else
+                @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
+                    {{$transferencia->MedioPago->Costo}}
+                @else
+                    {{$transferencia->MedioPago->Costo / 38}}
+                @endif  
+            @endif
+            
+        </td>
     </tr>
     <tr>
         <td></td>
@@ -232,7 +247,22 @@
     </tr>
     <tr>
         <td class="negrita" style="text-align:right; border: none !important;">Total</td>
-        <td class="costo">{{$cotizacionTransferencia->MontoEnviar}}</td>
+        <td class="costo">
+            @if ($transferencia->MedioPago->IdMedioPago == 3)
+            @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
+                {{$transferencia->MedioPago->Costo + ($cotizacionTransferencia->MontoEnviar * 0.005) + $cotizacionTransferencia->MontoEnviar}}
+            @else
+                {{($transferencia->MedioPago->Costo / 38) + $cotizacionTransferencia->MontoEnviar}}
+            @endif  
+        @else
+            @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
+                {{$transferencia->MedioPago->Costo + $cotizacionTransferencia->MontoEnviar}}
+            @else
+                {{($transferencia->MedioPago->Costo / 38) + $cotizacionTransferencia->MontoEnviar}}
+            @endif  
+        @endif
+
+        </td>
     </tr>
 </table>
 

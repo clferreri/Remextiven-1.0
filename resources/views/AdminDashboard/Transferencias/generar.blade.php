@@ -2,8 +2,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset("css/Utilidades/wizards.css")}}">
-<link rel="stylesheet" href="{{ asset("assets/$temaDashboard/plugins/select2/css/select2.min.css")}}">
-<link rel="stylesheet" href="{{ asset("assets/$temaDashboard/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
+<link href="{{ asset("assets/$temaDashboardRemextiven/plugins/select2/dist/css/select2.min.css") }}" rel="stylesheet" />
 @endsection
 
 @section('contenidoHeader')

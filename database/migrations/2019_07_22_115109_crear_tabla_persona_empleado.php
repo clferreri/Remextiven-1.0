@@ -32,7 +32,6 @@ class CrearTablaPersonaEmpleado extends Migration
             $table->string('Telefono', 30)->nullable();
             $table->string('Telefono2', 30)->nullable();
             $table->unsignedTinyInteger('IdCargo');
-            $table->string('CorreoEmpresarial', 30);
             $table->string('CorreoPersonal', 30)->nullable(); 
             $table->timestamps();
 

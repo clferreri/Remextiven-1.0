@@ -33,6 +33,7 @@ class CrearTablaSolicitudesTransferencias extends Migration
             $table->foreign('IdUsuarioResponde', 'FK_SolicitudTransferencia_UsuarioResponde')->references('IdUsuarioR')->on('UsuariosR')->onDelete('restrict');
             $table->foreign('IdCuentaBancaria', 'FK_SolicitudTransferencia_CuentaBancaria')->references('IdCuentaBancaria')->on('CuentasBancariasUsuariosR')->onDelete('restrict');
             $table->foreign('IdCuentaBeneficiaria', 'FK_SolicitudTransferencia_CuentaBeneficiaria')->references('IdCuenta')->on('CuentasBeneficiarios')->onDelete('restrict');
+            $table->foreign('IdMedioPago', 'FK_SolicitudTransferencia_MedioPago')->references('IdMedioPago')->on('MediosDePago')->onDelete('restrict');
         });
     }
 

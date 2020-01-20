@@ -53,7 +53,7 @@ function crearCliente(){
     var numeroPuerta = $("#txtNumeroPuerta").val();
     var tel = $("#txtTelefono").val();
 
-    if (validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2, documento, paisEmisor, paisResidente, ciudadResidente,direccion, numeroPuerta, tel)){
+    if (validarDatosCliente(email, fechaNacimiento, nombre, apellido, documento, paisEmisor, paisResidente, ciudadResidente,direccion, numeroPuerta, tel)){
         $("#mantaLoading").modal('show');
         $.ajax({
             url:'../api/createClient',
@@ -75,9 +75,10 @@ function crearCliente(){
             },
             error:function(x,xs,xt){
                 $("#mantaLoading").modal('hide');
-                alert(JSON.stringify(x));
-                alert(xs);
-                alert(xt);
+                var errores = x.responseJSON.errors;
+                $.each( errores, function( key, value ) {
+                    alertaToast(tipoAlertaError, value[0],3500);
+               });
             }
         });
     }
@@ -93,7 +94,7 @@ function crearCliente(){
 
 }
 
-function validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2, documento, paisEmisor, paisResidente, ciudadResidente, dir, numPuerta, tel){
+function validarDatosCliente(email, fechaNacimiento, nombre, apellido, documento, paisEmisor, paisResidente, ciudadResidente, dir, numPuerta, tel){
     
     var validacionCorrecta = true
 
@@ -121,14 +122,8 @@ function validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2
         validacionCorrecta = false
     }
 
-    //Valido el segundo apellido
-    if (apellido2 == '' || apellido2 == ' ' || apellido2.length < 4){
-        $("#txtSegundoApellido").addClass('is-invalid');
-        validacionCorrecta = false
-    }
-
     //Valido el documento
-    if (isNaN(documento) || documento.length < 7){
+    if (isNaN(documento) || documento.length < 6){
         $("#txtDocumento").addClass('is-invalid');
         validacionCorrecta = false
     }

@@ -16,7 +16,7 @@ class CrearTablaPersonasFisicas extends Migration
         Schema::create('PersonasFR', function (Blueprint $table) {
             $table->increments('IdPersonaF');
             $table->unsignedInteger('IdUsuario');
-            $table->string('Nombre', 20);
+            $table->string('PrimerNombre', 20);
             $table->string('PrimerApellido', 25);
             $table->string('SegundoApellido', 25)->nullable(); 
             $table->string('Documento', 20);

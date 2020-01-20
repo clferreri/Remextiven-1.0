@@ -48,8 +48,7 @@ class ClienteController extends Controller
             'fechaNacimiento' => ['required'],
             'nombre' => ['required'],
             'apellido' => ['required'], 
-            'segundoApellido' => ['required'],
-            'documento' => ['required','numeric','unique:personasfr,Documento'], 
+            'documento' => ['required','numeric','unique:personasfr,Documento', 'unique:personaer,Documento'], 
             'paisDocumento' => ['required','numeric'], 
             'pais' => ['required','numeric'], 
             'ciudad' => ['required','numeric'], 
@@ -73,16 +72,17 @@ class ClienteController extends Controller
             'NewsLetters' => 1,
             'TokenReferido' => substr($datos['email'],0,4) . str::random(6),
             'RutaImagen' => 'img/images/avatar.png',
-            'EsReferido ' => 0
+            'EsReferido ' => 0,
+            'RequiereCambioPass' => 1
         ]);
         }
 
     private function crearPersonaFisicaCliente($data, $idUsuario){
         return PhysicalPerson::create([
             'IdUsuario' => $idUsuario,
-            'Nombre' => $data['nombre'],
+            'PrimerNombre' => $data['nombre'],
             'PrimerApellido' => $data['apellido'],
-            'SegundoApellido' => $data['segundoApellido'],
+            'SegundoApellido' => ($data['segundoApellido'] != '') ? $data['segundoApellido'] : null,
             'Documento' => $data['documento'],
             'TipoDocumento' => $data['tipoDocumento'],
             'FechaNacimiento' => $data['fechaNacimiento'],

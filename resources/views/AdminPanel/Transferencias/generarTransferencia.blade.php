@@ -1,4 +1,4 @@
-@extends('AdminDashboard/layouts/layout')
+@extends('AdminPanel/layouts/layout')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset("css/Utilidades/wizards.css")}}">
@@ -12,10 +12,6 @@
 
 
 @section('menu-transferencias')
-  menu-open
-@endsection
-
-@section('link-transferencias')
   active
 @endsection
 
@@ -102,8 +98,8 @@
   </div><!--Fin Modal Agregar Cuenta Bancaria-->
 
   <div class="row">
-    <div id="wizard" class="wizard col-12 col-md-10">
-    <div class="wizard__content">
+    <div id="wizard" class="wizard col-12 col-md-11">
+    <div class="wizard__content d-none">
       <header class="wizard__header d-none d-md-block">
         <div class="wizard__header-overlay"></div>
         
@@ -222,20 +218,21 @@
                         <label for="cmbUsuarios">Cliente:</label>
                     <div class="row">                        
                         <div class="form-group col-12 col-md-7">
-                                <select id="cmbClientes" class="form-control select2bs4" style="width: 100%;">
+                                <select id="cmbClientes" class="default-select2 form-control select2-hidden-accessible" style="width: 100%;">
                                     <option value="0" disabled selected="selected">Seleccione un usuario...</option>
                                     @foreach ($usuariosPersonas as $usuario)
                                       <option value="{{$usuario->IdUsuarioR}}">{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido . ' - ' . $usuario->DatosPersona->Documento }}</option>
                                     @endforeach
                                 </select>              
                         </div>
+                       
                       <button class="btn btn-success col-12 col-sm-8 col-md-4 col-xl-3 h-75 w-100" onclick="location.href='{{route('nuevoCliente')}}';">+ Crear usuario</button>                  
                   </div>
                   <br/>
                   <br/>
                   <label>Datos del Cliente:</label>
                   <div class="row mt-1">                        
-                      <div class="col-12 col-sm-4 text-center mb-2"><img id="imgAvatar" class="img-circle" width="120px" src="{{ asset("img/images/avatar.png")}}" alt=""></span></div>
+                      <div class="col-12 col-sm-4 text-center mb-2"><img id="imgAvatar" class="img-circle border" width="120px" src="{{ asset("img/images/avatar.png")}}" alt=""></span></div>
                       <div class="col-12 col-sm-8">
                           <div class="row">
                               <label class="col-3 col-sm-4">Nombre:</label>
@@ -247,7 +244,7 @@
                           </div> 
                           <div class="row">
                               <label class="col-3 col-sm-4">Correo:</label>
-                              <p id=" " class="col-9 col-sm-8">Correo del cliente</p>    
+                              <p id="txtCorreoCliente" class="col-9 col-sm-8">Correo del cliente</p>    
                           </div>       
                       </div>                   
                   </div>
@@ -274,13 +271,13 @@
                 <div class="input-group input-group-lg">
                     <input id="txtMontoEnviar" type="text" class="form-control col-6 col-sm-9 m-0" onkeyup="CalcularMontoRecibir();">
           
-                    <a id="banderita" class="dropdown-toggle col-6 col-sm-3 text-center pt-2" data-toggle="dropdown" style="border: 1px solid gray;">
+                    <a id="banderita" class="dropdown-toggle col-6 col-sm-3 text-center pt-2 border" data-toggle="dropdown" style="border: 1px solid gray;">
                         <img class="d-none d-sm-inline-block" style="margin-top: -8px; margin-left:-5px;" src="{{asset("img/images/banderas/EstadosUnidos.png")}}"><span> </span><label class="pt-1"> USD</label>
                     </a>
                     
                     <ul class="dropdown-menu">
                       <li class="dropdown-item" onclick='ponerImagen("{{asset("img/images/banderas/EstadosUnidos.png")}}","USD");'><img src="{{asset("img/images/banderas/EstadosUnidos.png")}}"> USD</li>
-                      <li class="dropdown-item" onclick='ponerImagen("{{asset("img/images/banderas/Uruguay.png")}}","PES" );'><img src="{{asset("img/images/banderas/Uruguay.png")}}"> $</li>
+                      <li class="dropdown-item" onclick='ponerImagen("{{asset("img/images/banderas/Uruguay.png")}}","UYU" );'><img src="{{asset("img/images/banderas/Uruguay.png")}}"> UYU</li>
                     </ul>
               </div>
             </div>
@@ -295,7 +292,7 @@
                         <input id="txtMontoRecibir" type="text" class="form-control col-6 col-sm-4 m-0" >
                         <input id="txtMontoRecibirBanesco" readonly type="text" class="form-control col-6 col-sm-5 m-0 d-none d-sm-block" >
               
-                        <a class="col-6 col-sm-3 text-center pt-2">
+                        <a class="col-6 col-sm-3 text-center pt-2 border">
                             <img class="d-none d-sm-inline-block" style="margin-top: -8px;" src="{{asset("img/images/banderas/Venezuela.png")}}"><span> </span><label class="pt-1"> VES</label>
                         </a>
                         
@@ -331,20 +328,6 @@
                   </div>
                 @endif
               
-                <div class="row cajaPunteada text-center mt-1">
-                    
-                </div>
-                {{-- <br/>
-                <label class=" col-12 text-center">Margen</label>
-                <div class="col-12 col-md-3 m-auto text-center">
-                      @foreach ($porcentajesGanancia as $porcentaje)
-                          @if ($porcentaje->Actual)
-                          <label>{{$porcentaje->TextoGanancia}}</label>
-                          @endif                
-                      @endforeach  
-                    
-                    <!-- /input-group -->
-                  </div>            --}}
             </div>
           </div>                         
         </div>
@@ -541,7 +524,7 @@
               <div class="row">
                 <label class="col-12 text-center" style="margin-bottom: 0px;">Propósito:</label>
                 <div class="col-12 text-center">
-                  <select class="col-3 text-center form-control m-auto" name="propositoEnvio" id="cmbPropositoEnvio">
+                  <select class="col-12 col-xs-10 col-md-6 col-xl-3 text-center form-control m-auto" name="propositoEnvio" id="cmbPropositoEnvio">
                     <option value="1">Remesas</option>
                     <option value="2">Viajes</option>
                     <option value="3">Donación</option>
@@ -592,29 +575,6 @@
                       @endif
                     @endforeach
                     
-                    
-
-                    {{-- <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style="width: 18rem; justify-content:center;">
-                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/prex.png")}}" alt="">
-                      <div class="card-body">
-                        <p class="card-text">Trensferencia <br/>Prex a Prex</p>
-                      </div>
-                      <ul for="optPrex" class="list-group list-group-flush">
-                          <li class="list-group-item">Costo de 9 UYU</li>
-                          <li class="list-group-item"><input type="radio" name="optMedioPago" id="optPrex"></li>
-                        </ul>
-                    </div>
-
-                    <div class="card col-12 col-md-6 col-xl-3 text-center m-auto" style="width: 18rem; justify-content:center;">
-                        <img class="img-fluid" src="{{asset("img/images/metodosDePago/abitab.png")}}" alt="">
-                      <div class="card-body">
-                        <p class="card-text">Giro Abitab</p>
-                      </div>
-                      <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Costo de 100 UYU</li>
-                          <li class="list-group-item"><input type="radio" name="optMedioPago" id="optAbitab"></li>
-                        </ul>
-                    </div> --}}
                   </div>
 
               </div>
@@ -628,9 +588,39 @@
       <button class="button next">Siguiente</button>
     </div>
     </div>
-    
-    <h1 class="wizard__congrats-message d-none">
-      Congratulations, you are now in a world of pain and suffering!
+    <div class="col-12 text-center pt-5">
+      <h1>Transferencia En proceso...</h1>
+      <br/>
+
+        <a href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
+          <span class="d-flex align-items-center text-left">
+            <i class="fab fa-whatsapp fa-3x mr-3"></i>
+            <span>
+              <span class="d-block mb-n1"><b>Compartir por Whatssap</b></span>
+              <span class="f-s-12 f-w-600 text-white-transparent-7"><i class="fas fa-circle-notch fa-spin"></i></span>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
+          <span class="d-flex align-items-center text-left">
+            <i class="fas fa-download fa-3x mr-3"></i>
+            <span>
+              <span class="d-block mb-n1"><b>Descargar Transferencia</b></span>
+              <span class="f-s-12 f-w-600 text-white-transparent-7"><i class="fas fa-circle-notch fa-spin"></i></span>
+            </span>
+          </span>
+        </a>
+        <br/>
+        <br/>
+        <a class="btn btn-success m-r-5" href="">
+          Realizar otra transferencia
+        </a>
+
+
+    </div>
+    <h1 id="tituF" class="wizard__congrats-message d-none">
+      ¡Transferencia Completada!
     </h1>
   </div>
 </div> <!-- /.row -->
@@ -642,7 +632,7 @@
 @section('scripts')
 <script src="{{asset("js/UtilScripts/wizards.js")}}"></script>
 <!-- Select2 -->
-<script src="{{asset("assets/$temaDashboard/plugins/select2/js/select2.full.min.js")}}"></script>
+<script src="{{ asset("assets/$temaDashboardRemextiven/plugins/select2/dist/js/select2.min.js") }}"></script>
 <!-- Custom Controls -->
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/cuentaBeneficiaria.js")}}"></script>
 <script type="text/javascript" src="{{asset("js/generalScripts/Ascripts/Dashboard/Transferencias/altaTransferencia.js")}}"></script>
@@ -654,7 +644,7 @@
         var datos = new Array();
         @foreach ($usuariosPersonas as $usuario)
          
-          var nuevoDato = {'Nombre': '{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersona->Documento}}', 'Email': '{{$usuario->Email}}'};
+          var nuevoDato = {'Nombre': '{{$usuario->DatosPersona->Nombre . ' ' . $usuario->DatosPersona->PrimerApellido . ' ' . $usuario->DatosPersona->SegundoApellido}}', 'Dni': '{{$usuario->DatosPersona->Documento}}', 'Email': '{{$usuario->Email}}', 'Avatar': '{{$usuario->RutaImagen}}'};
           datos.push(nuevoDato);      
         @endforeach
 
@@ -665,7 +655,7 @@
           alertaCajaHTML(
             tipoAlertaExclamacion, 
             'Tasas en espera', 
-            'No se an ingresado las tasas del dia<br/> Al actualizar las tasas el envio tomara las ingresadas.', 
+            'No se an ingresado las tasas del dia.<br/> Al actualizar las tasas el envio tomara las ingresadas.', 
              posicion = 'center', 
              animacionEntrada = animacionEntradaEstirar, 
              animacionSalida = animacionSalidaFadeOutRapida)
@@ -681,8 +671,6 @@
     };
 
     //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
+   $('#cmbClientes').select2();
 </script>
 @endsection

@@ -4,15 +4,19 @@ namespace App\Http\Controllers\AjaxControllers\AdminControllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\ConfirmacionTransferencia;
 use App\Models\Bank;
 use App\Models\BeneficiaryAccount;
 use App\Models\PercentGain;
 use App\Models\RateConfig;
 use App\Models\Transfer;
+use App\Models\TransferLink;
 use App\Models\TransferQuotation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\TransferenciaPDF;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class TransferController extends Controller
 {
@@ -22,11 +26,25 @@ class TransferController extends Controller
         if ($this->ValidarTransferencia($datos) && $this->ValidarCotizacionTransferencia($datos)){
             $transferencia = $this->AltaTransferenciaAdmin($datos);
             $cotizacionTransferencia = $this->AltaCotizacionAdmin($transferencia, $datos);
-            $pdf = TransferenciaPDF::generarPDF($transferencia, $cotizacionTransferencia);    
-            TransferenciaPDF::enviarPorMail('clferreri94@hotmail.com', 'Cristian Pepito', $transferencia->IdSolicitudTransferencia);     
-            return response('OK', 200);
+            $pdf = TransferenciaPDF::generarPDF($transferencia, $cotizacionTransferencia);  
+            $link =
+            $usuario = $transferencia->UsuarioTransferencia;
+            $nombre ="";    
+            $telefono ="";
+            if ($usuario->TipoUsuario == 1){
+                $nombre = $usuario->DatosPersona->PrimerNombre . ' ' . $usuario->DatosPersona->PrimerApellido;
+                $telefono = $usuario->DatosPersona->Telefono;
+            }
+            else{
+                $nombre = $usuario->DatosEmpresa->NombreFantasia;
+                $telefono = $usuario->DatosEmpresa->Telefono;
+            }
+            TransferenciaPDF::enviarPorMail($usuario->Email, $nombre, $transferencia->IdSolicitudTransferencia);
+            $link = $this->GenerarLink($transferencia->IdSolicitudTransferencia);  
+
+            return response()->json(['respuesta' => 'Transferencia generada correctamente', 'nombre' => $nombre, 'parametro' => $link->Parametro, 'numero' => $telefono], 200);
         }
-        dd('No funco');
+        return response()->json(['respuesta' => 'Error al generar la transferencia.'], 500);
     }
 
     private function CargarCotizacionTransferencia(){
@@ -116,6 +134,15 @@ class TransferController extends Controller
     private function CalcularComision($margenGanancia, $montoEnviar){
         $ganancia = round($montoEnviar * $margenGanancia,2);
         return $ganancia;
+    }
+
+    private function GenerarLink($idTransferencia){
+        return TransferLink::create([
+            'Parametro' => Str::random(6) . $idTransferencia,
+            'Transferencia' => "Tr. N°" . $idTransferencia . ".pdf",
+            'IdTransferencia' => $idTransferencia,
+            'Activo' => 1,
+        ]);
     }
 
 

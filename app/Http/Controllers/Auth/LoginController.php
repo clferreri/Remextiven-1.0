@@ -46,7 +46,10 @@ class LoginController extends Controller
         $email = $request->email;
         $contrasena = $request->password;
         if (Auth::attempt(['email' => $email, 'password' => $contrasena, 'activo' => 1])){
-            return view('Home.inicio');
+            if(Auth::user()->Rol->SoloEmpleado){
+                return redirect('/admin');
+            }
+            return redirect('home');
         }
         else{
             $usuario = User::where('Email', $email)->first();

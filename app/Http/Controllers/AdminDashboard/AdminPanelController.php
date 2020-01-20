@@ -12,6 +12,7 @@ use App\Models\Position;
 use App\Models\RateConfig;
 use App\Models\Transfer;
 use App\Models\UserRol;
+use App\Traits\ManejadorDeArchivos;
 use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -32,7 +33,7 @@ class AdminPanelController extends Controller
         $mediosDePago = PaymentMethod::where('Activo', 1)->where('PagoCliente', 1)->get();
         $tasa = RateConfig::where('Fecha', Carbon::today()->toDateString())
                 ->orderBy('created_at', 'desc')->first();
-        return view('AdminDashboard.Transferencias.generar', compact('usuariosPersonas', 'bancos', 'porcentajesGanancia', 'mediosDePago', 'tasa'));
+        return view('AdminPanel.Transferencias.generarTransferencia', compact('usuariosPersonas', 'bancos', 'porcentajesGanancia', 'mediosDePago', 'tasa'));
     }
 
     protected function ListadoEnProceso(){
@@ -58,16 +59,33 @@ class AdminPanelController extends Controller
     }
 
     protected function VerificarCliente(){
-        $usuariosPersonas = User::where('Activo', 1)->where('Verificado', 0)->with('DatosPersona')->get();
-        return view('AdminDashboard.Clientes.verificarCliente', compact('usuariosPersonas'));
+        $usuariosPersonas = User::where('Activo', 1)->where('Verificado', 0)->where('TipoUsuario', 1)->with('DatosPersona')->get();
+        return view('AdminPanel.Clientes.verificarCliente', compact('usuariosPersonas'));
+    }
+
+    protected function VerificacionCliente(Request $request){
+        $datos = $request->all();
+        $usu = User::where('IdUsuarioR', $datos['cliente'])->first();
+        if ($usu != null){
+            ManejadorDeArchivos::CrearCarpetaVerificacion($datos['cliente']);
+            ManejadorDeArchivos::AlmacenarArchivosVerificacion($datos['cliente'], $datos['imagenes']);
+            $usu->Verificado = 1;
+            $usu->save();
+        }
+
+        $nombre = $usu->getNombreCompleto();
+        
+        
+
+        return view('AdminPanel.Clientes.verificado', compact('nombre'));
     }
 
 
     //---------------------------------------  USUARIOS  ---------------------------------------------//
 
     protected function AgregarUsuario(){
-        $roles = UserRol::where('Activo', 1)->where('SoloEmpleado', 1);
-        $cargos = Position::where('Activo', 1)->where('SoloAdmin', 0);
+        $roles = UserRol::where('Activo', 1)->where('SoloEmpleado', 1)->get();
+        $cargos = Position::where('Activo', 1)->where('SoloAdmin', 0)->get();
         $paises = Pais::where('Activo', 1)->get();
 
         return view('AdminPanel.EquipoRemextiven.generarUsuario', compact('roles', 'cargos', 'paises'));

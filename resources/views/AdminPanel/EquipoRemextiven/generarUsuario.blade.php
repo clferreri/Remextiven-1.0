@@ -13,7 +13,9 @@
   active
 @endsection
 
-
+@section('styles')
+<link href="{{ asset("assets/$temaDashboardRemextiven/plugins/switchery/switchery.min.css") }}" rel="stylesheet" />
+@endsection
 
 
 @section('contenido')  
@@ -73,8 +75,9 @@
                             <span class="input-group-text"><i class="fas fa-user-shield"></i></span>
                           </div>
                           <select id="cmbRol" class="form-control">
+                            <option value="0" disabled="" selected="">Seleccione un Rol...</option>
                             @foreach ($roles as $rol)
-                              <option value="{{ $Rol->IdRol }}">{{$rol->Rol}}</option>
+                              <option value="{{ $rol->IdRol }}">{{$rol->Rol}}</option>
                             @endforeach
                           </select>
                         </div>                      
@@ -168,10 +171,11 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user-tie fa-lg"></i></span>
                           </div>
-                          <select class="form-control" id="cmbPaisEmisionDocumento" onchange="quitarInvalido('cmbPaisEmisionDocumento');">
+                          <select class="form-control" id="cmbCargo" onchange="quitarInvalido('cmbPaisEmisionDocumento');">
+                            <option value="0" disabled="" selected="">Seleccione un Cargo...</option>
                             @foreach ($cargos as $cargo)
-                                <option value="{{ $cargo->IdCargo }}">{{$cargo->NombreCargo}}</option>
-                              @endforeach
+                              <option value="{{ $cargo->IdCargo }}">{{$cargo->NombreCargo}}</option>
+                            @endforeach
                           </select>
                         </div>
                       </div>
@@ -237,9 +241,16 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                           </div>
-                          <input type="text" class="form-control" id="txtTelefono" placeholder="Ingresa un telefono de contacto" onblur="quitarInvalidoCasillaNumerica('txtTelefono');">
+                          <input type="text" class="form-control" id="txtTelefono2" placeholder="Ingresa un telefono de contacto" onblur="quitarInvalidoCasillaNumerica('txtTelefono');">
                         </div>
                       </div>
+                  </div>
+
+                  <div class="row justify-content-end">
+                    <p class="col-12 col-xl-3">
+                      <input id="chk" type="checkbox" data-render="switchery" data-theme="blue"/>
+                      <span class=" m-l-5 m-r-20">Notificar por Email</span>                 
+                    </p>
                   </div>
 
                  
@@ -247,7 +258,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer text-right">
-                  <button type="button" id="btnAgregarCliente" class="btn btn-green m-auto col-12 col-md-6 col-xl-3">Agregar</button>
+                  <button type="button" id="btnAgregarUsuario" class="btn btn-green m-auto col-12 col-md-6 col-xl-3">Agregar</button>
                 </div>
               </form>
             </div>
@@ -261,5 +272,7 @@
 
   @section('scripts')
     <script src="{{ asset('js/generalScripts/validacionesGenerales.js') }}"></script>
-    <script src="{{ asset('js/generalScripts/Ascripts/Dashboard/Cliente/altaCliente.js') }}"></script>
+    <script src="{{ asset('js/generalScripts/Ascripts/Dashboard/Equipo/altaUsuario.js') }}"></script>
+    <script src="{{ asset("assets/$temaDashboardRemextiven/plugins/switchery/switchery.min.js") }}"></script>
+    <script src="{{ asset("assets/$temaDashboardRemextiven/js/demo/form-slider-switcher.demo.js") }}"></script>
   @endsection

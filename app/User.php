@@ -8,9 +8,11 @@ use App\Models\PhysicalPerson;
 use App\Models\LegalPerson;
 use App\Models\BankAccount;
 use App\Models\Ciudad;
+use App\Models\Employee;
 use App\Models\Pais;
 use App\Models\UserCard;
 use App\Models\UserCheck;
+use App\Models\UserRol;
 
 class User extends Authenticatable
 {
@@ -56,20 +58,10 @@ class User extends Authenticatable
         return $pass;
     }
 
-    public function persona()
-    {
-        // if ($this->TipoUsuario == "P"){
-            return $this->hasOne('App\Models\PhysicalPerson', 'IdUsuario', 'IdUsuarioR');
-        // }
-        // else{
-            return $this->hasOne('App\Models\LegalPerson', 'IdUsuario', 'IdUsuarioR');
-        
-    }
-
     //Retorna todos los datos de la persona que pertenece al usuario
     public function getPersonaLigada()
     {
-        if ($this->TipoUsuario == "P"){
+        if ($this->TipoUsuario == 1){
             $persona = PhysicalPerson::where('IdUsuario', $this->IdUsuarioR)->first();
         }
         else{
@@ -80,7 +72,7 @@ class User extends Authenticatable
     }
 
     public function soyPersona(){
-        if($this->TipoUsuario == "P"){
+        if($this->TipoUsuario == 1){
             return true;
         }
         else{
@@ -92,13 +84,17 @@ class User extends Authenticatable
     public function getNombreCompleto()
     {
         $nombreCompleto ="";
-        if ($this->TipoUsuario == "P"){
+        if ($this->TipoUsuario == "1"){
             $persona = PhysicalPerson::where('IdUsuario', $this->IdUsuarioR)->first();
-            $nombreCompleto = $persona->Nombre . " " . $persona->PrimerApellido;
+            $nombreCompleto = $persona->PrimerNombre . " " . $persona->PrimerApellido;
         }
-        else{
+        elseif ($this->TipoUsuario == "2"){
             $persona = LegalPerson::where('IdUsuario', $this->IdUsuarioR)->first();
-            $nombreCompleto = $persona->RazonSocial . " " . $persona->FormaJuridica;
+            $nombreCompleto = $persona->PrimerNombre . " " . $persona->PrimerApellido;
+        }
+        elseif ($this->TipoUsuario == "3"){
+            $persona = Employee::where('IdUsuario', $this->IdUsuarioR)->first();
+            $nombreCompleto = $persona->PrimerNombre . " " . $persona->PrimerApellido;
         }
 
         return $nombreCompleto;
@@ -151,6 +147,16 @@ class User extends Authenticatable
         return $ciudad->Ciudad;
     }    
 
+    protected function AccesoInicial(){
+        $rol = $this->Rol;
+        if($rol->SoloEmpleado){
+            return 'AdminPanel.Index';
+        }
+        else{
+            return 'Home.inicio';
+        }
+    }
+
     //////////////////////////////////////////////////////////////////////////
     ///////////////// INICIO DE RELACIONES //////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
@@ -175,6 +181,8 @@ class User extends Authenticatable
       protected function Rol(){
         return $this->hasOne('App\Models\UserRol', 'IdRol', 'IdRol');
     }
+
+  
 
     //--------------------  1 a N  -----------------------------------
 

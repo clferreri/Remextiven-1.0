@@ -11,7 +11,7 @@ function altaBeneficiario(){
 
     if (validarDatosBeneficiario(nombreTitular, apellidoTitular, documentoTitular, bancoBeneficiario, tipoCuenta, numeroCuenta, alias)){
         $("#modalAgregarCuentaBancaria").modal('hide');
-        $("#mantaLoading").modal('show');
+        // $("#mantaLoading").modal('show');
         $.ajax({
             url:'../api/createBeneficiaryAccount',
             data:{'idUsuario': cliente, 'idBanco': bancoBeneficiario, 'tipoCuenta': tipoCuenta, 'numeroCuenta': numeroCuenta, 'nombreTitular': nombreTitular, 'apellidoTitular': apellidoTitular, 'tipoDocumento': tipoDocumentoTitular, 'documento': documentoTitular, 'alias': alias},
@@ -20,9 +20,9 @@ function altaBeneficiario(){
             success: function (response) {
                 $("#cmbBeneficiario").append('<option value="'+ response.IdCuenta +'">' + response.Alias + '</option>');
                 var datosBeneficiarios = JSON.parse(sessionStorage.getItem('Beneficiarios'));
-                var nuevoBeneficiario = {'Beneficiario': response.NombreTitular + ' ' + response.ApellidoTitular, 'Banco': value.banco.Banco, 'Cuenta': response.TipoCuenta, 'NumeroCuenta': response.NumeroCuenta}
+                var nuevoBeneficiario = {'Beneficiario': response.NombreTitular + ' ' + response.ApellidoTitular, 'Banco': response.banco.Banco, 'Cuenta': response.TipoCuenta, 'NumeroCuenta': response.NumeroCuenta}
                 datosBeneficiarios.push(nuevoBeneficiario);
-                $("#mantaLoading").modal('hide');
+                // $("#mantaLoading").modal('hide');
                 sessionStorage.setItem('Beneficiarios', JSON.stringify(datosBeneficiarios));
                 
             },

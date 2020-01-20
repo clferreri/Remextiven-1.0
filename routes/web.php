@@ -73,6 +73,58 @@ Route::view('recovery', 'User.RecoveryPassword')->name('RecuperarContraseña');
 // Route::get('/home', 'HomeController@index')->name('home');
 
 
+
+/////////////////////////////////////////////////////////////////////////////
+//////////////         PANEL DE ADMINISTRACION        //////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+
+//CONTROL DE LOGEADO Y AUTORIZADO A ENTRAR AL PANEL
+Route::middleware('panelAdminAutorizado')->group(function () {
+
+    //-- INICIO --//
+    Route::get('/admin', 'AdminDashboard\AdminPanelController@index')->name('inicioAdminPanel');
+    //------------//
+
+    //-- TRANSFERENCIAS --//
+    Route::get('/admin/newTransfer','AdminDashboard\AdminPanelController@AgregarTransferencia')->name('nuevaTransferencia');
+
+    Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@ListadoEnProceso')->name('transferenciasEnProceso');
+
+   
+
+    //-------------------//
+
+
+    //-- CLIENTES --//
+    Route::get('/admin/newClient','AdminDashboard\AdminPanelController@AgregarCliente')->name('nuevoCliente');
+
+    Route::get('/admin/checkClient','AdminDashboard\AdminPanelController@VerificarCliente')->name('verificarCliente');
+    Route::post('/admin/checkClient/checkOk', 'AdminDashboard\AdminPanelController@VerificacionCliente')->name('verificacionCliente');
+    Route::view('/tuya', 'AdminPanel.Clientes.verificado');
+
+
+    //------------------//
+
+    //-- EQUIPO REMEXTIVEN --//
+    Route::get('/admin/newUser', 'AdminDashboard\AdminPanelController@AgregarUsuario')->name('nuevoUsuarioR');
+
+    //-------------------------//
+
+    //-- SISTEMA --//
+
+    Route::get('/admin/configRate', 'AdminDashboard\AdminPanelController@ConfigurarTasa')->name('configTasas');
+
+    //-----------------//
+
+
+    //-- SISTEMAS --//
+
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////FIN RUTAS ADMINISTRACION///////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
 Route::view('/home', 'Home.inicio')->name('Inicio');
 
 
@@ -113,48 +165,10 @@ Route::get('DashboardTransfer','UserDashboard\UserDashboardController@index')->n
 ///////////////////////////////////////////////
 
 
-//-- INICIO --//
-Route::get('/admin', 'AdminDashboard\AdminPanelController@index')->name('inicioAdminPanel');
-//------------//
-
-
-//-- TRANSFERENCIAS --//
-Route::get('/admin/newTransfer','AdminDashboard\AdminPanelController@AgregarTransferencia')->name('nuevaTransferencia');
-
-Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@ListadoEnProceso')->name('transferenciasEnProceso');
-
-//-------------------//
-
-
-//-- CLIENTES --//
-Route::get('/admin/newClient','AdminDashboard\AdminPanelController@AgregarCliente')->name('nuevoCliente');
-
-Route::get('/admin/checkClient','AdminDashboard\AdminPanelController@VerificarCliente')->name('verificarCliente');
-
-
-//------------------//
-
-//-- EQUIPO REMEXTIVEN --//
-Route::get('/admin/newUser', 'AdminDashboard\AdminPanelController@AgregarUsuario')->name('nuevoUsuarioR');
-
-//-------------------------//
-
-//-- SISTEMA --//
-
-Route::get('/admin/configRate', 'AdminDashboard\AdminPanelController@ConfigurarTasa')->name('configTasas');
-
-//-----------------//
-
-
-//-- SISTEMAS --//
 
 
 
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////FIN RUTAS ADMINISTRACION///////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::view('/ad', 'AdminDashboard\Transferencias\generar');
 

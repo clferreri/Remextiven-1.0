@@ -6,7 +6,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnAgregarCliente').click(crearCliente);
+    $('#btnAgregarUsuario').click(crearCliente);
     $('#cmbPaisResidente').change(function(){
         var pais = $(this).val();
     //we will send data and recive data fom our AjaxController
@@ -39,25 +39,30 @@ $(document).ready(function () {
 
 
 function crearCliente(){
-    var email = $("#txtEmail").val();
+    var email = $("#txtEmailUsuario").val();
+    var email2 = $("#txtEmailPersonal").val();
+    var rol = $("#cmbRol").val();
     var fechaNacimiento = $("#dtpFechaNacimiento").val();
-    var nombre = $("#txtNombre").val();
-    var apellido = $("#txtPrimerApellido").val();
-    var apellido2 = $("#txtSegundoApellido").val();
+    var primerNombre = $("#txtPrimerNombre").val();
+    var segundoNombre = $("#txtSegundoNombre").val();
+    var primerApellido = $("#txtPrimerApellido").val();
+    var segundoApellido = $("#txtSegundoApellido").val();
     var documento = $("#txtDocumento").val();
     var tipoDocumento = $("#cmbTipoDocumento").val();
     var paisEmisor = $("#cmbPaisEmisionDocumento").val();
+    var cargo = $("#cmbCargo").val();
     var paisResidente = $("#cmbPaisResidente").val();
     var ciudadResidente = $("#cmbCiudadResidente").val();
     var direccion = $("#txtDireccion").val();
     var numeroPuerta = $("#txtNumeroPuerta").val();
     var tel = $("#txtTelefono").val();
+    var tel2 = $("#txtTelefono2").val();
 
-    if (validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2, documento, paisEmisor, paisResidente, ciudadResidente,direccion, numeroPuerta, tel)){
+    if (validarDatosUsuario(email, email2, rol, fechaNacimiento, primerNombre, primerApellido, documento, paisEmisor, cargo, paisResidente, ciudadResidente,direccion, numeroPuerta, tel)){
         $("#mantaLoading").modal('show');
         $.ajax({
-            url:'../api/createClient',
-            data:{'email': email, 'nombre': nombre, 'apellido': apellido, 'segundoApellido': apellido2, 'documento': documento, 'tipoDocumento': tipoDocumento, 'fechaNacimiento': fechaNacimiento, 'paisDocumento': paisEmisor, 'pais': paisResidente, 'ciudad': ciudadResidente, 'dir': direccion, 'numeroPuerta': numeroPuerta, 'telefono': tel},
+            url:'../api/createUser',
+            data:{'emailUsuario': email, 'emailPersonal': email2, 'idRol': rol,  'primerNombre': primerNombre, 'segundoNombre': segundoNombre, 'primerApellido': primerApellido, 'segundoApellido': segundoApellido, 'documento': documento, 'tipoDocumento': tipoDocumento, 'fechaNacimiento': fechaNacimiento, 'paisDocumento': paisEmisor, 'idCargo':cargo, 'pais': paisResidente, 'ciudad': ciudadResidente, 'dir': direccion, 'numeroPuerta': numeroPuerta, 'telefono': tel, 'telefono2':tel2},
             type:'post',
             dataType: "json",
             success: function (response) {
@@ -93,13 +98,23 @@ function crearCliente(){
 
 }
 
-function validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2, documento, paisEmisor, paisResidente, ciudadResidente, dir, numPuerta, tel){
+function validarDatosUsuario(email, emailPersonal, rol, fechaNacimiento, nombre, apellido, documento, paisEmisor, cargo, paisResidente, ciudadResidente, dir, numPuerta, tel){
     
     var validacionCorrecta = true
 
     //Valido el email
     if (!validarMail(email)){
-        $("#txtEmail").addClass('is-invalid');
+        $("#txtEmailUsuario").addClass('is-invalid');
+        validacionCorrecta = false
+    }
+
+    if(emailPersonal != "" && !validarMail(email)){
+        $("#txtEmailPersonal").addClass('is-invalid');
+        validacionCorrecta = false
+    }
+
+    if(rol <= 0){
+        $("#cmbRol").addClass('is-invalid');
         validacionCorrecta = false
     }
 
@@ -111,19 +126,13 @@ function validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2
 
     //Valido el nombre
     if (nombre == '' || nombre == ' ' || nombre.length < 4){
-        $("#txtNombre").addClass('is-invalid');
+        $("#txtPrimerNombre").addClass('is-invalid');
         validacionCorrecta = false
     }
 
     //Valido el apellido
     if (apellido == '' || apellido == ' ' || apellido.length < 4){
         $("#txtPrimerApellido").addClass('is-invalid');
-        validacionCorrecta = false
-    }
-
-    //Valido el segundo apellido
-    if (apellido2 == '' || apellido2 == ' ' || apellido2.length < 4){
-        $("#txtSegundoApellido").addClass('is-invalid');
         validacionCorrecta = false
     }
 
@@ -139,32 +148,39 @@ function validarDatosCliente(email, fechaNacimiento, nombre, apellido, apellido2
         validacionCorrecta = false
     }
 
+    if (cargo <= 0) {
+        $("#cmbCargo").addClass('is-invalid');
+        validacionCorrecta = false
+    }
+
     //Valido que seleccione un pais
     if (paisResidente < 1){
         $("#cmbPaisResidente").addClass('is-invalid');
-        validacionCorrecta = false
+        $("#cmbCiudadResidente").addClass('is-invalid');
+        validacionCorrecta = false;
     }
 
     //Valido que seleccione una ciudad
     if (ciudadResidente < 1){
         $("#cmbCiudadResidente").addClass('is-invalid');
-        validacionCorrecta = false
+        validacionCorrecta = false;
     }
 
     if (dir == '' || dir == ' ' || dir.length < 3){
         $("#txtDireccion").addClass('is-invalid');
-        validacionCorrecta = false
+        validacionCorrecta = false;
     }
 
     if (isNaN(numPuerta) || numPuerta.length < 3){
         $("#txtNumeroPuerta").addClass('is-invalid');
-        validacionCorrecta = false
+        validacionCorrecta = false;
     }
 
     if (isNaN(tel) || tel.length < 8){
         $("#txtTelefono").addClass('is-invalid');
-        validacionCorrecta = false
+        validacionCorrecta = false;
     }
+
 
     return validacionCorrecta;
 }

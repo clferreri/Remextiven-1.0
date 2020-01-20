@@ -14,14 +14,9 @@
 	<!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body class="pace-top">
-	<!-- begin #page-loader -->
-	<div id="page-loader" class="fade show">
-		<span class="spinner"></span>
-	</div>
-	<!-- end #page-loader -->
-	
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade">
+		
 		<!-- begin login -->
 		<div class="login login-with-news-feed">
 			<!-- begin news-feed -->
@@ -37,6 +32,26 @@
 			<!-- end news-feed -->
 			<!-- begin right-content -->
 			<div class="right-content">
+				@if ($errors->any())
+					<div class="alert alert-danger col-12 col-sm-11 m-auto textoCentrado">
+						<div class="row">
+							<div class="col-2" style="display: flex; align-items: center;">
+								<img src="img/icons/triangle.png" class="m-auto img-fluid"/>
+							</div>
+							<div class="col-10" style="text-align: left;">
+								{!! $errors->first() !!}
+							</div>
+						</div>
+							
+					</div>
+					<script>
+						window.setTimeout(function() {
+							$(".alert").fadeTo(500, 0).slideUp(500, function(){
+								$(this).remove(); 
+							});
+						}, 8000);
+					</script>                 
+				@endif
 				<!-- begin login-header -->
 				<div class="login-header">
 					<div class="brand">
@@ -47,12 +62,13 @@
 				<!-- end login-header -->
 				<!-- begin login-content -->
 				<div class="login-content">
-					<form action="index.html" method="GET" class="margin-bottom-0">
+					<form action="{{ route('loginUser')}}" method="POST" class="margin-bottom-0">
+						@csrf
 						<div class="form-group m-b-15">
-							<input type="text" class="form-control form-control-lg" placeholder="Email" required />
+							<input type="text" name="email" class="form-control form-control-lg" placeholder="Email" required />
 						</div>
 						<div class="form-group m-b-15">
-							<input type="password" class="form-control form-control-lg" placeholder="Contraseña" required />
+							<input data-toggle="password" name="password" data-placement="after" class="form-control form-control-lg" type="password" value="" placeholder="Contraseña" required />
 						</div>
 						<div class="checkbox checkbox-css m-b-30">
 							<input type="checkbox" id="remember_me_checkbox" value="" />
@@ -60,6 +76,7 @@
 							Recordarme
 							</label>
 						</div>
+						
 						<div class="login-buttons text-center">
                             <button type="submit" class="btn btn-success btn-block btn-lg mb-2">Iniciar <i class="fa fa-sign-in-alt ml-2 fa-lg"></i>
 							</button>
@@ -92,7 +109,8 @@
 	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{ asset("assets/$temaDashboardRemextiven/js/app.min.js")}}"></script>
-    <script src="{{ asset("assets/$temaDashboardRemextiven/js/theme/default.min.js")}}"></script>
+	<script src="{{ asset("assets/$temaDashboardRemextiven/js/theme/default.min.js")}}"></script>
+	<script src="{{ asset("assets/$temaDashboardRemextiven/plugins/bootstrap-show-password/dist/bootstrap-show-password.js") }}"></script>
 	<!-- ================== END BASE JS ================== -->
 </body>
 </html>

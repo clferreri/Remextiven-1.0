@@ -15,9 +15,10 @@ class CrearTablaLinks extends Migration
     {
         Schema::create('LinksTransferencias', function (Blueprint $table) {
             $table->increments('IdLinkTransferencia');
-            $table->string('Parametro', 12);
+            $table->string('Parametro', 15);
             $table->string('Transferencia', 20);
             $table->unsignedInteger('IdTransferencia');
+            $table->boolean('Activo');
             $table->timestamps();
 
             $table->foreign('IdTransferencia', 'FK_Link_SolicitudTransferencia')->references('IdSolicitudTransferencia')->on('SolicitudesTransferencia')->onDelete('restrict');

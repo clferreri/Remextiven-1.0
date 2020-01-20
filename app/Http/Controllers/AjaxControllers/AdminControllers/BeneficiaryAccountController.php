@@ -14,6 +14,7 @@ class BeneficiaryAccountController extends Controller
         $datos = $request->all();
         if ($this->validarDatosBeneficiaryAccount($datos)){
             $nuevoBeneficiario = $this->newBeneficiaryAccount($datos);
+            $nuevoBeneficiario->Banco;
             return $nuevoBeneficiario->toJson();
         }
         
