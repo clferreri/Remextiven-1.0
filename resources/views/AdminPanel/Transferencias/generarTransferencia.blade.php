@@ -596,8 +596,8 @@
           <span class="d-flex align-items-center text-left">
             <i class="fab fa-whatsapp fa-3x mr-3"></i>
             <span>
-              <span class="d-block mb-n1"><b>Compartir por Whatssap</b></span>
-              <span class="f-s-12 f-w-600 text-white-transparent-7"><i class="fas fa-circle-notch fa-spin"></i></span>
+              <span class="d-block mb-n1"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+              <span class="f-s-12 f-w-600 text-white-transparent-7"></span>
             </span>
           </span>
         </a>
@@ -606,8 +606,8 @@
           <span class="d-flex align-items-center text-left">
             <i class="fas fa-download fa-3x mr-3"></i>
             <span>
-              <span class="d-block mb-n1"><b>Descargar Transferencia</b></span>
-              <span class="f-s-12 f-w-600 text-white-transparent-7"><i class="fas fa-circle-notch fa-spin"></i></span>
+              <span class="d-block mb-n1"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+              <span class="f-s-12 f-w-600 text-white-transparent-7"></span>
             </span>
           </span>
         </a>
