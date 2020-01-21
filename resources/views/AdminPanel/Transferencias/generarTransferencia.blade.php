@@ -589,7 +589,7 @@
     </div>
     </div>
     <div class="col-12 text-center pt-5">
-      <h1 id="lblTituloProcesoTransferencia">Transferencia En proceso...</h1>
+      <h1 id="lblTituloProcesoTransferencia" class="animated infinite pulse slow">Transferencia En proceso...</h1>
       <br/>
         <a href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
           <span class="d-flex align-items-center text-left">
