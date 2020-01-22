@@ -22,4 +22,19 @@ class LegalPerson extends Model
     public function Pais(){
         return $this->hasOne('App\Models\Pais', 'IdPais', 'IdPais');
     }
+
+    public function Celular(){
+        if(substr($this->Telefono, 0,2) == '09'){
+            return $this->Telefono;
+        }
+        else{
+            if(substr($this->Telefono2, 0, 2) == '09'){
+                return $this->Telefono2;
+            }
+
+            else{
+                return "";
+            }
+        }
+    }
 }

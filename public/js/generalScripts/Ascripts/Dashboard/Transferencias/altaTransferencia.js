@@ -142,14 +142,19 @@ function altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPag
         success: function (response) {
             $("#lblTituloProcesoTransferencia").removeClass('infinite');
             $("#lblTituloProcesoTransferencia").html('¡Transferencia Completada!');
-            if (response.numero)
-            $("#lblTituloProcesoTransferencia").addClass('text-success')
-            var link ="https://api.whatsapp.com/send?phone=" + response.numero + "&text=hola,%20necesito%20ayuda%20con%20mi%20enlace%20";
-            $("#linkWhatssap").attr("href", link);
-            $("#lblTituloWhatsapp").html('Compartir por Whatssap');
-            $("#lblTituloDescargar").html('Descargar Transferencia');
-            $("#lblTextoWhatsapp").html('A ' + response.nombre);
+            if (response.esCelu){
+                $("#linkWhatssap").attr("href", response.urlMensaje);
+                $("#lblTituloWhatsapp").html('Compartir por Whatssap');
+                $("#lblTextoWhatsapp").html('A ' + response.nombre);
+            }
+            else{
+                $("#lblTituloWhatsapp").html('No posee celular registrado');
+                $("#lblTextoWhatsapp").html('No se puede compartir a ' + response.nombre);
+            }
+            $("#lblTituloProcesoTransferencia").addClass('text-success')         
+            $("#lblTituloDescargar").html('Descargar Transferencia');   
             $("#lblTextoDescarga").html('Transferencia N° ' + response.transferencia);
+            $("#linkTransfer").attr("href", response.url);
             alertaToast(tipoAlertaOK, response.respuesta, 3500);
         },
         statusCode: {

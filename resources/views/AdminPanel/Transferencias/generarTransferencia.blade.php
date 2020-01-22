@@ -601,7 +601,7 @@
           </span>
         </a>
 
-        <a href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
+        <a id="linkTransfer" href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
           <span class="d-flex align-items-center text-left">
             <i class="fas fa-download fa-3x mr-3"></i>
             <span>

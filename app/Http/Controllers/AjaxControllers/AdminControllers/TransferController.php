@@ -29,20 +29,32 @@ class TransferController extends Controller
             $pdf = TransferenciaPDF::generarPDF($transferencia, $cotizacionTransferencia);  
             $link =
             $usuario = $transferencia->UsuarioTransferencia;
-            $nombre ="";    
-            $telefono ="";
+            $nombre =""; $telefono =""; $numTel ="";
+            $esCelular = false;
             if ($usuario->TipoUsuario == 1){
+                $numTel = $usuario->DatosPersona->Celular();
                 $nombre = $usuario->DatosPersona->PrimerNombre . ' ' . $usuario->DatosPersona->PrimerApellido;
-                $telefono = $usuario->DatosPersona->Pais->Prefijo . $usuario->DatosPersona->Telefono;
+                $telefono = $usuario->DatosPersona->Pais->Prefijo . $numTel;
             }
             else{
                 $nombre = $usuario->DatosEmpresa->NombreFantasia;
-                $telefono = $usuario->DatosEmpresa->Pais->Prefio . $usuario->DatosEmpresa->Telefono;
+                $numTel = $usuario->DatosEmpresa->Celular();
+                $telefono = $usuario->DatosEmpresa->Pais->Prefio . $numTel;
             }
+
+            //Enviamos el PDF generado por Mail al cliente
             TransferenciaPDF::enviarPorMail($usuario->Email, $nombre, $transferencia->IdSolicitudTransferencia);
+            //Generamos un link para compartir por whatssap y que pueda acceder en todo momento a su recibo
             $link = $this->GenerarLink($transferencia->IdSolicitudTransferencia);  
 
-            return response()->json(['respuesta' => 'Transferencia generada correctamente', 'nombre' => $nombre, 'parametro' => $link->Parametro, 'numero' => $telefono, 'transferencia' => $transferencia->IdSolicitudTransferencia], 200);
+            $urlTransferencia = route('transferenciaPDF', ['parametro' => $link->Parametro]);
+
+            $urlWhat ="#";
+            if ($numTel != ""){
+                $esCelular = true;
+                $urlWhat = "https://api.whatsapp.com/send?phone=" . $telefono . "&text=Estimado " . $nombre . ",%0D%0ASe genero la transferencia N° " . $transferencia->IdSolicitudTransferencia . " a su nombre. %0D%0A%0D%0APuede acceder al recibo de dicha transferencia mediante el siguiente link: " . route('transferenciaPDF', ['parametro' => $link->Parametro]) . "%0D%0A%0D%0ASaludos de parte del equipo de Remextiven.";
+            }       
+            return response()->json(['respuesta' => 'Transferencia generada correctamente', 'nombre' => $nombre, 'url' => $urlTransferencia, 'urlMensaje' => $urlWhat, 'esCelu' => $esCelular, 'transferencia' => $transferencia->IdSolicitudTransferencia], 200);
         }
         return response()->json(['respuesta' => 'Error al generar la transferencia.'], 500);
     }

@@ -51,6 +51,21 @@ class PhysicalPerson extends Model
     public function Ciudad(){
         return $this->hasOne('App\Models\Ciudad', 'IdCiudad', 'IdCiudad');
     }
+
+    public function Celular(){
+        if(substr($this->Telefono, 0,2) == '09'){
+            return $this->Telefono;
+        }
+        else{
+            if(substr($this->Telefono2, 0, 2) == '09'){
+                return $this->Telefono2;
+            }
+
+            else{
+                return "";
+            }
+        }
+    }
 }
 
 

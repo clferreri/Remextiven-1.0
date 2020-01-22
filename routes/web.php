@@ -86,11 +86,13 @@ Route::middleware('panelAdminAutorizado')->group(function () {
     Route::get('/admin', 'AdminDashboard\AdminPanelController@index')->name('inicioAdminPanel');
     //------------//
 
+
     //-- TRANSFERENCIAS --//
     Route::get('/admin/newTransfer','AdminDashboard\AdminPanelController@AgregarTransferencia')->name('nuevaTransferencia');
 
     Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@ListadoEnProceso')->name('transferenciasEnProceso');
 
+    Route::get('/transferenciaPDF/{parametro}', 'PDFs\TransferenciaPDFController@abrirPDF')->name('transferenciaPDF');
    
 
     //-------------------//
