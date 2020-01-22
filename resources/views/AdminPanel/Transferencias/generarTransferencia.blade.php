@@ -98,8 +98,8 @@
   </div><!--Fin Modal Agregar Cuenta Bancaria-->
 
   <div class="row">
-    <div id="wizard" class="wizard col-12 col-md-11">
-    <div class="wizard__content d-none">
+    <div id="wizard" class="wizard col-12 col-md-11" style="position:relative;">
+    <div class="wizard__content" style="z-index:3 !important;">
       <header class="wizard__header d-none d-md-block">
         <div class="wizard__header-overlay"></div>
         
@@ -588,10 +588,10 @@
       <button class="button next">Siguiente</button>
     </div>
     </div>
-    <div class="col-12 text-center pt-5">
+    <div id="panFinTransferencia" class="col-12 text-center pt-5 animate rotateIn" style="position:absolute; top:2em; display:none;">
       <h1 id="lblTituloProcesoTransferencia" class="animated infinite pulse slow">Transferencia En proceso...</h1>
       <br/>
-        <a href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
+        <a id="linkWhatssap" href="#" class="btn btn-lg btn-primary mr-1 ml-1 mb-2">
           <span class="d-flex align-items-center text-left">
             <i class="fab fa-whatsapp fa-3x mr-3"></i>
             <span>

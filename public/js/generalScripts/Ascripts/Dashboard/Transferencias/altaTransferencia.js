@@ -125,7 +125,7 @@ function CalcularMontoRecibir(){
   }
 
 function altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPago){
-    $("#tituF").removeClass('d-none');
+    setTimeout(function(){$("#panFinTransferencia").show();}, 400);
     $.ajax({
         url:'../api/createTransfer',
         data:{'idUsuario': cliente, 
@@ -140,14 +140,16 @@ function altaTransferencia(cliente, montoEnviar, moneda, beneficiario, metodoPag
         dataType: "json",
         async:true,
         success: function (response) {
+            $("#lblTituloProcesoTransferencia").removeClass('infinite');
             $("#lblTituloProcesoTransferencia").html('¡Transferencia Completada!');
-            var link ="https://api.whatsapp.com/send?phone=" + response.numero + "&text=hola,%20necesito%20ayuda%20con%20mi%20enlace%20"
-            $("#linkWhatssap").attr("href", "https://api.whatsapp.com/send?phone=TUNUMEROAQUI&text=Hola,%20se a generado la transferencia N°" + response.transferencia +". Puedes%20ayuda%20con%20mi%20enlace%20")
+            if (response.numero)
+            $("#lblTituloProcesoTransferencia").addClass('text-success')
+            var link ="https://api.whatsapp.com/send?phone=" + response.numero + "&text=hola,%20necesito%20ayuda%20con%20mi%20enlace%20";
+            $("#linkWhatssap").attr("href", link);
             $("#lblTituloWhatsapp").html('Compartir por Whatssap');
             $("#lblTituloDescargar").html('Descargar Transferencia');
             $("#lblTextoWhatsapp").html('A ' + response.nombre);
             $("#lblTextoDescarga").html('Transferencia N° ' + response.transferencia);
-            alert(response.nombre + " " + response.parametro + " " + response.numero);
             alertaToast(tipoAlertaOK, response.respuesta, 3500);
         },
         statusCode: {
