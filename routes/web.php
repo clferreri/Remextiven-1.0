@@ -92,7 +92,6 @@ Route::middleware('panelAdminAutorizado')->group(function () {
 
     Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@ListadoEnProceso')->name('transferenciasEnProceso');
 
-    Route::get('/transferenciaPDF/{parametro}', 'PDFs\TransferenciaPDFController@abrirPDF')->name('transferenciaPDF');
    
 
     //-------------------//
@@ -104,6 +103,8 @@ Route::middleware('panelAdminAutorizado')->group(function () {
     Route::get('/admin/checkClient','AdminDashboard\AdminPanelController@VerificarCliente')->name('verificarCliente');
     Route::post('/admin/checkClient/checkOk', 'AdminDashboard\AdminPanelController@VerificacionCliente')->name('verificacionCliente');
     Route::view('/tuya', 'AdminPanel.Clientes.verificado');
+    
+    Route::get('/admin/visualizePDFTransfer/{id}', 'PDFs\TransferenciaPDFController@abrirPDFAdmin')->name('transferenciaPDFAdmin');
 
 
     //------------------//
@@ -188,3 +189,11 @@ Route::view('/pdfview', 'PDFs\Transferencia');
 
 
 Route::view('/nuevotema', 'AdminPanel.index');
+
+
+
+
+
+
+//VER PDF ONLINE !!NO PONER RESTRICCIONES!!!
+Route::get('/transferenciaPDF/{parametro}', 'PDFs\TransferenciaPDFController@abrirPDF')->name('transferenciaPDF');
