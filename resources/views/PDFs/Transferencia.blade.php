@@ -227,15 +227,15 @@
         <td class="costo">
             @if ($transferencia->MedioPago->IdMedioPago == 3)
                 @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
-                    {{$transferencia->MedioPago->Costo + ($cotizacionTransferencia->MontoEnviar * 0.005)}}
+                    {{$cotizacionTransferencia->Moneda->CodigoValor . ' ' . round($transferencia->MedioPago->Costo + ($cotizacionTransferencia->MontoEnviar * 0.005), 2)}}
                 @else
-                    {{$transferencia->MedioPago->Costo / 38}}
+                    {{$cotizacionTransferencia->Moneda->CodigoValor . ' ' . round($transferencia->MedioPago->Costo / 38, 2)}}
                 @endif  
             @else
                 @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
-                    {{$transferencia->MedioPago->Costo}}
+                    {{ $cotizacionTransferencia->Moneda->CodigoValor . ' ' . round($transferencia->MedioPago->Costo, 2)}}
                 @else
-                    {{$transferencia->MedioPago->Costo / 38}}
+                    {{$cotizacionTransferencia->Moneda->CodigoValor . ' ' . round($transferencia->MedioPago->Costo / 38, 2)}}
                 @endif  
             @endif
             
@@ -250,15 +250,15 @@
         <td class="costo">
             @if ($transferencia->MedioPago->IdMedioPago == 3)
             @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
-                {{$transferencia->MedioPago->Costo + ($cotizacionTransferencia->MontoEnviar * 0.005) + $cotizacionTransferencia->MontoEnviar}}
+                {{$cotizacionTransferencia->Moneda->CodigoTexto . ' ' . round($transferencia->MedioPago->Costo + ($cotizacionTransferencia->MontoEnviar * 0.005) + $cotizacionTransferencia->MontoEnviar, 2)}}
             @else
-                {{($transferencia->MedioPago->Costo / 38) + $cotizacionTransferencia->MontoEnviar}}
+                {{$cotizacionTransferencia->Moneda->CodigoTexto . ' ' . round(($transferencia->MedioPago->Costo / 38) + $cotizacionTransferencia->MontoEnviar, 2)}}
             @endif  
         @else
             @if ($cotizacionTransferencia->Moneda->IdMoneda == 1)
-                {{$transferencia->MedioPago->Costo + $cotizacionTransferencia->MontoEnviar}}
+                {{$cotizacionTransferencia->Moneda->CodigoTexto . ' ' . round($transferencia->MedioPago->Costo + $cotizacionTransferencia->MontoEnviar, 2)}}
             @else
-                {{($transferencia->MedioPago->Costo / 38) + $cotizacionTransferencia->MontoEnviar}}
+                {{$cotizacionTransferencia->Moneda->CodigoTexto . ' ' . round(($transferencia->MedioPago->Costo / 38) + $cotizacionTransferencia->MontoEnviar, 2)}}
             @endif  
         @endif
 
@@ -286,8 +286,8 @@
                     <td>USD</td>
                 </tr>
                 <tr>
-                    <td>{{$cotizacionTransferencia->CotizacionVES ?? 'EN ESPERA'}}</td>
-                    <td>{{$cotizacionTransferencia->Cambio ?? 'EN ESPERA'}}</td>
+                    <td>{{$cotizacionTransferencia->CotizacionVES ?? ' - '}}</td>
+                    <td>{{$cotizacionTransferencia->Cambio ?? ' - '}}</td>
                 </tr>
             </table>
         </td>

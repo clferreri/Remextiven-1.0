@@ -43,7 +43,7 @@ class AdminPanelController extends Controller
         $atrasados = Transfer::where('FechaSolicitada','!=', Carbon::today()->toDateString())->count();
         $totales = Transfer::where('FechaSolicitada', Carbon::today()->toDateString())->orWhereIn('IdEstadoTransferencia',[1,2,3])->count();
        
-        return view('AdminDashboard.Transferencias.listado', compact('transferencias', 'completados', 'pendientes', 'atrasados', 'totales'));
+        return view('AdminPanel.Transferencias.listadoEnProceso', compact('transferencias', 'completados', 'pendientes', 'atrasados', 'totales'));
     }
 
 

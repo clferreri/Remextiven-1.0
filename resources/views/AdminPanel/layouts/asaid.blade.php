@@ -48,7 +48,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="@yield('link-transferencias-generar')"><a href="{{ route('nuevaTransferencia')}}">Generar Transferencia</a></li>
-                    <li><a href="ui_typography.html">En proceso</a></li>
+                    <li class="@yield('link-transferencias-proceso')"><a href="{{ route('transferenciasEnProceso') }}">En proceso</a></li>
                 </ul>
             </li>
 
@@ -112,7 +112,7 @@
             <li class="has-sub @yield('menu-tasaYmargen')">
                 <a href="{{route('configTasas')}}">
                     <i class="fas fa-bug"></i>
-                    <span>Bugs</span>
+                    <span>Reportar Bug</span>
                 </a>
             </li>
 
