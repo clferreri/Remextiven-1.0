@@ -136,7 +136,7 @@
         <tbody>
           @foreach ($transferencias as $trans)
           <tr>
-              <td class="text-center">23459089452</td>
+          <td class="text-center">{{$trans->IdSolicitudTransferencia}}</td>
               <td>
                 {{$trans->UsuarioTransferencia->DatosPersona->Nombre . ' ' . $trans->UsuarioTransferencia->DatosPersona->PrimerApellido . ' ' . $trans->UsuarioTransferencia->DatosPersona->SegundoApellido }}
               </td>
@@ -189,88 +189,7 @@
 
 
   <script>
-    function CambioEstadoPendiente(id){
-      return '<span class="badge badge-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pendiente</span>' +
-                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">' +
-                    '<a class="dropdown-item link" onclick="CambioDeEstadoEnvio(1,2,' + id +');">Verificado</a>' +
-                    '<a class="dropdown-item link" onclick="CambioDeEstadoEnvio(1,5,' + id +');">Anulado</a>' +
-                    '</div>'
-    }
-
-    function CambioEstadoEnProceso(id){
-      return '<span class="badge badge-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Verificado</span>' +
-                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">' +
-                    '<a class="dropdown-item link" onclick="CambioDeEstadoEnvio(2,1,' + id +');">Pendiente</a>' +
-                    '<a class="dropdown-item link" onclick="CambioDeEstadoEnvio(2,5,' + id +');">Anulado</a>' +
-                    '</div>'
-    }
-
-    function CambioEstadoTransfiriendo(){
-      var codigoHTML = '<span class="badge badge-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transfiriendo</span>' +
-                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">'
-                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(3,1)>Pendiente</a>' +
-                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(3,2)>En Proceso</a>' +
-                    '<a class="dropdown-item" href="#" onclick="CambioDeEstadoEnvio(3,6)>Anulado</a>' +
-                    '</div>'
-
-      $("#estadoEnvio1").html(codigoHTML);    
-    }
-
-    function CambioEstadoAnulado(){
-
-    }
-
-
-    function CambioDeEstadoEnvio(estadoAnterior, estadoNuevo,id){
-      //Si el estado esta en pendiente y pasa a En Proceso
-      if (estadoAnterior == 1 && estadoNuevo == 2){
-        $("#estadoEnvio"+id).html(CambioEstadoEnProceso(id));         
-      }
-
-      //Estado En Proceso pasa a Transfiriendo
-      // else if (estadoAnterior == 2 && estadoNuevo == 3){
-      //   $("#estadoEnvio1").html(CambioEstadoTransfiriendo());
-      // }
-
-      //De Transifeindo pasa a Listo
-      // else if (estadoAnterior == 3 && estadoNuevo == 4){
-
-      // }
-      //Anulado
-      else if (estadoNuevo == 5){
-        Swal.fire({
-          title: 'Anular transferencia',
-          text: "¿Esta seguro que desea realizar esta acción?",
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, anular',
-          cancelButtonText: 'Cancelar'
-        }).then((result) => {
-          if (result.value) {
-            Swal.fire(
-              'Anulada',
-              'La transferencia a sido anulada.',
-              'success'
-            )
-          }
-        })
-        
-        CambioEstadoAnulado();
-      }
-
-      //Estoy volviendo el envio para atras
-      else if (estadoAnterior > estadoNuevo){
-        if (estadoAnterior == 2 && estadoNuevo == 1){
-          $("#estadoEnvio"+id).html(CambioEstadoPendiente(id)); 
-        }
-      }
-
-      else{
-        alert("Debe respetar el orden de cambio de estados.")
-      }
-    }
+    
   </script>
 @endsection
 
