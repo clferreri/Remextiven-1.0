@@ -46,6 +46,10 @@ class AdminPanelController extends Controller
         return view('AdminPanel.Transferencias.listadoEnProceso', compact('transferencias', 'completados', 'pendientes', 'atrasados', 'totales'));
     }
 
+    protected function ListadoParaTransferir(){
+        return view('AdminPanel.Transferencias.listadoVerificadas');
+    }
+
 
 
     //---------------------------------------  CLIENTES  --------------------------------------------//

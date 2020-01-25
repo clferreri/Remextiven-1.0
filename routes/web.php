@@ -92,6 +92,8 @@ Route::middleware('panelAdminAutorizado')->group(function () {
 
     Route::get('/admin/transferInProcess', 'AdminDashboard\AdminPanelController@ListadoEnProceso')->name('transferenciasEnProceso');
 
+    Route::get('/admin/transferTotransfer', 'AdminDashboard\AdminPanelController@ListadoParaTransferir')->name('transferenciasTransferir');
+
    
 
     //-------------------//

@@ -49,6 +49,8 @@
                 <ul class="sub-menu">
                     <li class="@yield('link-transferencias-generar')"><a href="{{ route('nuevaTransferencia')}}">Generar Transferencia</a></li>
                     <li class="@yield('link-transferencias-proceso')"><a href="{{ route('transferenciasEnProceso') }}">En proceso</a></li>
+                    <li class="@yield('link-transferencias-transferir')"><a href="{{ route('transferenciasTransferir') }}">Para transferir</a></li>
+                
                 </ul>
             </li>
 

@@ -1,19 +1,15 @@
-@extends('AdminDashboard/layouts/layout')
+@extends('AdminPanel/layouts/layout')
 
 @section('contenidoHeader')
     
 @endsection
 
 
-@section('menu-clientes')
-  menu-open
-@endsection
-
-@section('link-clientes')
+@section('menu-transferencias')
   active
 @endsection
 
-@section('link-clientes-verificar')
+@section('link-transferencias-transferir')
   active
 @endsection
 
