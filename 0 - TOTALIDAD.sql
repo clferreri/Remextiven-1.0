@@ -1,45 +1,3 @@
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Alemania','DE', '+49', 0, 'img/images/banderas/Alemania.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Argentina','AR', '+54', 1, 'img/images/banderas/Argentina.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Australia','AU', '+61', 0, 'img/images/banderas/Australia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Bélgica','BE', '+32', 0, 'img/images/banderas/Bélgica.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Bolivia','BO', '+591', 1, 'img/images/banderas/Bolivia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Brasil','BR', '+55', 1, 'img/images/banderas/Brasil.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Canadá','CA', '+1', 0, 'img/images/banderas/Canadá.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Chile','CL', '+56' ,1, 'img/images/banderas/Chile.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('China','CN', '+86', 0, 'img/images/banderas/China.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Colombia','CO', '+57', 1, 'img/images/banderas/Colombia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Costa Rica','CR', '+506', 0, 'img/images/banderas/CostaRica.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Croacia','HR', '+385', 0, 'img/images/banderas/Croacia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Cuba','CU', '+53', 0, 'img/images/banderas/Cuba.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Dominica','DM', '+1' ,0, 'img/images/banderas/Dominica.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Republica Dominicana','DO', '+1809', 0, 'img/images/banderas/RepublicaDominicana.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Ecuador','EC', '+593', 0, 'img/images/banderas/Ecuador.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('El Salvador','SV', '+503',0, 'img/images/banderas/ElSalvador.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('España','ES', '+34', 0, 'img/images/banderas/España.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Estados Unidos','US', '+1',0, 'img/images/banderas/EstadosUnidos.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Finlandia','FI', '+358', 0 , 'img/images/banderas/Finlandia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Francia','FR', '+33', 0, 'img/images/banderas/Francia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Guatemala','GT', '+502', 0, 'img/images/banderas/Guatemala.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Honduras','HN', '+504', 0, 'img/images/banderas/Honduras.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Irlanda','IE', '+353', 0, 'img/images/banderas/Irlanda.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Italia','IT', '+39', 0, 'img/images/banderas/Italia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Japon','JP', '+81', 0, 'img/images/banderas/Japon.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Mexico','MX', '+52', 0, 'img/images/banderas/Mexico.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Nicaragua','NI', '+505', 0, 'img/images/banderas/Nicaragua.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Nueva Zelanda','NZ', '+64', 0, 'img/images/banderas/NuevaZelanda.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Panamá','PA', '+507', 0, 'img/images/banderas/Panamá.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Paraguay','PY', '+595', 1, 'img/images/banderas/Paraguay.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Perú','PE', '+51', 0, 'img/images/banderas/Perú.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Puerto Rico','PR', '+1787' , 0, 'img/images/banderas/PuertoRico.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Reino Unido','GB', '+44', 0, 'img/images/banderas/ReinoUnido.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Rusia','RU', '+7' , 0, 'img/images/banderas/Rusia.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Suiza','CH', '+41' , 0, 'img/images/banderas/Suiza.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Uruguay','UY', '+598' , 1, 'img/images/banderas/Uruguay.png');
-INSERT INTO Paises (Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES ('Venezuela','VE', '+58', 1, 'img/images/banderas/Venezuela.png');
-INSERT INTO Paises (IdPais, Pais, Codigo, Prefijo, Activo, ImagenBandera) VALUES (0, 'Sistema', 'SIS', '+000', 0, '');
-UPDATE Paises SET IdPais = 0 WHERE Pais = 'Sistema';
-
-
 INSERT INTO Ciudades(idPais, Ciudad, Activo) VALUES ((SELECT IdPais FROM Paises WHERE Pais = 'Argentina'), 'Buenos Aires', 1);
 INSERT INTO Ciudades(idPais, Ciudad, Activo) VALUES ((SELECT IdPais FROM Paises WHERE Pais = 'Argentina'), 'Córdoba', 1);
 INSERT INTO Ciudades(idPais, Ciudad, Activo) VALUES ((SELECT IdPais FROM Paises WHERE Pais = 'Argentina'), 'Corrientes', 1);
@@ -747,37 +705,7 @@ INSERT INTO TiposUsuario (Tipo, Activo) VALUES
 ('Persona Juridica', 2),
 ('Empleado Remextiven', 3);
 
-INSERT INTO Cargos (Sigla ,NombreCargo, Activo, SoloAdmin) VALUES
-('SIS', 'Sistema Informatico', 0, 1)
-('CEO', 'Director Ejecutivo', 0, 1),
-('CFO', 'Director de Finanzas', 0, 1),
-('CTO', 'Director de Tecnología', 0, 1),
-('CMO', 'Director de Marketing', 0, 1),
-('DGI', 'Digitador', 1, 0),
-('OPE', 'Operador', 1, 0),
-('RSC', 'Representante de Servicio al Cliente', 1, 0),
-('CAD', 'Cadete Remextiven', 1, 0),
-('STI', 'Soporte Técnico Informatico', 1, 0),
-('DGR', 'Diseñador Grafico', 1, 0),
-('LOP', 'Lider de Operaciones', 1, 0);
 
-INSERT INTO RolesUsuariosR (Rol, Activo, SoloEmpleado) VALUES 
-('Usuario', 1, 0),
-('Cajero', 1, 0),
-('Remexero', 1, 1),
-('Banco de Bolivares', 1, 1),
-('Digitador', 1, 1),
-('Lider', 1, 1),
-('Moderador', 1, 1),
-('Administrador', 1, 1);
-
-INSERT INTO EstadosSolicitudTransferencia (Estado, Activo) VALUES
-('Pendiente', 1),
-('Verificado', 1),
-('Transfiriendo', 1),
-('Finalizado', 1),
-('Anulado', 1),
-('Pausado', 1);
 
 INSERT INTO TiposSolicitudTransferencia (Tipo, Activo) VALUES 
 ('Remesas', 1),
@@ -791,23 +719,6 @@ INSERT INTO TiposSolicitudTransferencia (Tipo, Activo) VALUES
 ('Importación', 1),
 ('Otros', 1);
 
-INSERT INTO MargenesDeGanancia (TextoGanancia, porcentajeGanancia, Actual, Activo) VALUES
-('5%', 0.05, 0, 1),
-('6%', 0.06, 0, 1),
-('7%', 0.07, 0, 1),
-('8%', 0.08, 0, 1),
-('9%', 0.09, 0, 1),
-('10%', 0.10, 1, 1),
-('11%', 0.11, 0, 1),
-('12%', 0.12, 0, 1),
-('13%', 0.13, 0, 1),
-('14%', 0.14, 0, 1),
-('15%', 0.15, 0, 1),
-('16%', 0.16, 0, 1),
-('17%', 0.17, 0, 1),
-('18%', 0.18, 0, 1),
-('19%', 0.19, 0, 1),
-('20%', 0.20, 0, 1);
 
 
 INSERT INTO MediosDePago (MedioDePago, Descripcion, TextoCosto, Costo, Activo, PagoCliente, UrlImagen) VALUES
@@ -816,12 +727,3 @@ INSERT INTO MediosDePago (MedioDePago, Descripcion, TextoCosto, Costo, Activo, P
 ('Abitab', 'Giros en Abitab', 'Costo  de 90 UYU + 0,5% de lo enviado', 90, 1, 1, 'img/images/metodosDePago/abitab.png'),
 ('Midinero', 'Trasnferencia desde aplicación', 'SIN COSTO', 0, 1, 1, 'img/images/metodosDePago/midinero.png'),
 ('Midinero', 'Deposito en Redpagos', 'Costo de 48 UYU', 48, 1, 1, 'img/images/metodosDePago/redpagos.png');
-
-
-INSERT INTO Monedas (Moneda, CodigoValor, CodigoTexto, Activo) VALUES
-('Pesos', '$', 'UYU', 1),
-('Dolar', 'U$S', 'USD', 1),
-('Bolívar', 'Bs', 'VES', 1);
-
-
-
